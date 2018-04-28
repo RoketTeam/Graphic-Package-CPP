@@ -80,7 +80,7 @@ void CheckList::KeyEventProc(KEY_EVENT_RECORD keyEventRecord) {
 
     CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
     GetConsoleScreenBufferInfo(_stdoutHandle, &consoleScreenBufferInfo);
-    
+
     // if key pressed
     if (keyEventRecord.bKeyDown) {
         ListItem* currentItem = nullptr;
