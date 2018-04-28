@@ -17,6 +17,7 @@ class ListItem {
         HANDLE _stdoutHandle;
         COORD _position;
         string _descriptionLabel;
+        short _lineLengh;
 
 
 
@@ -26,6 +27,7 @@ class ListItem {
 
         // functions
         void draw();
+        bool setBackground(DWORD background);
 
         //D'tors
         ~ListItem();
