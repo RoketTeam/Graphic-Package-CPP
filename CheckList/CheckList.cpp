@@ -43,6 +43,10 @@ bool CheckList::HandleInputRecord(INPUT_RECORD inputRecord) {
 
 }
 
+void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord) {
+
+}
+
 void CheckList::KeyEventProc(KEY_EVENT_RECORD keyEventRecord) {
     CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
     GetConsoleScreenBufferInfo(_stdoutHandle, &consoleScreenBufferInfo);

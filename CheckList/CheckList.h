@@ -19,8 +19,8 @@ class CheckList {
         bool HandleInputRecord(INPUT_RECORD inputRecord);
         void Draw();
         void KeyEventProc(KEY_EVENT_RECORD keyEventRecord);
-        void MouseEventProc(MOUSE_EVENT_RECORD mer){};
-        
+        void MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord);
+
     ~CheckList();
 
 };
