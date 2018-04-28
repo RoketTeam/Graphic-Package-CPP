@@ -64,7 +64,7 @@ void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord) {
                 }
             }
             break;
-        case 2:
+        case 0:
             if (CheckMousePosition(mouseEventRecord.dwMousePosition)){
                 for(int i = 0; i < _listSize ; ++i){
                     if(_items[i].IsHover(mouseEventRecord)){
