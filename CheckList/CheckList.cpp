@@ -43,7 +43,37 @@ bool CheckList::HandleInputRecord(INPUT_RECORD inputRecord) {
 
 }
 
+bool CheckList::CheckMousePosition(COORD mousePosition) {
+    return mousePosition.X >= _position.X &&
+            mousePosition.X <= _items[_listSize - 1].GetLineLengh() &&
+            mousePosition.Y >= _position.Y &&
+            mousePosition.Y <= _position.Y + _listSize;
+}
+
 void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord) {
+    switch (mouseEventRecord.dwEventFlags){
+        case MOUSE_MOVED:
+            if (CheckMousePosition(mouseEventRecord.dwMousePosition)){
+                for(int i = 0; i < _listSize ; ++i){
+                    if(_items[i].IsHover(mouseEventRecord)){
+                        _items[i].Focus();
+                    }
+                    else {
+                        _items[i].Unfocus();
+                    }
+                }
+            }
+            break;
+        case 2:
+            if (CheckMousePosition(mouseEventRecord.dwMousePosition)){
+                for(int i = 0; i < _listSize ; ++i){
+                    if(_items[i].IsHover(mouseEventRecord)){
+                        _items[i].Click();
+                    }
+                }
+            }
+            break;
+    }
 
 }
 
