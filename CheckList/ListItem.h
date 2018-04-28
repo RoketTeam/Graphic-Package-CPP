@@ -20,7 +20,7 @@ class ListItem {
         string _descriptionLabel;
         short _lineLengh;
         bool _isChecked;
-        bool _isFocusd;
+        bool _isFocused;
 
         // Methods
         void MarkAsChoose();
@@ -39,6 +39,9 @@ public:
         void Click();
         bool Focus();
         bool Unfocus();
+        bool IsFocus(){return _isFocused;}
+        bool IsHover(MOUSE_EVENT_RECORD mouseEventRecord);
+        short GetLineLengh(){return _lineLengh;}
 
         //D'tors
         ~ListItem();

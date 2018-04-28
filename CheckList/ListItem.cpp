@@ -11,7 +11,7 @@ ListItem::ListItem(short positionX, short positionY, string description):
         _stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         _lineLengh = (short)(_descriptionLabel.length() + 6);
         _isChecked = false;
-        _isFocusd = false;
+        _isFocused = false;
 
 }
 
@@ -23,11 +23,18 @@ void ListItem::Draw() {
 
     CONSOLE_CURSOR_INFO consoleCursorInfo = { 100, FALSE };
     SetConsoleCursorInfo(_stdoutHandle, &consoleCursorInfo);
-    if(_isChecked){
-        cout << "[X] " << _descriptionLabel << endl;
-    } else {
-        cout << "[ ] " << _descriptionLabel << endl;
+
+    if(_isChecked) {
+        cout << "[X] ";
     }
+    else{
+        cout << "[ ] " << _descriptionLabel;
+    }
+    if(_isFocused)
+        Focus();
+    else
+        Unfocus();
+
 }
 
 bool ListItem::SetColor(DWORD color) {
@@ -46,12 +53,12 @@ bool ListItem::SetTextColor(DWORD textColor) {
 }
 
 bool ListItem::Focus() {
-    _isFocusd = true;
+    _isFocused = true;
     return SetBackgroundColor(BACKGROUND_GREEN);
 }
 
 bool ListItem::Unfocus() {
-    _isFocusd = false;
+    _isFocused = false;
     return SetTextColor(FOREGROUND_GREEN);
 }
 
@@ -68,15 +75,15 @@ void ListItem::MarkAsChoose() {
 void ListItem::Click() {
     if(_isChecked) {
         MarkAsUnchoose();
-        if(_isFocusd){
-            Focus();
-        }
     } else {
         MarkAsChoose();
-        if(_isFocusd){
-            Focus();
-        }
     }
+}
+
+bool ListItem::IsHover(MOUSE_EVENT_RECORD mouseEventRecord) {
+    return mouseEventRecord.dwMousePosition.X > _position.X &&
+           mouseEventRecord.dwMousePosition.X < _position.X + _lineLengh &&
+           mouseEventRecord.dwMousePosition.Y == _position.Y;
 }
 
 ListItem::~ListItem() {}
