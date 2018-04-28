@@ -27,7 +27,7 @@ class ListItem {
 
         // functions
         void draw();
-        bool setBackground(DWORD background);
+        bool setBackgroundColor(DWORD background);
 
         //D'tors
         ~ListItem();
