@@ -9,6 +9,8 @@ ListItem::ListItem(short positionX, short positionY, string description):
         _descriptionLabel(description)
 {
         _stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        _lineLengh = _descriptionLabel.length() + 6;
+
 }
 
 
@@ -20,8 +22,14 @@ void ListItem::draw() {
 
         CONSOLE_CURSOR_INFO consoleCursorInfo = { 100, FALSE };
         SetConsoleCursorInfo(_stdoutHandle, &consoleCursorInfo);
-
-        DWORD backGround = BACKGROUND_BLUE;
-        SetConsoleTextAttribute(_stdoutHandle, backGround);
         cout << "[ ] " + _descriptionLabel << endl;
 }
+
+bool ListItem::setBackgroundColor(DWORD background) {
+    DWORD bg;
+    SetConsoleCursorPosition(_stdoutHandle, _position);
+    WINBOOL seccessStatus = FillConsoleOutputAttribute(_stdoutHandle, background, _lineLengh, _position, &bg);
+    return (bool)seccessStatus;
+}
+
+ListItem::~ListItem() {}
