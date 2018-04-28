@@ -23,9 +23,9 @@ class ListItem {
         bool _isFocusd;
 
         // Methods
-        void markAsChoose();
-        void markAsUnchoose();
-        bool setColor(DWORD color);
+        void MarkAsChoose();
+        void MarkAsUnchoose();
+        bool SetColor(DWORD color);
 
 
 
@@ -33,12 +33,12 @@ public:
         // C'tors
         ListItem(short positionX, short positionY, string description);
         // methods
-        void draw();
-        bool setBackgroundColor(DWORD background);
-        bool setTextColor(DWORD textColor);
-        void click();
-        bool focus();
-        bool unfocus();
+        void Draw();
+        bool SetBackgroundColor(DWORD background);
+        bool SetTextColor(DWORD textColor);
+        void Click();
+        bool Focus();
+        bool Unfocus();
 
         //D'tors
         ~ListItem();

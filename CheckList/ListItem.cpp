@@ -16,7 +16,7 @@ ListItem::ListItem(short positionX, short positionY, string description):
 }
 
 
-void ListItem::draw() {
+void ListItem::Draw() {
     SetConsoleCursorPosition(_stdoutHandle, _position);
     CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
     GetConsoleScreenBufferInfo(_stdoutHandle, &consoleScreenBufferInfo);
@@ -30,51 +30,51 @@ void ListItem::draw() {
     }
 }
 
-bool ListItem::setColor(DWORD color) {
+bool ListItem::SetColor(DWORD color) {
     DWORD bg;
     SetConsoleCursorPosition(_stdoutHandle, _position);
     WINBOOL seccessStatus = FillConsoleOutputAttribute(_stdoutHandle, color, _lineLengh, _position, &bg);
     return (bool)seccessStatus;
 }
 
-bool ListItem::setBackgroundColor(DWORD background) {
-    return setColor(background);
+bool ListItem::SetBackgroundColor(DWORD background) {
+    return SetColor(background);
 }
 
-bool ListItem::setTextColor(DWORD textColor) {
-    return setColor(textColor);
+bool ListItem::SetTextColor(DWORD textColor) {
+    return SetColor(textColor);
 }
 
-bool ListItem::focus() {
+bool ListItem::Focus() {
     _isFocusd = true;
-    return setBackgroundColor(BACKGROUND_GREEN);
+    return SetBackgroundColor(BACKGROUND_GREEN);
 }
 
-bool ListItem::unfocus() {
+bool ListItem::Unfocus() {
     _isFocusd = false;
-    return setTextColor(FOREGROUND_GREEN);
+    return SetTextColor(FOREGROUND_GREEN);
 }
 
-void ListItem::markAsUnchoose() {
+void ListItem::MarkAsUnchoose() {
     _isChecked = false;
-    draw();
+    Draw();
 }
 
-void ListItem::markAsChoose() {
+void ListItem::MarkAsChoose() {
     _isChecked = true;
-    draw();
+    Draw();
 }
 
-void ListItem::click() {
+void ListItem::Click() {
     if(_isChecked) {
-        markAsUnchoose();
+        MarkAsUnchoose();
         if(_isFocusd){
-            focus();
+            Focus();
         }
     } else {
-        markAsChoose();
+        MarkAsChoose();
         if(_isFocusd){
-            focus();
+            Focus();
         }
     }
 }
