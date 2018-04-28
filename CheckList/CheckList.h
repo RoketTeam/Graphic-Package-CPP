@@ -16,7 +16,7 @@ class CheckList {
 
     public:
         CheckList(int numberOfOptions, string options[], short positionX, short positionY);
-        bool HandleInputRecord(INPUT_RECORD inputRecord);
+        void HandleInputRecord(INPUT_RECORD inputRecord);
         void Draw();
         void KeyEventProc(KEY_EVENT_RECORD keyEventRecord);
         void MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord);

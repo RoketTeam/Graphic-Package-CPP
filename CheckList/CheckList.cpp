@@ -30,7 +30,7 @@ void CheckList::Draw() {
     }
 }
 
-bool CheckList::HandleInputRecord(INPUT_RECORD inputRecord) {
+void CheckList::HandleInputRecord(INPUT_RECORD inputRecord) {
 
     switch (inputRecord.EventType) {
         case KEY_EVENT:
