@@ -49,6 +49,7 @@ bool CheckList::CheckMousePosition(COORD mousePosition) {
 }
 
 void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord) {
+
     switch (mouseEventRecord.dwEventFlags){
         case MOUSE_MOVED:
             if (CheckMousePosition(mouseEventRecord.dwMousePosition)){
@@ -76,8 +77,10 @@ void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord) {
 }
 
 void CheckList::KeyEventProc(KEY_EVENT_RECORD keyEventRecord) {
+
     CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
     GetConsoleScreenBufferInfo(_stdoutHandle, &consoleScreenBufferInfo);
+    
     // if key pressed
     if (keyEventRecord.bKeyDown) {
         ListItem* currentItem = nullptr;
