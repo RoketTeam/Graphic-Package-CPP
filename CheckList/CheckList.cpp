@@ -31,7 +31,6 @@ void CheckList::Draw() {
 }
 
 void CheckList::HandleInputRecord(INPUT_RECORD inputRecord) {
-
     switch (inputRecord.EventType) {
         case KEY_EVENT:
             KeyEventProc(inputRecord.Event.KeyEvent);
@@ -40,7 +39,6 @@ void CheckList::HandleInputRecord(INPUT_RECORD inputRecord) {
             MouseEventProc(inputRecord.Event.MouseEvent);
             break;
     }
-
 }
 
 bool CheckList::CheckMousePosition(COORD mousePosition) {
