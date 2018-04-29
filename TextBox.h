@@ -7,38 +7,36 @@ using namespace std;
 
 class TextBox
 {
-private:
-	COORD position;
-	int length;
-	string value;
+    private:
+        COORD position;
+        int length;
+        string value;
 
-public:
+    public:
 
-	TextBox(COORD pos, int Length, string name)
-		: position(pos), length(Length), value(name) {
-	};
+        TextBox(COORD pos, int Length, string name)
+                : position(pos), length(Length), value(name) {
+        };
 
-	string getValue() {
-		return value;
-	}
+        string GetValue() {
+            return value;
+        }
 
-	COORD getPosition() {
-		return position;
-	}
+        COORD GetPosition() {
+            return position;
+        }
 
 
 
-	void setFrame(int Length);
-	void addChar(char ch);
-	void deleteChar();
-	void deleteAllText();
-	void gotoXY(int x, int y);
-	void gotoXY(int x, int y, string text);
+        void GetFrame(int Length);
+        void AddChar(char ch);
+        void DeleteChar();
+        void GoToXY(int x, int y);
+        void GoToXY(int x, int y, string text);
+        void SetFrame(int length);
+        void Draw();
 
-	void draw();
-
-	~TextBox() {};
+        ~TextBox() {};
 
 
 };
-
