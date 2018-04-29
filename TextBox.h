@@ -27,7 +27,7 @@ class TextBox
         }
 
 
-
+        void HandleEvent(INPUT_RECORD inputRecord, int* counter);
         void GetFrame(int Length);
         void AddChar(char ch);
         void DeleteChar();

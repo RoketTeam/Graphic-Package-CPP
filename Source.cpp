@@ -18,26 +18,6 @@ int main(int argc, char** argv) {
         INPUT_RECORD ir;
         DWORD count;
         ReadConsoleInput(in, &ir, 1, &count);
-        switch (ir.EventType) {
-            case KEY_EVENT:
-                if (!counter) {
-                    if (ir.Event.KeyEvent.uChar.AsciiChar >= 32 && ir.Event.KeyEvent.uChar.AsciiChar <= 127) {
-                        d.AddChar(ir.Event.KeyEvent.uChar.AsciiChar);
-                    }
-                    else if (ir.Event.KeyEvent.uChar.AsciiChar == 8) {
-                        d.DeleteChar();
-                    }
-                }
-                if (counter == 0) {
-                    counter++;
-                }
-                else {
-                    counter = 0;
-                }
-        }
+        d.HandleEvent(ir, &counter);
     }
-
-
-
-
 }

@@ -75,3 +75,23 @@ void TextBox::Draw() {
     cout << bl << Line << br;
     GoToXY(col + 1, row + 1, value);
 }
+
+void TextBox::HandleEvent(INPUT_RECORD inputRecord, int* counter) {
+    switch (inputRecord.EventType) {
+        case KEY_EVENT:
+            if (!(*counter)) {
+                if (inputRecord.Event.KeyEvent.uChar.AsciiChar >= 32 && inputRecord.Event.KeyEvent.uChar.AsciiChar <= 127) {
+                    AddChar(inputRecord.Event.KeyEvent.uChar.AsciiChar);
+                }
+                else if (inputRecord.Event.KeyEvent.uChar.AsciiChar == 8) {
+                    DeleteChar();
+                }
+            }
+            if ((*counter) == 0) {
+                (*counter)++;
+            }
+            else {
+                (*counter) = 0;
+            }
+    }
+}
