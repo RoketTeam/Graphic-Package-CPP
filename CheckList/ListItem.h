@@ -32,6 +32,7 @@ class ListItem {
 public:
         // C'tors
         ListItem(short positionX, short positionY, string description);
+        
         // methods
         void Draw();
         bool SetBackgroundColor(DWORD background);

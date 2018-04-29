@@ -28,6 +28,7 @@ void ListItem::Draw() {
         cout << "[X] ";
     }
     else{
+        SetConsoleTextAttribute(_stdoutHandle, BACKGROUND_GREEN);
         cout << "[ ] " << _descriptionLabel;
     }
     if(_isFocused)
