@@ -6,69 +6,69 @@
 #include "CheckList.h"
 
 
-CheckList::CheckList(int numberOfOptions, string *options, short positionX, short positionY):
-        _listSize(numberOfOptions),
-        _position({positionX, positionY})
+CheckList::CheckList(int number_of_options, string *options, short position_x, short position_y):
+        list_size_(number_of_options),
+        position_({position_x, position_y})
 {
-    _stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(_stdoutHandle, FOREGROUND_GREEN);
-    for(short i = 0 ; i < _listSize; ++i){
-        _items.push_back(ListItem(_position.X, _position.Y + i, options[i]));
+    stdout_handle_ = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(stdout_handle_, FOREGROUND_GREEN);
+    for(short i = 0 ; i < list_size_; ++i){
+        items_.push_back(ListItem(position_.X, position_.Y + i, options[i]));
     }
 }
 
 void CheckList::Draw() {
-    SetConsoleCursorPosition(_stdoutHandle, _position);
-    CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
-    GetConsoleScreenBufferInfo(_stdoutHandle, &consoleScreenBufferInfo);
+    SetConsoleCursorPosition(stdout_handle_, position_);
+    CONSOLE_SCREEN_BUFFER_INFO console_screen_buffer_info;
+    GetConsoleScreenBufferInfo(stdout_handle_, &console_screen_buffer_info);
 
-    CONSOLE_CURSOR_INFO consoleCursorInfo = { 100, FALSE };
-    SetConsoleCursorInfo(_stdoutHandle, &consoleCursorInfo);
+    CONSOLE_CURSOR_INFO console_cursor_info = { 100, FALSE };
+    SetConsoleCursorInfo(stdout_handle_, &console_cursor_info);
 
-    for(short i = 0 ; i < _listSize; ++i){
-        _items[i].Draw();
+    for(short i = 0 ; i < list_size_; ++i){
+        items_[i].Draw();
     }
 }
 
-void CheckList::HandleInputRecord(INPUT_RECORD inputRecord) {
-    switch (inputRecord.EventType) {
+void CheckList::HandleInputRecord(INPUT_RECORD input_record) {
+    switch (input_record.EventType) {
         case KEY_EVENT:
-            KeyEventProc(inputRecord.Event.KeyEvent);
+            KeyEventProc(input_record.Event.KeyEvent);
             break;
         case MOUSE_EVENT:
-            MouseEventProc(inputRecord.Event.MouseEvent);
+            MouseEventProc(input_record.Event.MouseEvent);
             break;
     }
 }
 
-bool CheckList::CheckMousePosition(COORD mousePosition) {
-    return mousePosition.X >= _position.X &&
-            mousePosition.X <= _items[_listSize - 1].GetLineLengh() &&
-            mousePosition.Y >= _position.Y &&
-            mousePosition.Y <= _position.Y + _listSize;
+bool CheckList::CheckMousePosition(COORD mouse_position) {
+    return mouse_position.X >= position_.X &&
+            mouse_position.X <= items_[list_size_ - 1].GetLineLengh() &&
+            mouse_position.Y >= position_.Y &&
+            mouse_position.Y <= position_.Y + list_size_;
 }
 
-void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord) {
+void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouse_event_record) {
 
-    switch (mouseEventRecord.dwEventFlags){
+    switch (mouse_event_record.dwEventFlags){
         case MOUSE_MOVED:
-            if (CheckMousePosition(mouseEventRecord.dwMousePosition)){
-                for(int i = 0; i < _listSize ; ++i){
-                    if(_items[i].IsHover(mouseEventRecord)){
-                        _items[i].Focus();
+            if (CheckMousePosition(mouse_event_record.dwMousePosition)){
+                for(int i = 0; i < list_size_ ; ++i){
+                    if(items_[i].IsHover(mouse_event_record)){
+                        items_[i].Focus();
                     }
                     else {
-                        _items[i].Unfocus();
+                        items_[i].Unfocus();
                     }
                 }
             }
             return;
         case 0:
-            if (mouseEventRecord.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
-                if (CheckMousePosition(mouseEventRecord.dwMousePosition)){
-                    for(int i = 0; i < _listSize ; ++i){
-                        if(_items[i].IsHover(mouseEventRecord)){
-                            _items[i].Click();
+            if (mouse_event_record.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
+                if (CheckMousePosition(mouse_event_record.dwMousePosition)){
+                    for(int i = 0; i < list_size_ ; ++i){
+                        if(items_[i].IsHover(mouse_event_record)){
+                            items_[i].Click();
                         }
                     }
                 }
@@ -78,55 +78,55 @@ void CheckList::MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord) {
 
 }
 
-void CheckList::KeyEventProc(KEY_EVENT_RECORD keyEventRecord) {
+void CheckList::KeyEventProc(KEY_EVENT_RECORD key_event_record) {
 
-    CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo;
-    GetConsoleScreenBufferInfo(_stdoutHandle, &consoleScreenBufferInfo);
+    CONSOLE_SCREEN_BUFFER_INFO console_screen_buffer_info;
+    GetConsoleScreenBufferInfo(stdout_handle_, &console_screen_buffer_info);
 
     // if key pressed
-    if (keyEventRecord.bKeyDown) {
-        ListItem* currentItem = nullptr;
+    if (key_event_record.bKeyDown) {
+        ListItem* current_item = nullptr;
         int index = -1;
-        for(int i=0 ; i<_listSize ; ++i) {
-            if (_items[i].IsFocus()){
-                currentItem = &_items[i];
+        for(int i=0 ; i<list_size_ ; ++i) {
+            if (items_[i].IsFocus()){
+                current_item = &items_[i];
                 index = i;
             }
         }
-        if(!currentItem){
+        if(!current_item){
             index = -1;
         }
 
         //Down key pressed
-        if(keyEventRecord.wVirtualKeyCode == 40) {
-            if(currentItem)
-                currentItem->Unfocus();
-            if(index == _listSize - 1) {
-                _items[0].Focus();
+        if(key_event_record.wVirtualKeyCode == 40) {
+            if(current_item)
+                current_item->Unfocus();
+            if(index == list_size_ - 1) {
+                items_[0].Focus();
             }
             else {
-                _items[index+1].Focus();
+                items_[index+1].Focus();
             }
             return;
 
         }
 
         //Space key pressed
-        if (keyEventRecord.wVirtualKeyCode == VK_SPACE) {
-            _items[index].Click();
+        if (key_event_record.wVirtualKeyCode == VK_SPACE) {
+            items_[index].Click();
             return;
         }
 
         //Up key pressed
-        if (keyEventRecord.wVirtualKeyCode == VK_UP) {
-            if(currentItem)
-                currentItem->Unfocus();
+        if (key_event_record.wVirtualKeyCode == VK_UP) {
+            if(current_item)
+                current_item->Unfocus();
 
             if(index == 0 || index == -1) {
-                _items[_listSize - 1].Focus();
+                items_[list_size_ - 1].Focus();
             }
             else {
-                _items[index - 1].Focus();
+                items_[index - 1].Focus();
             }
             return;
 

@@ -15,12 +15,12 @@ class ListItem {
 
     private:
         // Atrributes
-        HANDLE _stdoutHandle;
-        COORD _position;
-        string _descriptionLabel;
-        short _lineLengh;
-        bool _isChecked;
-        bool _isFocused;
+        HANDLE stdout_handle_;
+        COORD position_;
+        string description_label_;
+        short line_lengh_;
+        bool is_checked_;
+        bool is_focused_;
 
         // Methods
         void MarkAsChoose();
@@ -31,8 +31,8 @@ class ListItem {
 
 public:
         // C'tors
-        ListItem(short positionX, short positionY, string description);
-        
+        ListItem(short position_x, short position_y, string description);
+
         // methods
         void Draw();
         bool SetBackgroundColor(DWORD background);
@@ -40,9 +40,9 @@ public:
         void Click();
         bool Focus();
         bool Unfocus();
-        bool IsFocus(){return _isFocused;}
+        bool IsFocus(){return is_focused_;}
         bool IsHover(MOUSE_EVENT_RECORD mouseEventRecord);
-        short GetLineLengh(){return _lineLengh;}
+        short GetLineLengh(){return line_lengh_;}
 
         //D'tors
         ~ListItem();

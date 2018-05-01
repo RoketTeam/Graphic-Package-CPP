@@ -6,20 +6,20 @@
 
 class CheckList {
     private:
-        COORD _position;
-        vector<ListItem> _items;
-        int _listSize;
-        HANDLE _stdoutHandle;
+        COORD position_;
+        vector<ListItem> items_;
+        int list_size_;
+        HANDLE stdout_handle_;
 
         //Methods:
-        bool CheckMousePosition(COORD mousePosition);
+        bool CheckMousePosition(COORD mouse_position);
 
     public:
-        CheckList(int numberOfOptions, string options[], short positionX, short positionY);
-        void HandleInputRecord(INPUT_RECORD inputRecord);
+        CheckList(int number_of_options, string options[], short position_x, short position_y);
+        void HandleInputRecord(INPUT_RECORD input_record);
         void Draw();
-        void KeyEventProc(KEY_EVENT_RECORD keyEventRecord);
-        void MouseEventProc(MOUSE_EVENT_RECORD mouseEventRecord);
+        void KeyEventProc(KEY_EVENT_RECORD key_event_record);
+        void MouseEventProc(MOUSE_EVENT_RECORD mouse_event_record);
 
     ~CheckList();
 
