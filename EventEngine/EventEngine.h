@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Graphic-Package-CPP/IControl/Control.h"
+#include "../Control/Control.h"
 #include <windows.h>
 #include "../Graphics/Graphics.h"
 

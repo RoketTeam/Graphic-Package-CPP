@@ -6,4 +6,4 @@ Control::Control()
 {
 }
 
-
+Control::~Control() {}

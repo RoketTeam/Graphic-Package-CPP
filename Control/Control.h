@@ -1,5 +1,6 @@
 #pragma once
 #include "../Graphics/Graphics.h"
+#include "../IBorder/IBorder.h"
 #include <vector>
 
 using namespace std;
