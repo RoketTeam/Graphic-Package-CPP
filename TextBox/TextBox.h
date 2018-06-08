@@ -6,38 +6,25 @@
 
 using namespace std;
 
-class TextBox : public IControl
+class TextBox : public Control
 {
 	private:
-		COORD position;
-		int length;
-		string value;
+		int length_;
+		Label value_;
 
 	public:
 
 		TextBox(COORD pos, int Length, string name)
 			: position(pos), length(Length), value(name) {
-		};
+		}; // need to be refactor
 
 		string getValue() {
-			return value;
+			return value_;
 		}
-
-		COORD getPosition() {
-			return position;
-		}
-
-
 
 		void setFrame(int Length);
 		void addChar(char ch);
 		void deleteChar();
-		void deleteAllText();
-		void gotoXY(int x, int y);
-		void gotoXY(int x, int y, string text);
-
-		void draw();
-
 		~TextBox() {};
 
 

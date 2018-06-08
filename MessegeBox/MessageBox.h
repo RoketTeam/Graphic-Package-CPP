@@ -8,19 +8,19 @@
 
 using namespace std;
 
-class MessageBox : public IControl
+class MessageBox : public Control
 {
 	private:
-		Button _ok;
-		Button _cancel;
-		Label _message;
+		Button ok_;
+		Button cancel_;
+		Label message_;
 
 	public:
 		//C'tors
 		MessageBox() {};
 
 		MessageBox(Button ok, Button cancel, Label message)
-			: _ok(ok), _cancel(cancel), _message(message) {
+			: ok_(ok), cancel_(cancel), message_(message) {
 		};
 
 		// methods

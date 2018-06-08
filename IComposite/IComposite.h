@@ -11,19 +11,19 @@
 using namespace std;
 
 
-class IComposite : public IControl, IListener  {
+class IComposite : public Control, IListener  {
 
 	private:
 		// Atrributes
-		vector<IControl> _items;
+		vector<Control*> items_;
 
 	public:
 
 		// methods
-		virtual IControl* GetItem(int index) = 0;
-		virtual void Add(IControl* item) = 0;
+		virtual Control* GetItem(int index){};
+		virtual void Add(Control* item){};
 
 		//D'tors
-		virtual ~IComposite() {};
+		virtual ~IComposite() = 0;
 
 };

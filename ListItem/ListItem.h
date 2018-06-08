@@ -9,18 +9,17 @@
 using namespace std;
 
 
-class ListItem : public IControl {
+class ListItem : public Control {
 
 	private:
 		// Atrributes
-		HANDLE _stdoutHandle;
-		COORD _position;
-		string _descriptionLabel;
-		short _lineLengh;
-		bool _isChecked;
-		bool _isFocused;
+		Label descriptionLabel_;
+		short lineLengh_;
+		bool isChecked_;
+		bool isFocused_;
 
-		// Methods
+
+	// Methods
 		void MarkAsChoose();
 		void MarkAsUnchoose();
 		bool SetColor(DWORD color);
@@ -30,17 +29,11 @@ class ListItem : public IControl {
 		ListItem(short positionX, short positionY, string description);
 
 		// methods
-		void Draw();
-		bool SetBackgroundColor(DWORD background);
-		bool SetTextColor(DWORD textColor);
-		void Click();
-		bool Focus();
-		bool Unfocus();
-		bool IsFocus() { return _isFocused; }
-		bool IsHover(MOUSE_EVENT_RECORD mouseEventRecord);
-		short GetLineLengh() { return _lineLengh; }
-	    void HandleEvent(INPUT_RECORD inputRecord);
-		void ChangeColors(IBGColor* backGroundColor, ITextColor* textColor);
+		bool focus();
+		bool unfocus();
+		bool isFocus() { return _isFocused; }
+		bool isHover(); // need redesign
+		short getLineLengh() { return _lineLengh; }
 
 		//D'tors
 		~ListItem();

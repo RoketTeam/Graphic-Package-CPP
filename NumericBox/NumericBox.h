@@ -9,9 +9,9 @@ using namespace std;
 class NumericBox : public IControl
 {
 	private:
-		Button _inc;
-		Button _dec;
-		int _value;
+		Button inc_;
+		Button dec_;
+		int value_;
 
 	public:
 		//C'tors
@@ -19,15 +19,15 @@ class NumericBox : public IControl
 		};
 
 		NumericBox(Button inc, Button dec, int value)
-			: _inc(inc), _dec(dec), _value(value) {
+			: inc_(inc), dec_(dec), value_(value) {
 		};
 
 		// methods
-		void Inc();
-		void Dec();
-		void SetMinValue(int value);
-		void SetMaxValue(int value);
-		void SetValue(int value);
+		void inc();
+		void dec();
+		void setMinValue(int value);
+		void setMaxValue(int value);
+		void setValue(int value);
 
 		//D'tors
 		~NumericBox() {};

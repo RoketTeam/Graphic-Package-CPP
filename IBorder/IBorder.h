@@ -12,7 +12,8 @@ class IBorder {
 	public:
 
 		// methods
-		void DrawBorder();
+		void
+			drawBorder();
 
 		//D'tors
 		virtual ~IBorder() {};
