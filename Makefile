@@ -1,6 +1,6 @@
 CXX = i686-w64-mingw32-g++
 CPPFLAGS = -std=c++1z -static -g
-# OBJS += Button/Button.o
+OBJS += Button/Button.o
 # OBJS += CheckList/CheckList.o
 # OBJS += ComboBox/ComboBox.o
 OBJS += Control/Control.o

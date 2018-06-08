@@ -1,21 +1,21 @@
 #include <string>
 #include <Windows.h>
-#include "IObservable.h"
-#include "Label.h"
-#include "IListener.h"
+#include "../IObserver/IObservable.h"
+#include "../Label/Label.h"
+#include "../IListener/IListener.h"
 
 using namespace std;
 
-class Button : public IObservable, Label
+class Button : public IObservable, public Label
 {
 
 	public:
 
-		Button();
-
-
+		Button(string text);
+		void mousePressed(int x, int y, bool isLeft);
+		void notify();
 		//D'tors
-		~Button() {};
+		~Button();
 
 };
 

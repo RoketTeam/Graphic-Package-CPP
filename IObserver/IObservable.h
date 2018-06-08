@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "IListener.h"
+#include "../IListener/IListener.h"
 
 #pragma once
 
@@ -12,15 +12,15 @@ using namespace std;
 
 class IObservable {
 
-	private:
+	protected:
 		// Atrributes
-		vector<IListener> _listeners;
+		vector<IListener*> listeners_;
 
 	public:
 
 		// methods
-		 void Notify();
-		 void Add(IListener* listener);
+		 virtual void notify() = 0;
+		 void add(IListener* listener);
 
 		//D'tors
 		virtual ~IObservable() {};

@@ -8,7 +8,7 @@ class IListener {
 	public:
 
 		// methods
-		virtual void Action() = 0;
+		virtual void action() = 0;
 
 		//D'tors
 		virtual ~IListener() {};
