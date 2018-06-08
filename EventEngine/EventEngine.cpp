@@ -30,37 +30,37 @@ void EventEngine::run(Control &c)
 		ReadConsoleInput(_console, &record, 1, &count);
 		switch (record.EventType)
 		{
-		case KEY_EVENT:
-		{
-			auto f = Control::getFocus();
-			if (f != nullptr && record.Event.KeyEvent.bKeyDown)
+			case KEY_EVENT:
 			{
-				auto code = record.Event.KeyEvent.wVirtualKeyCode;
-				auto chr = record.Event.KeyEvent.uChar.AsciiChar;
-				if (code == VK_TAB)
-					moveFocus(c, f);
-				else
-					f->keyDown(code, chr);
-				redraw = true;
+				auto f = Control::getFocus();
+				if (f != nullptr && record.Event.KeyEvent.bKeyDown)
+				{
+					auto code = record.Event.KeyEvent.wVirtualKeyCode;
+					auto chr = record.Event.KeyEvent.uChar.AsciiChar;
+					if (code == VK_TAB)
+						moveFocus(c, f);
+					else
+						f->keyDown(code, chr);
+					redraw = true;
+				}
+				break;
 			}
-			break;
-		}
-		case MOUSE_EVENT:
-		{
-			auto button = record.Event.MouseEvent.dwButtonState;
-			auto coord = record.Event.MouseEvent.dwMousePosition;
-			auto x = coord.X - c.getLeft();
-			auto y = coord.Y - c.getTop();
-			if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
+			case MOUSE_EVENT:
 			{
-				c.mousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
-				redraw = true;
+				auto button = record.Event.MouseEvent.dwButtonState;
+				auto coord = record.Event.MouseEvent.dwMousePosition;
+				auto x = coord.X - c.getLeft();
+				auto y = coord.Y - c.getTop();
+				if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
+				{
+					c.mousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
+					redraw = true;
+				}
+				break;
 			}
-			break;
-		}
-		default:
-			break;
-		}
+			default:
+				break;
+			}
 	}
 }
 

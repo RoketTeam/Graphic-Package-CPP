@@ -12,9 +12,11 @@ void Label::setText(string text)
 
 void Label::draw(Graphics& g, int x, int y, size_t z)
 {
-    if (!z)
-        g.write(text_);
-
+    if (z == 0) {
+        top_ = x;
+        left_ = y;
+        g.write(top_, left_, text_);
+    }
 }
 
 Label::~Label() {}

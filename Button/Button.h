@@ -11,8 +11,8 @@ class Button : public IObservable, Label
 
 	public:
 
-		//C'tors
 		Button();
+
 
 		//D'tors
 		~Button() {};
