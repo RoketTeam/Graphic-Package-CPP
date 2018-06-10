@@ -1,3 +1,4 @@
+#pragma once
 
 #include <windows.h>
 #include <iostream>
@@ -5,10 +6,10 @@
 #include <vector>
 #include "../IListener/IListener.h"
 
-#pragma once
 
 using namespace std;
 
+class IListener;
 
 class IObservable {
 
@@ -19,10 +20,10 @@ class IObservable {
 	public:
 
 		// methods
-		 virtual void notify() = 0;
+         void notify();
 		 void add(IListener* listener);
 
 		//D'tors
-		virtual ~IObservable() {};
+		virtual ~IObservable() = 0;
 
 };

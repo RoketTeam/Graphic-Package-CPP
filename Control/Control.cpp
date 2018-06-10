@@ -1,6 +1,7 @@
 #include "Control.h"
 
 
+using namespace std;
 
 Control::Control()
 {

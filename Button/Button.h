@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <Windows.h>
 #include "../IObserver/IObservable.h"
@@ -10,10 +12,10 @@ class Button : public IObservable, public Label
 {
 
 	public:
-
 		Button(string text);
 		void mousePressed(int x, int y, bool isLeft);
-		void notify();
+		string getText();
+
 		//D'tors
 		~Button();
 
