@@ -2,7 +2,10 @@
 #include <iostream>
 
 
-Label::Label(string text) : Control(), text_(text) {};
+Label::Label(string text) : Control(), text_(text) {
+    right_  = left_ + 5;
+    bottom_ = top_ + text_.length() + 1;
+};
 
 void Label::setText(string text) {
     text_ = text;
