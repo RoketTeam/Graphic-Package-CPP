@@ -8,13 +8,7 @@
 
 int main(int argc, char** argv)
 {
-
-	Label l(" I Hate C++ Very Much ");
-	DoubleLine* OLborder = new DoubleLine();
-	l.setBorder(OLborder);
-	Control& l2 = l;
-	NumericBox b(2, 10);
+	NumericBox b(0, 10);
 	EventEngine e;
-	e.run(l);
-
+	e.run(b);
 }

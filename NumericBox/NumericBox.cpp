@@ -7,8 +7,8 @@ using namespace std;
 NumericBox::NumericBox(int minValue, int maxValue):
         minVal_(minValue),
         maxVal_(maxValue),
-        inc_("+"),
-        dec_("-"),
+        inc_(" + "),
+        dec_(" - "),
         value_(minValue),
         textValue_(to_string(minValue))
 {
@@ -55,9 +55,9 @@ void NumericBox::dec() {
 }
 
 void NumericBox::action(IObservable* iObservable) {
-    if((((Button*)iObservable)->getText().compare ("INC")) == 0){
+    if((((Button*)iObservable)->getText().compare (" - ")) == 0){
         inc();
-    } else if (!(((Button*)iObservable)->getText().compare("DEC"))) {
+    } else if (!(((Button*)iObservable)->getText().compare(" + "))) {
         dec();
     }
 }
@@ -68,9 +68,11 @@ void NumericBox::mousePressed(int x, int y, bool isLeft) {
 
 
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){
+    int labelPos = x + dec_.getWidth() + 4;
+    int decPos = labelPos + textValue_.getText().length() + 4;
     if(!z){
-        inc_.draw(g, 0, 0, 0);
-        textValue_.draw(g, 5, 0, 0);
-        dec_.draw(g, 0, 7, 0);
+        inc_.draw(g, x, y, 0);
+        textValue_.draw(g, labelPos, y, 0);
+        dec_.draw(g, decPos, y, 0);
     }
 }

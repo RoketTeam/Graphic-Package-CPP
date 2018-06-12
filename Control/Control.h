@@ -12,8 +12,8 @@ class Control
 		short left_;	 	// top y
 		short top_; 		// top x
 		IBorder* border_;
-		short height_;		// bottom y
-		short width_;		// bottom x
+		int height_;		// bottom y
+		int width_;		// bottom x
 
 
 
@@ -27,6 +27,7 @@ class Control
 		virtual void keyDown(int keyCode, char character) {};
 		virtual short getLeft() { return left_; };
 		virtual short getTop() { return top_; };
+		int getWidth(){ return width_;}
 		virtual void getAllControls(vector<Control*>* controls) {};
 		virtual bool canGetFocus() { return FALSE; };
 		void setBorder(IBorder* border){border_ = border;}

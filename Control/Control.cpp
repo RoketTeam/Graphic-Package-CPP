@@ -1,4 +1,5 @@
 #include "Control.h"
+#include "../IBorder/NoneBorder.h"
 
 
 using namespace std;
@@ -7,7 +8,7 @@ Control::Control()
 {
     left_ = 0;
     top_ = 0;
-    border_ = NULL;
+    border_ = new NoneBorder();
 }
 
 Control::Control(int left, int top, IBorder* border):

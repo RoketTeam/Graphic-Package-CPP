@@ -7,6 +7,7 @@ OBJS += IBorder/IBorder.o
 OBJS += IBorder/IBorderStyle.o
 OBJS += IBorder/OneLine.o
 OBJS += IBorder/DoubleLine.o
+OBJS += IBorder/NoneBorder.o
 OBJS += Control/Control.o
 OBJS += EventEngine/EventEngine.o
 OBJS += Graphics/Graphics.o
