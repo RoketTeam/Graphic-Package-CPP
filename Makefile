@@ -3,10 +3,13 @@ CPPFLAGS = -std=c++1z -static -g
 OBJS += Button/Button.o
 # OBJS += CheckList/CheckList.o
 # OBJS += ComboBox/ComboBox.o
+OBJS += IBorder/IBorder.o
+OBJS += IBorder/IBorderStyle.o
+OBJS += IBorder/OneLine.o
+OBJS += IBorder/DoubleLine.o
 OBJS += Control/Control.o
 OBJS += EventEngine/EventEngine.o
 OBJS += Graphics/Graphics.o
-# OBJS += IBorder/IBorder.o
 # OBJS += IComposite/IComposite.o
 OBJS += IListener/IListener.o
 OBJS += IObserver/IObservable.o
@@ -23,7 +26,7 @@ OBJS += NumericBox/NumericBox.o
 %.o: %.cpp
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
-all: $(OBJS)
+all:$(OBJS)
 	$(CXX) $(CPPFLAGS) $(OBJS) -o final.exe
 
 clean:

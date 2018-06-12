@@ -12,7 +12,7 @@ private:
 public:
 
 	// methods
-
+	DoubleLine();
 	//D'tors
 	~DoubleLine() {};
 

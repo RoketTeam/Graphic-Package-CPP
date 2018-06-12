@@ -1,9 +1,9 @@
 #pragma once
 #include "../Graphics/Graphics.h"
-#include "../IBorder/IBorder.h"
 #include <vector>
 
 using namespace std;
+class IBorder;
 
 class Control
 {
@@ -29,6 +29,7 @@ class Control
 		virtual short getTop() { return top_; };
 		virtual void getAllControls(vector<Control*>* controls) {};
 		virtual bool canGetFocus() { return FALSE; };
+		void setBorder(IBorder* border){border_ = border;}
 		virtual ~Control() = 0;
 };
 

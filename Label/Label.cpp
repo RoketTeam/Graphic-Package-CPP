@@ -1,10 +1,10 @@
-#include "Label.h"
+#include "../Label/Label.h"
+#include "../IBorder/IBorder.h"
 #include <iostream>
 
 
 Label::Label(string text) : Control(), text_(text) {
-    right_  = left_ + 5;
-    bottom_ = top_ + text_.length() + 1;
+
 };
 
 void Label::setText(string text) {
@@ -17,9 +17,10 @@ string Label::getText() {
 
 void Label::draw(Graphics& g, int x, int y, size_t z) {
     if (z == 0) {
-        top_ = x;
-        left_ = y;
-        g.write(top_, left_, text_);
+        top_ = 5;
+        left_ = 5;
+        border_->drawBorder(top_, left_, this->getText().length(), g);
+        g.write(top_ + 1, left_ + 1, text_);
     }
 }
 

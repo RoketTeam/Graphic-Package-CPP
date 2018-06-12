@@ -12,7 +12,7 @@ private:
 public:
 
 	// methods
-
+	NoneBorder();
 	//D'tors
 	~NoneBorder() {};
 
