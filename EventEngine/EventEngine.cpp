@@ -55,6 +55,8 @@ void EventEngine::run(Control &c)
 				{
 					c.mousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
 					redraw = true;
+				} else if(MOUSE_MOVED) {
+					c.mouseHover(x, y);
 				}
 				break;
 			}

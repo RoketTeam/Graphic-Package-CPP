@@ -11,8 +11,12 @@ Control::Control()
     border_ = new NoneBorder();
 }
 
+
+
 Control::Control(int left, int top, IBorder* border):
         left_(left), top_(top), border_(border){}
+
+
 
 
 Control::~Control() {}
