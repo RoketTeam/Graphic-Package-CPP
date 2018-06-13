@@ -1,4 +1,5 @@
 #include "NumericBox.h"
+#include "../IBorder/OneLine.h"
 #include <iostream>
 
 using namespace std;
@@ -14,6 +15,8 @@ NumericBox::NumericBox(int minValue, int maxValue):
 {
     inc_.add(this);
     dec_.add(this);
+    textValue_.setLeft(inc_.getWidth() + 3);
+    dec_.setLeft(textValue_.getLeft() + textValue_.getText().length() + 4);
 }
 
 void NumericBox::setMaxValue(int value) {
@@ -63,16 +66,22 @@ void NumericBox::action(IObservable* iObservable) {
 }
 
 void NumericBox::mousePressed(int x, int y, bool isLeft) {
-
+    if(isInside(x, y, inc_.getLeft(), inc_.getTop(), inc_.getWidth(), inc_.getHeight()))
+        inc();
+    if(isInside(x, y, dec_.getLeft(), dec_.getTop(), dec_.getWidth(), dec_.getHeight()))
+        dec();
 };
 
 
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){
-    int labelPos = x + dec_.getWidth() + 4;
-    int decPos = labelPos + textValue_.getText().length() + 4;
     if(!z){
         inc_.draw(g, x, y, 0);
-        textValue_.draw(g, labelPos, y, 0);
-        dec_.draw(g, decPos, y, 0);
+        textValue_.draw(g, textValue_.getLeft(), y, 0);
+        dec_.draw(g, dec_.getLeft(), 0, 0);
     }
+}
+
+
+bool NumericBox::mouseHover(int x, int y, Graphics &g) {
+    return dec_.mouseHover(x, y, g);
 }

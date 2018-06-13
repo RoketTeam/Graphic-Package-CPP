@@ -30,6 +30,14 @@ void Graphics::setBackground(Color color)
 	updateConsoleAttributes();
 }
 
+void Graphics::setBackground(Color color, short lineLength, short x, short y){
+	DWORD bg;
+	moveTo(x, y);
+	DWORD backgroundColor = getBackgroundColor(color);
+	FillConsoleOutputAttribute(_console, backgroundColor, lineLength, COORD({x,y}), &bg);
+}
+
+
 void Graphics::setForeground(Color color)
 {
 	_foreground = color;
@@ -66,34 +74,47 @@ void Graphics::setCursorVisibility(bool isVisible)
 	SetConsoleCursorInfo(_console, &cci);
 }
 
+DWORD Graphics::getBackgroundColor(Color color) {
+	DWORD background = 0;
+
+	switch (color)
+	{
+		case Color::Black:	break;
+		case Color::Blue:	background |= BACKGROUND_BLUE; break;
+		case Color::Green:	background |= BACKGROUND_GREEN; break;
+		case Color::Red:	background |= BACKGROUND_RED; break;
+		case Color::Cyan:	background |= BACKGROUND_BLUE | BACKGROUND_GREEN; break;
+		case Color::Purple:	background |= BACKGROUND_BLUE | BACKGROUND_RED; break;
+		case Color::Orange: background |= BACKGROUND_GREEN | BACKGROUND_RED; break;
+		case Color::White:	background |= BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED; break;
+	}
+
+	return background;
+}
+
+DWORD Graphics::getForegroundColor(Color color) {
+	DWORD foreground = 0;
+
+	switch (color)
+	{
+		case Color::Black:	break;
+		case Color::Blue:	foreground |= FOREGROUND_BLUE; break;
+		case Color::Green:	foreground |= FOREGROUND_GREEN; break;
+		case Color::Red:	foreground |= FOREGROUND_RED; break;
+		case Color::Cyan:	foreground |= FOREGROUND_BLUE | FOREGROUND_GREEN; break;
+		case Color::Purple:	foreground |= FOREGROUND_BLUE | FOREGROUND_RED; break;
+		case Color::Orange: foreground |= FOREGROUND_GREEN | FOREGROUND_RED; break;
+		case Color::White:	foreground |= FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED; break;
+	}
+
+	return foreground;
+}
+
+
+
 void Graphics::updateConsoleAttributes()
 {
-	DWORD attributes = 0;
-
-	switch (_foreground)
-	{
-		case Color::Black:	break;
-		case Color::Blue:	attributes |= FOREGROUND_BLUE; break;
-		case Color::Green:	attributes |= FOREGROUND_GREEN; break;
-		case Color::Red:	attributes |= FOREGROUND_RED; break;
-		case Color::Cyan:	attributes |= FOREGROUND_BLUE | FOREGROUND_GREEN; break;
-		case Color::Purple:	attributes |= FOREGROUND_BLUE | FOREGROUND_RED; break;
-		case Color::Orange: attributes |= FOREGROUND_GREEN | FOREGROUND_RED; break;
-		case Color::White:	attributes |= FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED; break;
-	}
-
-	switch (_background)
-	{
-		case Color::Black:	break;
-		case Color::Blue:	attributes |= BACKGROUND_BLUE; break;
-		case Color::Green:	attributes |= BACKGROUND_GREEN; break;
-		case Color::Red:	attributes |= BACKGROUND_RED; break;
-		case Color::Cyan:	attributes |= BACKGROUND_BLUE | BACKGROUND_GREEN; break;
-		case Color::Purple:	attributes |= BACKGROUND_BLUE | BACKGROUND_RED; break;
-		case Color::Orange: attributes |= BACKGROUND_GREEN | BACKGROUND_RED; break;
-		case Color::White:	attributes |= BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED; break;
-	}
-
+	DWORD attributes = getBackgroundColor(_background) | getForegroundColor(_foreground);
 	SetConsoleTextAttribute(_console, attributes);
 }
 

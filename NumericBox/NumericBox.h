@@ -32,9 +32,10 @@ class NumericBox : public Control, public IListener
 		void action(IObservable* iObservable);
 	 	void draw(Graphics& g, int x, int y, size_t z);
         void mousePressed(int x, int y, bool isLeft);
+		bool mouseHover(int x, int y, Graphics &g);
 
 
-    //D'tors
+	//D'tors
 		~NumericBox() {};
 
 
