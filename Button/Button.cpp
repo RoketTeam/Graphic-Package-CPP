@@ -21,6 +21,9 @@ string Button::getText() {
 
 void Button::draw(Graphics &g, int x, int y, size_t z) {
     Label::draw(g, x, y, z);
+    if(isHover_){
+        g.setBackground(Color::White, width_, left_, top_);
+    }
 }
 
 bool Button::mouseHover(int x, int y, Graphics &g){
