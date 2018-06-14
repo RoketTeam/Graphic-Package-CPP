@@ -1,6 +1,7 @@
 #include "Button.h"
 #include <iostream>
 #include "../IBorder/OneLine.h"
+#include "../IBorder/DoubleLine.h"
 
 using namespace std;
 
@@ -23,13 +24,15 @@ void Button::draw(Graphics &g, int x, int y, size_t z) {
 }
 
 bool Button::mouseHover(int x, int y, Graphics &g){
-    if(isInside(top_, left_, x, y, width_, height_)){
+    if(isInside(x, y, left_, top_, width_, height_)){
+        if(isHover_)
+            return false;
         hover();
-        g.setBackground(Color::White, height_, left_, top_);
-        return false;
+        this->setBorder(new DoubleLine());
+        return true;
     } else if (isHover()) {
         unHover();
-        g.setBackground(Color::Black);
+        this->setBorder(new OneLine());
         return true;
     }
     return false;

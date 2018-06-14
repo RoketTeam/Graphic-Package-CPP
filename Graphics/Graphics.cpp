@@ -33,8 +33,8 @@ void Graphics::setBackground(Color color)
 void Graphics::setBackground(Color color, short lineLength, short x, short y){
 	DWORD bg;
 	moveTo(x, y);
-	DWORD backgroundColor = getBackgroundColor(color);
-	FillConsoleOutputAttribute(_console, backgroundColor, lineLength, COORD({x,y}), &bg);
+	DWORD consoleColor = getBackgroundColor(color) | getForegroundColor(Color::White);
+	FillConsoleOutputAttribute(_console, consoleColor, lineLength, COORD({x,y}), &bg);
 }
 
 
