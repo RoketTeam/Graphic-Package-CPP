@@ -10,17 +10,20 @@ using namespace std;
 
 class IBorderStyle : public IBorder {
 
-	private:
-		char _topLeft;
-		char _topRight;
-		char _buttomLeft;
-		char _buttomRight;
-		char _horizontalLine;
-		char _verticalLine;
+	protected:
+		char topCorner;
+		char horizontalLine;
+		char topRightCorner;
+		char verticalLine;
+		char bottomLeftCorner;
+		char bottomRightCorner;
 
 	public:
 
+		IBorderStyle(char, char, char, char, char, char);
 		// methods
+		virtual void drawBorder(int, int, int, Graphics& );
+
 
 		//D'tors
 		virtual ~IBorderStyle() {};

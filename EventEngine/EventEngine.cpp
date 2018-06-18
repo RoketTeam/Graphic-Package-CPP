@@ -49,13 +49,16 @@ void EventEngine::run(Control &c)
 			{
 				auto button = record.Event.MouseEvent.dwButtonState;
 				auto coord = record.Event.MouseEvent.dwMousePosition;
+				auto event = record.Event.MouseEvent.dwEventFlags;
 				auto x = coord.X - c.getLeft();
 				auto y = coord.Y - c.getTop();
 				if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
 				{
 					c.mousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
 					redraw = true;
-				}
+				} else if(event == MOUSE_MOVED) {
+                    redraw = c.mouseHover(x, y, _graphics);
+                }
 				break;
 			}
 			default:

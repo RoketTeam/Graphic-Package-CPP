@@ -1,21 +1,24 @@
 
 #include <windows.h>
+#include "../Graphics/Graphics.h"
 #include <iostream>
 
 #pragma once
 
 using namespace std;
 
-
 class IBorder {
+
+	private:
+
 
 	public:
 
 		// methods
-		void
-			drawBorder();
+		IBorder(){};
+		virtual void drawBorder(int, int, int, Graphics&){};
 
 		//D'tors
-		virtual ~IBorder() {};
+		virtual ~IBorder() = 0;
 
 };

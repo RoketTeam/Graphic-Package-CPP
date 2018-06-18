@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <Windows.h>
 #include "../IObserver/IObservable.h"
@@ -8,12 +10,18 @@ using namespace std;
 
 class Button : public IObservable, public Label
 {
+    protected:
+        bool isHover_;
 
 	public:
-
 		Button(string text);
 		void mousePressed(int x, int y, bool isLeft);
-		void notify();
+		string getText();
+		void draw(Graphics &g, int x, int y, size_t z);
+		bool mouseHover(int x, int y, Graphics &g);
+		bool isHover(){ return isHover_;}
+		void hover(){isHover_ = true;}
+		void unHover(){isHover_ = false;}
 		//D'tors
 		~Button();
 

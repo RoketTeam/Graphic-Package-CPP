@@ -1,26 +1,26 @@
 
 #include <string>
 #include <Windows.h>
-#include "IControl.h"
-#include "Button.h"
+#include "../Control/Control.h"
+#include "../IListener/IListener.h"
+#include "../Button/Button.h"
 
 using namespace std;
 
-class NumericBox : public IControl
+class NumericBox : public Control, public IListener
 {
 	private:
 		Button inc_;
 		Button dec_;
+		Label textValue_;
 		int value_;
+		int minVal_;
+		int maxVal_;
 
 	public:
 		//C'tors
-		NumericBox() {
-		};
+		NumericBox(int minValue, int MaxValue);
 
-		NumericBox(Button inc, Button dec, int value)
-			: inc_(inc), dec_(dec), value_(value) {
-		};
 
 		// methods
 		void inc();
@@ -28,8 +28,14 @@ class NumericBox : public IControl
 		void setMinValue(int value);
 		void setMaxValue(int value);
 		void setValue(int value);
+		int getValue();
+		void action(IObservable* iObservable);
+	 	void draw(Graphics& g, int x, int y, size_t z);
+        void mousePressed(int x, int y, bool isLeft);
+		bool mouseHover(int x, int y, Graphics &g);
 
-		//D'tors
+
+	//D'tors
 		~NumericBox() {};
 
 

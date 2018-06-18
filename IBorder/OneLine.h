@@ -12,8 +12,7 @@ private:
 public:
 
 	// methods
-
+	OneLine();
 	//D'tors
 	~OneLine() {};
-
 };

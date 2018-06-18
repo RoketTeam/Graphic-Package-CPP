@@ -14,6 +14,7 @@ public:
 	void clearScreen();
 	void moveTo(int x, int y);
 	void setBackground(Color color);
+	void setBackground(Color color, short lineLength, short x, short y);
 	void setForeground(Color color);
 	void write(string s);
 	void write(int x, int y, string s);
@@ -22,8 +23,9 @@ public:
 	void setCursorVisibility(bool isVisible);
 private:
 	HANDLE _console;
+	DWORD getBackgroundColor(Color color);
+	DWORD getForegroundColor(Color color);
 	Color _background, _foreground;
-
 	void updateConsoleAttributes();
 };
 
