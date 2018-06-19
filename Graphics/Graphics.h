@@ -14,12 +14,13 @@ class Graphics
         void clearScreen();
         void moveTo(int x, int y);
         void setBackground(Color color);
-        void setBackground(Color color, short lineLength, short x, short y);
         void setForeground(Color color);
         void write(string s);
         void write(int x, int y, string s);
         void write(wstring s);
         void write(int x, int y, wstring s);
+        Color getBackground(){ return _background;}
+        Color getForeground(){ return _foreground;}
         void setCursorVisibility(bool isVisible);
     private:
         HANDLE _console;
