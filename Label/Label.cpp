@@ -6,6 +6,7 @@
 Label::Label(string text) : Control(), text_(text) {
     width_ = text_.length() + 2;
     height_ = 3;
+    background_ = Color ::Transparent;
 };
 
 
@@ -30,8 +31,16 @@ void Label::draw(Graphics& g, int x, int y, size_t z) {
         top_ = y;
         left_ = x;
         width_ = text_.length() + 2;
+        Color background = g.getBackground();
+        Color foreground = g.getForeground();
+        if(background_ != Color::Transparent)
+            g.setBackground(background_);
+        if(foreground_ != Color::Transparent)
+            g.setForeground(foreground_);
         border_->drawBorder(left_, top_, width_ - 2, g);
         g.write(left_ + 1, top_ + 1, text_);
+        g.setBackground(background);
+        g.setForeground(foreground);
     }
 }
 
