@@ -15,6 +15,7 @@ NumericBox::NumericBox(int minValue, int maxValue):
 {
     inc_.add(this);
     dec_.add(this);
+    this->setBackground(Color::Orange);
 }
 
 void NumericBox::setMaxValue(int value) {
@@ -74,11 +75,20 @@ void NumericBox::mousePressed(int x, int y, bool isLeft) {
 
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){
     if(!z){
+        Color background = g.getBackground();
+        Color foreground = g.getForeground();
         textValue_.setLeft(inc_.getWidth());
         dec_.setLeft(textValue_.getLeft() + textValue_.getText().length() + 2);
+        if(background_ != Color::Transparent)
+            g.setBackground(background_);
+        if(foreground_ != Color::Transparent)
+            g.setForeground(foreground_);
+        this->fillBackground(x, y, dec_.getLeft(), g);
         inc_.draw(g, x, y, 0);
         textValue_.draw(g, textValue_.getLeft(), y, 0);
         dec_.draw(g, dec_.getLeft(), 0, 0);
+        g.setBackground(background);
+        g.setForeground(foreground);
     }
 }
 
