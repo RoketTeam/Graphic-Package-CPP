@@ -9,6 +9,7 @@ using namespace std;
 Button::Button(string text): Label(text) {
     this->setBorder(new OneLine());
     isHover_ = false;
+    this->setBackground(Color::Transparent);
 }
 
 void Button::mousePressed(int x, int y, bool isLeft) {

@@ -14,6 +14,8 @@ class Control
 		IBorder* border_;
 		int height_;		// bottom y
 		int width_;		// bottom x
+        Color background_;
+        Color foreground_;
 
 
 
@@ -22,10 +24,16 @@ class Control
 		Control(int left, int top, IBorder*);
 		static Control* getFocus() { return NULL; };
 		static void setFocus(Control& control) {};
-		virtual void draw(Graphics& g, int x, int y, size_t z) {}
+		virtual void draw(Graphics& g, int x, int y, size_t z){}
 		virtual void mousePressed(int x, int y, bool isLeft) {}
 		virtual bool mouseHover(int x, int y, Graphics &g){}
 		virtual void keyDown(int keyCode, char character) {}
+
+		void setBackground(Color color){background_ = color; }
+		void setForeground(Color color){ foreground_ = color; }
+
+        void fillBackground(short, short, int, Graphics&);
+
 		virtual short getLeft() { return left_; }
 		virtual short getTop() { return top_; }
 		virtual void setLeft(short left){left_ = left;}

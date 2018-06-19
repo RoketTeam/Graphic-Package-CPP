@@ -30,14 +30,6 @@ void Graphics::setBackground(Color color)
 	updateConsoleAttributes();
 }
 
-void Graphics::setBackground(Color color, short lineLength, short x, short y){
-	DWORD bg;
-	moveTo(x, y);
-	DWORD consoleColor = getBackgroundColor(color) | getForegroundColor(Color::White);
-	FillConsoleOutputAttribute(_console, consoleColor, lineLength, COORD({x,y}), &bg);
-}
-
-
 void Graphics::setForeground(Color color)
 {
 	_foreground = color;

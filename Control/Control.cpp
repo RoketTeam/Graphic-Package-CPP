@@ -9,6 +9,8 @@ Control::Control()
     left_ = 0;
     top_ = 0;
     border_ = new NoneBorder();
+    background_ = Color::Transparent;
+    foreground_ = Color::Transparent;
 }
 
 
