@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum class Color { Black, Blue, Green, Red, Cyan, Purple, Orange, White };
+enum class Color { Black, Blue, Green, Red, Cyan, Purple, Orange, White, Transparent };
 
 class Graphics
 {
