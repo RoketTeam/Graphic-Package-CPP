@@ -5,10 +5,14 @@
 #include "../IBorder/OneLine.h"
 #include "../IBorder/DoubleLine.h"
 #include "../EventEngine/EventEngine.h"
+#include "../MyMessageBox/MyMessageBox.h"
+
+
 
 int main(int argc, char** argv)
 {
-	NumericBox b(0, 10);
+//	NumericBox b(0, 10);
+    MyMessageBox m("lashdklajhdskja");
 	EventEngine e;
-	e.run(b);
+	e.run(m);
 }

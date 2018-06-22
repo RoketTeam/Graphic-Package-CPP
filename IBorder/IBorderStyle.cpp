@@ -15,14 +15,14 @@ IBorderStyle::IBorderStyle(char topCorner,
         bottomLeftCorner(bottomLeftCorner),
         bottomRightCorner(bottomRightCorner){}
 
-void IBorderStyle::drawBorder(int top, int left, int length, Graphics& g){
+void IBorderStyle::drawBorder(int top, int left, int length, Graphics& g, int amount = 3){
     string Line(length, horizontalLine);
     string Fill(length , ' ');
     int col = top;
     int row = left;
     g.moveTo(col, row);
     cout << topCorner << Line << topRightCorner;
-    int a, amount = 3;
+    int a;
     for (a = 1; a <amount - 1;a++)
     {
         g.moveTo(col, row + a);

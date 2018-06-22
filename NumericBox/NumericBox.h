@@ -1,6 +1,5 @@
 
 #include <string>
-#include <Windows.h>
 #include "../Control/Control.h"
 #include "../IListener/IListener.h"
 #include "../Button/Button.h"

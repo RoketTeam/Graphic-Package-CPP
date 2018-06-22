@@ -19,6 +19,21 @@ Control::Control(int left, int top, IBorder* border):
         left_(left), top_(top), border_(border){}
 
 
-
-
 Control::~Control() {}
+
+void Control::fillBackground(short x, short y, int height, Graphics & g) {
+    string Line(height,  ' ');
+    string Fill(height , ' ');
+    int col = x;
+    int row = y;
+    g.moveTo(col, row);
+    cout << ' ' << Line << ' ';
+    int a, amount = 3;
+    for (a = 1; a <amount;a++)
+    {
+        g.moveTo(col, row + a);
+        cout << ' ';
+        cout << Fill;
+        cout << ' ';
+    }
+}

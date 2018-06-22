@@ -22,7 +22,7 @@ class IBorderStyle : public IBorder {
 
 		IBorderStyle(char, char, char, char, char, char);
 		// methods
-		virtual void drawBorder(int, int, int, Graphics& );
+		virtual void drawBorder(int, int, int, Graphics&, int);
 
 
 		//D'tors
