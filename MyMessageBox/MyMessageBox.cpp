@@ -4,7 +4,7 @@
 
 
 void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
-    if(z == 3){
+    if(is_visible && z == 3){
         if(border_)
             border_->drawBorder(left_, top_, width_, g, getHeight());
         Color background = g.getBackground();
@@ -13,6 +13,10 @@ void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
             g.setBackground(background_);
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
+        message_.draw(g, x+1, y+1, 0);
+        ok_.draw(g, x+2, y+3, 0);
+        cancel_.draw(g, x+10, y+3, 0);
+
         g.setBackground(background);
         g.setForeground(foreground);
     }
@@ -25,6 +29,26 @@ MyMessageBox::MyMessageBox(string message) :
 {
     this->setBorder(new OneLine());
     this->setBackground(Color::Transparent);
-    this->height_ = 5;
-    this->width_ = 5;
+    this->height_ = message_.getHeight() + 4;
+    this->width_ = message_.getText().length() + 4;
+    this->is_visible = true;
+    ok_.add(this);
+    cancel_.add(this);
+}
+
+bool MyMessageBox::mouseHover(int x, int y, Graphics &g) {
+    return ok_.mouseHover(x, y, g) || cancel_.mouseHover(x, y, g);
+}
+
+void MyMessageBox::mousePressed(int x, int y, bool isLeft) {
+    ok_.mousePressed(x, y, isLeft);
+    cancel_.mousePressed(x, y, isLeft);
+};
+
+void MyMessageBox::action(IObservable *observable) {
+    // TODO: Check who is pressed and handle it
+    if(is_visible)
+        is_visible = false;
+    else
+        is_visible = true;
 }
