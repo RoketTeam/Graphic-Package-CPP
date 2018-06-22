@@ -32,9 +32,9 @@ class Control
 		void setBackground(Color color){background_ = color; }
 		void setForeground(Color color){ foreground_ = color; }
 
-        void fillBackground(short, short, int, Graphics&);
+		void fillBackground(short x, short y, int height, Graphics & g);
 
-		virtual short getLeft() { return left_; }
+		virtual int getLeft() { return left_; }
 		virtual short getTop() { return top_; }
 		virtual void setLeft(short left){left_ = left;}
 		virtual void setTop(short top){top_ = top;}
