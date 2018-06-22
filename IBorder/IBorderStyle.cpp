@@ -15,7 +15,7 @@ IBorderStyle::IBorderStyle(char topCorner,
         bottomLeftCorner(bottomLeftCorner),
         bottomRightCorner(bottomRightCorner){}
 
-void IBorderStyle::drawBorder(int top, int left, int length, Graphics& g, int amount = 3){
+void IBorderStyle::drawBorder(int top, int left, int length, Graphics& g, int amount){
     string Line(length, horizontalLine);
     string Fill(length , ' ');
     int col = top;
