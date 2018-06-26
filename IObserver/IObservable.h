@@ -16,12 +16,14 @@ class IObservable {
 	protected:
 		// Atrributes
 		vector<IListener*> listeners_;
+		vector<void (*)()> event_listeners;
 
 	public:
 
 		// methods
          void notify();
 		 void add(IListener* listener);
+		 void addEventListener(void (*function)());
 
 		//D'tors
 		virtual ~IObservable() = 0;
