@@ -12,7 +12,8 @@ Button::Button(string text): Label(text) {
 }
 
 void Button::mousePressed(int x, int y, bool isLeft) {
-    this->notify();
+    if(isLeft && isInside(x, y, getLeft(), getTop(), getWidth(), getHeight()))
+        this->notify();
 }
 
 string Button::getText() {
