@@ -56,19 +56,17 @@ void NumericBox::dec() {
 }
 
 void NumericBox::action(IObservable* iObservable) {
-    if(!(((Button*)iObservable)->getText().compare (" - "))){
+    Button* button = (Button*) iObservable;
+    if((button->getText().compare("+")) == 0){
         inc();
-    } else if (!(((Button*)iObservable)->getText().compare(" + "))) {
+    } else if (!(((Button*)iObservable)->getText().compare("-"))) {
         dec();
     }
 }
 
 void NumericBox::mousePressed(int x, int y, bool isLeft) {
-    if(isInside(x, y, inc_.getLeft(), inc_.getTop(), inc_.getWidth(), inc_.getHeight()))
-        inc();
-
-    if(isInside(x, y, dec_.getLeft(), dec_.getTop(), dec_.getWidth(), dec_.getHeight()))
-        dec();
+    inc_.mousePressed(x, y, isLeft);
+    dec_.mousePressed(x, y, isLeft);
 };
 
 
