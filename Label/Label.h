@@ -18,7 +18,9 @@ class Label : public Control
 		void draw(Graphics& g, int x, int y, size_t z);
 		void setLeft(short left);
 		void setTop(short top);
-		~Label();
+		bool mouseHover(int x, int y, Graphics &g){ return false;}
+
+	    ~Label();
 
 };
 
