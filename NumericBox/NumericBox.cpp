@@ -85,8 +85,8 @@ void NumericBox::draw(Graphics& g, int x, int y, size_t z){
         width_ = dec_.getLeft();
         this->fillBackground(x, y, width_, g);
         inc_.draw(g, x, y, 0);
-        textValue_.draw(g, textValue_.getLeft(), y, 0);
-        dec_.draw(g, dec_.getLeft(), 0, 0);
+        textValue_.draw(g, textValue_.getLeft() + 1, y, 0);
+        dec_.draw(g, x + dec_.getLeft(), y, 0);
         g.setBackground(background);
         g.setForeground(foreground);
     }
