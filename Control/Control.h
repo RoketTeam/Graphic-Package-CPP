@@ -16,14 +16,15 @@ class Control
 		int width_;		// bottom x
         Color background_;
         Color foreground_;
-
+		static Control* focused_control;
+		int margin_;
 
 
 	public:
 		Control();
 		Control(int left, int top, IBorder*);
-		static Control* getFocus() { return NULL; };
-		static void setFocus(Control& control) {};
+		static Control* getFocus() { return focused_control; };
+		static void setFocus(Control& control) {focused_control = &control;}
 		virtual void draw(Graphics& g, int x, int y, size_t z){}
 		virtual void mousePressed(int x, int y, bool isLeft) {}
 		virtual bool mouseHover(int x, int y, Graphics &g){ return false;}
@@ -44,5 +45,7 @@ class Control
 		virtual bool canGetFocus() { return FALSE; };
 		void setBorder(IBorder* border){border_ = border;}
 		virtual ~Control() = 0;
+		Control* setMargin(int margin){margin_ = margin;}
+		int getMargin(){return margin_;}
 };
 

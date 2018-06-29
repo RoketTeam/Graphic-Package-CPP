@@ -13,7 +13,7 @@ Control::Control()
     foreground_ = Color::Transparent;
 }
 
-
+Control* Control::focused_control = nullptr;
 
 Control::Control(int left, int top, IBorder* border):
         left_(left), top_(top), border_(border){}
