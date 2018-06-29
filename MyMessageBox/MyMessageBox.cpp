@@ -5,14 +5,14 @@
 
 void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
     if(is_visible && z == 3){
-        if(border_)
-            border_->drawBorder(left_, top_, width_, g, getHeight());
         Color background = g.getBackground();
         Color foreground = g.getForeground();
         if(background_ != Color::Transparent)
             g.setBackground(background_);
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
+        if(border_)
+            border_->drawBorder(left_, top_, width_, g, getHeight());
         message_.draw(g, x+1, y+1, 0);
         ok_.draw(g, x+2, y+3, 0);
         cancel_.draw(g, x+10, y+3, 0);
@@ -27,11 +27,14 @@ MyMessageBox::MyMessageBox(string message) :
         cancel_("CANCEL"),
         message_(message)
 {
-    this->setBorder(new OneLine());
-    this->setBackground(Color::Transparent);
-    this->height_ = message_.getHeight() + 4;
-    this->width_ = message_.getText().length() + 4;
-    this->is_visible = true;
+    setBorder(new OneLine());
+    setBackground(Color::Purple);
+    ok_.setBackground(Color::Green);
+    cancel_.setBackground(Color::Red);
+
+    height_ = message_.getHeight() + 4;
+    width_ = message_.getText().length() + 4;
+    is_visible = true;
     ok_.add(this);
     cancel_.add(this);
 }
