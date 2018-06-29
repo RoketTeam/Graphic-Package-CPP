@@ -12,6 +12,7 @@ class Button : public IObservable, public Label
 {
     protected:
         bool isHover_;
+        bool clickable_;
 
 	public:
 		Button(string text);
@@ -22,6 +23,8 @@ class Button : public IObservable, public Label
 		bool isHover(){ return isHover_;}
 		void hover(){isHover_ = true;}
 		void unHover(){isHover_ = false;}
+		void setClickable(bool clickable){clickable_ = clickable;}
+		bool isClickable(){ return clickable_;}
 		//D'tors
 		~Button();
 

@@ -10,11 +10,13 @@ Button::Button(string text): Label(text) {
     this->setBorder(new OneLine());
     isHover_ = false;
     this->setBackground(Color::Transparent);
+    setClickable(true);
 }
 
 void Button::mousePressed(int x, int y, bool isLeft) {
-    if(isLeft && isInside(x, y, getLeft(), getTop(), getWidth(), getHeight()))
-        this->notify();
+    if(isClickable())
+        if(isLeft && isInside(x, y, getLeft(), getTop(), getWidth(), getHeight()))
+            this->notify();
 }
 
 string Button::getText() {
@@ -26,16 +28,19 @@ void Button::draw(Graphics &g, int x, int y, size_t z) {
 }
 
 bool Button::mouseHover(int x, int y, Graphics &g){
-    if(isInside(x, y, left_, top_, width_, height_)){
-        if(isHover_)
-            return false;
-        hover();
-        this->setBorder(new DoubleLine());
-        return true;
-    } else if (isHover()) {
-        unHover();
-        this->setBorder(new OneLine());
-        return true;
+    if(isClickable()){
+        if(isInside(x, y, left_, top_, width_, height_)){
+            if(isHover_)
+                return false;
+            hover();
+            this->setBorder(new DoubleLine());
+            return true;
+        } else if (isHover()) {
+            unHover();
+            this->setBorder(new OneLine());
+            return true;
+        }
+        return false;
     }
     return false;
 }
