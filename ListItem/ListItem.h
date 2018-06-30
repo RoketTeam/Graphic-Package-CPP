@@ -28,7 +28,7 @@ class ListItem : public Control {
 		bool is_focus() { return is_focused_; }
 	    void draw(Graphics& g, int x, int y, size_t z);
         void MarkAsUnchecked(){is_checked_ = false;};
-        void MarkAsChecked(){is_checked_ = true;};
+        void MarkAsChecked(){is_checked_ = true;}
 
         // Event handlers
         void MousePressed(int x, int y, bool isLeft);
