@@ -29,7 +29,7 @@ void ListItem::unfocus() {
 
 bool ListItem::MouseHover(int x, int y, Graphics &g){
     bool redraw = false;
-    if (isInside(x-1, y-1, top_, left_, width_, height_)){
+    if (isInside(x-1, y - 1, left_, top_, width_, height_)){
         if(!is_focused_){
             focus();
             redraw = true;
@@ -44,9 +44,9 @@ bool ListItem::MouseHover(int x, int y, Graphics &g){
 
 void ListItem::MousePressed(int x, int y, bool isLeft) {
     if (is_checked_)
-        is_checked_ = false;
+        MarkAsUnchecked();
     else
-        is_checked_ = true;
+        MarkAsChecked();
 }
 
 void ListItem::draw(Graphics &g, int x, int y, size_t z) {
