@@ -8,7 +8,7 @@
 #include "../MyMessageBox/MyMessageBox.h"
 #include "../Panel/Panel.h"
 #include "../ListItem/ListItem.h"
-
+#include "../RadioBox/RadioBox.h"
 
 int main(int argc, char** argv)
 {
@@ -29,7 +29,11 @@ int main(int argc, char** argv)
 //    p.Add(l);
 //    p.Add(new MyMessageBox("I hope dsfsfsdfdsf"));
 //	MyMessageBox m("lalala");
-    ListItem l("Messi is a LOSER");
+    RadioBox radioBox;
+    radioBox.Add(new ListItem("Ligal"));
+    radioBox.Add(new ListItem("Chen"));
+    radioBox.Add(new ListItem("Lahmi"));
+    radioBox.Add(new ListItem("Shaked"));
 	EventEngine e;
-	e.run(l);
+	e.run(radioBox);
 }
