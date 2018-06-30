@@ -11,14 +11,14 @@ OBJS += IBorder/NoneBorder.o
 OBJS += Control/Control.o
 OBJS += EventEngine/EventEngine.o
 OBJS += Graphics/Graphics.o
-# OBJS += IComposite/IComposite.o
+OBJS += IComposite/IComposite.o
 OBJS += IListener/IListener.o
 OBJS += IObserver/IObservable.o
 OBJS += Label/Label.o
 OBJS += FinalProject/Source.o
 # OBJS += ListItem/ListItem.o
 OBJS += NumericBox/NumericBox.o
-# OBJS += Panel/Panel.o
+OBJS += Panel/Panel.o
 # OBJS += RadioBox/RadioBox.o
 # OBJS += TextBox/TextBox.o
 OBJS += MyMessageBox/MyMessageBox.o
@@ -29,8 +29,10 @@ OBJS += MyMessageBox/MyMessageBox.o
 
 all:$(OBJS)
 	$(CXX) $(CPPFLAGS) $(OBJS) -o final.exe
+	$ clear
+	$ wineconsole final.exe
 
-clean:
+clean:$
 	rm -f $(OBJS)
 	rm -f *.exe
 

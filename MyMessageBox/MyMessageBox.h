@@ -4,33 +4,34 @@
 #include "../Control/Control.h"
 #include "../Button/Button.h"
 
-#define DEFAULT_HEIGHT 300
-#define DEFAULT_WIDTH 300
 
-using namespace std;
-
-
-
-class MyMessageBox : public Control
+class MyMessageBox : public Control, public IListener
 {
+
+	public:
+
+		// C'tors & D'tors
+        MyMessageBox(string message);
+		~MyMessageBox() {}
+
+
+		// Setters & Getters
+		void set_message(string message){message_.set_text(message);}
+		string get_message(){ return message_.get_text();}
+
+		// Methods
+		void draw(Graphics& g, int x, int y, size_t z);
+
+		// Event handler
+		void MousePressed(int x, int y, bool isLeft);
+        bool MouseHover(int x, int y, Graphics &g);
+        virtual void action(IObservable* observable);
+
+
 	private:
 		Button ok_;
 		Button cancel_;
 		Label message_;
-
-	public:
-		//C'tors
-        MyMessageBox(string message);
-
-
-		// methods
-		void mousePressed(int x, int y, bool isLeft){};
-		void draw(Graphics& g, int x, int y, size_t z);
-
-		void SetMessage(string message){}
-		string getMessage(){ return message_.getText();}
-
-		//D'tors
-		~MyMessageBox() {}
+		bool is_visible_;
 };
 
