@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 #include "../Label/Label.h"
+#include "../IBorder/IBorderStyle.h"
+#include "../IBorder/NoneBorder.h"
 
 using namespace std;
 
@@ -35,12 +37,12 @@ class ListItem : public Control {
     private:
         // Atrributes
         Label description_label_;
-        short line_lengh_;
+        short line_length_;
         bool is_checked_;
         bool is_focused_;
 
 
         // Methods
-        void MarkAsChoose();
-        void MarkAsUnchoose();
+        void MarkAsChoose(){};
+        void MarkAsUnchoose(){};
 };

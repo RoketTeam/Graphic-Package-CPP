@@ -8,7 +8,9 @@ ListItem::ListItem(string description):
         is_focused_(false),
         is_checked_(false)
 {
-    line_lengh_ = description.length();
+    line_length_ = description.length();
+    set_background(Color::Transparent);
+    set_foreground(Color::Green);
 }
 
 void ListItem::focus() {
@@ -27,33 +29,32 @@ void ListItem::unfocus() {
 
 bool ListItem::MouseHover(int x, int y, Graphics &g){
     bool redraw = false;
-    if (isInside(x, y, top_, left_, width_, height_)){
+    if (isInside(x-1, y-1, top_, left_, width_, height_)){
         if(!is_focused_){
             focus();
             redraw = true;
         }
     }
-    if (is_focused_) {
+    else if (is_focused_) {
         unfocus();
         redraw = true;
     }
     return redraw;
 }
 
-bool ListItem::MousePressed(int x, int y, bool isLeft) {
-    bool redraw = true;
+void ListItem::MousePressed(int x, int y, bool isLeft) {
     if (is_checked_)
         is_checked_ = false;
     else
         is_checked_ = true;
-    return redraw;
 }
 
 void ListItem::draw(Graphics &g, int x, int y, size_t z) {
     if (z == 0) {
         top_ = y;
         left_ = x;
-        width_ = text_.length() + 6;
+        width_ = description_label_.get_text().length() + 6;
+        height_ = 1;
         Color background = g.getBackground();
         Color foreground = g.getForeground();
         if(background_ != Color::Transparent)
@@ -63,9 +64,9 @@ void ListItem::draw(Graphics &g, int x, int y, size_t z) {
         border_->drawBorder(x, y, width_ - 2, g);
         string line;
         if (is_checked_)
-            line = '[X]' + description_label_.get_text();
+            line = "[X] " + description_label_.get_text();
         else
-            line = '[ ]' + description_label_.get_text();
+            line = "[ ] " + description_label_.get_text();
         g.write(x+ 1, y + 1, line);
         g.setBackground(background);
         g.setForeground(foreground);
