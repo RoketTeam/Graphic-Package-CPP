@@ -3,26 +3,28 @@
 #include <iostream>
 
 
-Label::Label(string text) : Control(), text_(text) {
+Label::Label(string text) :
+        Control(), text_(text)
+{
     width_ = text_.length() + 2;
     height_ = 3;
     background_ = Color ::Transparent;
 };
 
 
-void Label::setLeft(short left) {
+void Label::set_left(short left) {
     left_ = left;
 }
 
-void Label::setTop(short top) {
+void Label::set_top(short top) {
     top_ = top;
 }
 
-void Label::setText(string text) {
+void Label::set_text(string text) {
     text_ = text;
 }
 
-string Label::getText() {
+string Label::get_text() {
     return text_;
 }
 

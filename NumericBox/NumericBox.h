@@ -8,35 +8,39 @@ using namespace std;
 
 class NumericBox : public Control, public IListener
 {
+
+	public:
+		// C'tors & D'tors
+		NumericBox(int min_value, int max_value);
+		~NumericBox() {};
+
+
+		// Setters & Getters
+		void set_min_value(int value);
+		void set_max_value(int value);
+		void set_value(int value);
+		int get_value();
+
+		// Methods
+		void inc();
+		void dec();
+		void draw(Graphics& g, int x, int y, size_t z);
+
+		// Event handlers
+		void action(IObservable* iObservable);
+		void MousePressed(int x, int y, bool isLeft);
+		bool MouseHover(int x, int y, Graphics &g);
+
+
+
+
 	private:
 		Button inc_;
 		Button dec_;
-		Label textValue_;
+		Label text_value_;
 		int value_;
-		int minVal_;
-		int maxVal_;
-
-	public:
-		//C'tors
-		NumericBox(int minValue, int MaxValue);
-
-
-		// methods
-		void inc();
-		void dec();
-		void setMinValue(int value);
-		void setMaxValue(int value);
-		void setValue(int value);
-		int getValue();
-		void action(IObservable* iObservable);
-	 	void draw(Graphics& g, int x, int y, size_t z);
-        void mousePressed(int x, int y, bool isLeft);
-		bool mouseHover(int x, int y, Graphics &g);
-
-
-	//D'tors
-		~NumericBox() {};
-
+		int min_value_;
+		int max_value_;
 
 };
 

@@ -5,94 +5,96 @@
 using namespace std;
 
 
-NumericBox::NumericBox(int minValue, int maxValue):
-        minVal_(minValue),
-        maxVal_(maxValue),
+NumericBox::NumericBox(int min_value, int max_value):
+        min_value_(min_value),
+        max_value_(max_value),
         inc_("+"),
         dec_("-"),
-        value_(minValue),
-        textValue_(to_string(minValue))
+        value_(min_value),
+        text_value_(to_string(min_value))
 {
     inc_.add(this);
     dec_.add(this);
 }
 
-void NumericBox::setMaxValue(int value) {
-    maxVal_ = value;
-    if (value_ > maxVal_)
-        value_ = maxVal_;
+
+void NumericBox::set_min_value(int value) {
+    min_value_ = value;
+    if (value_ > min_value_)
+        value_ = min_value_;
 }
 
-void NumericBox::setMinValue(int value) {
-    minVal_ = value;
-    if (value_ > minVal_)
-        value_ = minVal_;
+
+void NumericBox::set_max_value(int value) {
+    max_value_ = value;
+    if (value_ > max_value_)
+        value_ = max_value_;
 }
 
-void NumericBox::setValue(int value) {
-    if(value <= maxVal_ && value >= minVal_)
+void NumericBox::set_value(int value) {
+    if(value <= max_value_ && value >= min_value_)
         value_ = value;
 }
 
 
-int NumericBox::getValue() {
+int NumericBox::get_value() {
     return value_;
 }
 
 
 void NumericBox::inc() {
 
-    if (maxVal_ >= value_+1){
+    if (max_value_ >= value_+1){
         value_ += 1;
-        textValue_.setText(to_string(value_));
+        text_value_.set_text(to_string(value_));
     }
 }
 
 void NumericBox::dec() {
-    if (value_ - 1 >= minVal_) {
+    if (value_ - 1 >= min_value_) {
         value_ -= 1;
-        textValue_.setText(to_string(value_));
+        text_value_.set_text(to_string(value_));
     }
 }
-
-void NumericBox::action(IObservable* iObservable) {
-    if(!(((Button*)iObservable)->getText().compare (" - "))){
-        inc();
-    } else if (!(((Button*)iObservable)->getText().compare(" + "))) {
-        dec();
-    }
-}
-
-void NumericBox::mousePressed(int x, int y, bool isLeft) {
-    if(isInside(x, y, inc_.getLeft(), inc_.getTop(), inc_.getWidth(), inc_.getHeight()))
-        inc();
-
-    if(isInside(x, y, dec_.getLeft(), dec_.getTop(), dec_.getWidth(), dec_.getHeight()))
-        dec();
-};
 
 
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){
     if(!z){
         Color background = g.getBackground();
         Color foreground = g.getForeground();
-        textValue_.setLeft(inc_.getWidth());
-        dec_.setLeft(textValue_.getLeft() + textValue_.getText().length() + 2);
+        text_value_.set_left(inc_.get_width());
+        dec_.set_left(text_value_.get_left() + text_value_.get_text().length() + 2);
         if(background_ != Color::Transparent)
             g.setBackground(background_);
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
-        width_ = dec_.getLeft();
-        this->fillBackground(x, y, width_, g);
+        width_ = dec_.get_left();
+        this->FillBackground(x, y, width_, g);
         inc_.draw(g, x, y, 0);
-        textValue_.draw(g, textValue_.getLeft() + 1, y, 0);
-        dec_.draw(g, x + dec_.getLeft(), y, 0);
+        text_value_.draw(g, text_value_.get_left() + 1, y, 0);
+        dec_.draw(g, x + dec_.get_left(), y, 0);
         g.setBackground(background);
         g.setForeground(foreground);
     }
 }
 
+void NumericBox::action(IObservable* iObservable) {
+    if(!(((Button*)iObservable)->get_text().compare (" - "))){
+        inc();
+    } else if (!(((Button*)iObservable)->get_text().compare(" + "))) {
+        dec();
+    }
+}
 
-bool NumericBox::mouseHover(int x, int y, Graphics &g) {
-    return dec_.mouseHover(x, y, g) || inc_.mouseHover(x, y, g);
+void NumericBox::MousePressed(int x, int y, bool isLeft) {
+    if(isInside(x, y, inc_.get_left(), inc_.get_top(), inc_.get_width(), inc_.get_height()))
+        inc();
+
+    if(isInside(x, y, dec_.get_left(), dec_.get_top(), dec_.get_width(), dec_.get_height()))
+        dec();
+};
+
+
+bool NumericBox::MouseHover(int x, int y, Graphics &g) {
+    return dec_.MouseHover(x, y, g) || inc_.MouseHover(x, y, g);
 }

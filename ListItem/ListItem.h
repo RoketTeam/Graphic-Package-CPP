@@ -13,10 +13,10 @@ class ListItem : public Control {
 
 	private:
 		// Atrributes
-		Label descriptionLabel_;
-		short lineLengh_;
-		bool isChecked_;
-		bool isFocused_;
+		Label description_label_;
+		short line_lengh_;
+		bool is_checked_;
+		bool is_focused_;
 
 
 	// Methods
@@ -31,9 +31,11 @@ class ListItem : public Control {
 		// methods
 		bool focus();
 		bool unfocus();
-		bool isFocus() { return _isFocused; }
-		bool isHover(); // need redesign
-		short getLineLengh() { return _lineLengh; }
+		bool is_focus() { return _isFocused; }
+		bool is_hover(); // need redesign
+	    void draw(Graphics& g, int x, int y, size_t z);
+
+	    short get_line_lengh() { return line_lengh_; }
 
 		//D'tors
 		~ListItem();

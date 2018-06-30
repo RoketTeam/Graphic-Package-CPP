@@ -7,24 +7,32 @@ using namespace std;
 
 class Panel : public IComposite {
 
-private:
-	int focus_control_index;
 
-public:
+    public:
 
-	// methods
-	Panel();
-    static Control* getFocus();
-    static void setFocus(Control& control);
-    void draw(Graphics& g, int x, int y, size_t z);
-    void mousePressed(int x, int y, bool isLeft);
-    bool mouseHover(int x, int y, Graphics &g);
-    void keyDown(int keyCode, char character);
-    void getAllControls(vector<Control*>* controls);
-    void action(IObservable* observable){};
-    void calculateHeight();
-    void calculateWidth();
-    //D'tors
-	 ~Panel() {};
+        // C'tor & D'tor
+        Panel();
+        ~Panel() {};
+
+        // Setters & Getters
+        static void set_focus(Control& control);
+        static Control* get_focus();
+        void get_all_controls(vector<Control*>* controls);
+
+        // Methods
+        void draw(Graphics& g, int x, int y, size_t z);
+
+        // Event handler
+        void MousePressed(int x, int y, bool isLeft);
+        bool MouseHover(int x, int y, Graphics &g);
+        void KeyDown(int keyCode, char character);
+        void action(IObservable* observable){};
+        void CalculateHeight();
+        void CalculateWidth();
+
+
+
+    private:
+        int focus_control_index_;
 
 };

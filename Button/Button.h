@@ -10,23 +10,32 @@ using namespace std;
 
 class Button : public IObservable, public Label
 {
-    protected:
-        bool isHover_;
-        bool clickable_;
-
 	public:
+		// C'tors & D'tors
 		Button(string text);
-		void mousePressed(int x, int y, bool isLeft);
-		string getText();
-		void draw(Graphics &g, int x, int y, size_t z);
-		bool mouseHover(int x, int y, Graphics &g);
-		bool isHover(){ return isHover_;}
-		void hover(){isHover_ = true;}
-		void unHover(){isHover_ = false;}
-		void setClickable(bool clickable){clickable_ = clickable;}
-		bool isClickable(){ return clickable_;}
-		//D'tors
 		~Button();
+
+		// Setters & Getters
+		void set_clickable(bool clickable){clickable_ = clickable;}
+		string get_text();
+
+		// Methods
+		void draw(Graphics &g, int x, int y, size_t z);
+
+		// Event handlers
+		void MousePressed(int x, int y, bool isLeft);
+		bool MouseHover(int x, int y, Graphics &g);
+
+		bool is_hover(){ return is_hover_;}
+		bool is_clickable(){ return clickable_;}
+
+		void hover(){is_hover_ = true;}
+		void unhover(){is_hover_ = false;}
+
+
+	protected:
+		bool is_hover_;
+		bool clickable_;
 
 };
 

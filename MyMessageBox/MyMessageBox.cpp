@@ -3,17 +3,35 @@
 #include <iostream>
 
 
+MyMessageBox::MyMessageBox(string message) :
+        ok_("OK"),
+        cancel_("CANCEL"),
+        message_(message)
+{
+    set_border(new OneLine());
+    ok_.set_background(Color::Green);
+    cancel_.set_background(Color::Red);
+
+    height_ = message_.get_height() + 4;
+    width_ = ok_.get_width() + cancel_.get_width() + message_.get_text().length();
+    is_visible_ = true;
+    ok_.add(this);
+    cancel_.add(this);
+}
+
+
 void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
-    if(is_visible && z == 3){
+    if(is_visible_ && z == 3){
         Color background = g.getBackground();
         Color foreground = g.getForeground();
         if(background_ != Color::Transparent)
             g.setBackground(background_);
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
-        width_ = ok_.getWidth() + cancel_.getWidth() + message_.getText().length();
+
+        width_ = ok_.get_width() + cancel_.get_width() + message_.get_text().length();
         if(border_)
-            border_->drawBorder(x, y, width_, g, getHeight());
+            border_->drawBorder(x, y, width_, g, get_height());
         int center = width_ / 4 - 1;
         message_.draw(g, center, y, 0);
         ok_.draw(g, center + 1, y+3, 0);
@@ -24,39 +42,24 @@ void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
     }
 }
 
-MyMessageBox::MyMessageBox(string message) :
-        ok_("OK"),
-        cancel_("CANCEL"),
-        message_(message)
-{
-    setBorder(new OneLine());
-    ok_.setBackground(Color::Green);
-    cancel_.setBackground(Color::Red);
 
-    height_ = message_.getHeight() + 4;
-    width_ = ok_.getWidth() + cancel_.getWidth() + message_.getText().length();
-    is_visible = true;
-    ok_.add(this);
-    cancel_.add(this);
+bool MyMessageBox::MouseHover(int x, int y, Graphics &g) {
+    return ok_.MouseHover(x, y, g) || cancel_.MouseHover(x, y, g);
 }
 
-bool MyMessageBox::mouseHover(int x, int y, Graphics &g) {
-    return ok_.mouseHover(x, y, g) || cancel_.mouseHover(x, y, g);
-}
-
-void MyMessageBox::mousePressed(int x, int y, bool isLeft) {
-    ok_.mousePressed(x, y, isLeft);
-    cancel_.mousePressed(x, y, isLeft);
+void MyMessageBox::MousePressed(int x, int y, bool isLeft) {
+    ok_.MousePressed(x, y, isLeft);
+    cancel_.MousePressed(x, y, isLeft);
 };
 
 void MyMessageBox::action(IObservable *observable) {
     // TODO: Check who is pressed and handle it
-    if(is_visible){
-        is_visible = false;
-        ok_.setClickable(false);
-        cancel_.setClickable(false);
+    if(is_visible_){
+        is_visible_ = false;
+        ok_.set_clickable(false);
+        cancel_.set_clickable(false);
     }
     else {
-        is_visible = true;
+        is_visible_ = true;
     }
 }
