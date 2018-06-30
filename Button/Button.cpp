@@ -17,7 +17,7 @@ void Button::mousePressed(int x, int y, bool isLeft) {
 }
 
 string Button::getText() {
-    Label::getText();
+    return Label::getText();
 }
 
 void Button::draw(Graphics &g, int x, int y, size_t z) {
@@ -41,6 +41,6 @@ bool Button::mouseHover(int x, int y, Graphics &g){
 
 
 Button::~Button() {
-    delete this->border_;
+    //delete this->border_;
 }
 

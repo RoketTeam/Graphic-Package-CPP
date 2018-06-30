@@ -16,6 +16,7 @@ class Label : public Control
 		void setText(string text);
 		string getText();
 		void draw(Graphics& g, int x, int y, size_t z);
+		void draw(Graphics& g, int x, int y, int length, size_t z);
 		void setLeft(short left);
 		void setTop(short top);
 		~Label();
