@@ -29,10 +29,17 @@ string Label::get_text() {
 }
 
 void Label::draw(Graphics& g, int x, int y, size_t z) {
+	Label::draw(g, x, y, z, text_.length());
+}
+
+void Label::draw(Graphics& g, int x, int y, size_t z, int length) {
     if (z == 0) {
+		if (length < text_.length()) {
+			length = text_.length();
+		}
         top_ = y;
         left_ = x;
-        width_ = text_.length() + 2;
+        width_ = length + 2;
         Color background = g.getBackground();
         Color foreground = g.getForeground();
         if(background_ != Color::Transparent)

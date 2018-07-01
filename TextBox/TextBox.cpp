@@ -91,13 +91,11 @@ void TextBox::draw(Graphics& g, int x = -1, int y = -1, size_t z = 0) {
 	}
 }
 
-void TextBox::action(IObservable * iObservable)
-{
+void TextBox::action(IObservable *observable) {
 	//need to complete
 }
 
-void TextBox::KeyDown(int keyCode, char character)
-{
+void TextBox::KeyDown(int keyCode, char character) {
 	if (keyCode >= 32 && keyCode <= 127) {
 		addChar(0, character);
 	}
