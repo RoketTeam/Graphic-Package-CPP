@@ -32,7 +32,7 @@ void EventEngine::run(Control &c)
 		{
 			case KEY_EVENT:
 			{
-				auto f = Control::getFocus();
+				auto f = Control::get_focus();
 				if (f != nullptr && record.Event.KeyEvent.bKeyDown)
 				{
 					auto code = record.Event.KeyEvent.wVirtualKeyCode;
@@ -40,7 +40,7 @@ void EventEngine::run(Control &c)
 					if (code == VK_TAB)
 						moveFocus(c, f);
 					else
-						f->keyDown(code, chr);
+						f->KeyDown(code, chr);
 					redraw = true;
 				}
 				break;
@@ -50,14 +50,14 @@ void EventEngine::run(Control &c)
 				auto button = record.Event.MouseEvent.dwButtonState;
 				auto coord = record.Event.MouseEvent.dwMousePosition;
 				auto event = record.Event.MouseEvent.dwEventFlags;
-				auto x = coord.X - c.getLeft();
-				auto y = coord.Y - c.getTop();
+				auto x = coord.X - c.get_left();
+				auto y = coord.Y - c.get_top();
 				if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
 				{
-					c.mousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
+					c.MousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
 					redraw = true;
 				} else if(event == MOUSE_MOVED) {
-                    redraw = c.mouseHover(x, y, _graphics);
+                    redraw = c.MouseHover(x, y, _graphics);
                 }
 				break;
 			}
@@ -75,11 +75,11 @@ EventEngine::~EventEngine()
 void EventEngine::moveFocus(Control &main, Control *focused)
 {
 	vector<Control*> controls;
-	main.getAllControls(&controls);
+	main.get_all_controls(&controls);
 	auto it = find(controls.begin(), controls.end(), focused);
 	do
 		if (++it == controls.end())
 			it = controls.begin();
-	while (!(*it)->canGetFocus());
-	Control::setFocus(**it);
+	while (!(*it)->CanGetFocus());
+	Control::set_focus(**it);
 }

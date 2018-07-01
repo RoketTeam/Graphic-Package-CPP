@@ -8,18 +8,25 @@ using namespace std;
 
 class Label : public Control
 {
-	private:
-		string text_;
-
 	public:
-		Label(string text);
-		void setText(string text);
-		string getText();
+
+		//  C'tors & D'tors
+        Label(string text);
+        ~Label();
+
+        // Setters & Getters
+        void set_text(string text);
+        void set_left(short left);
+        void set_top(short top);
+
+        string get_text();
+
+		// Methods
 		void draw(Graphics& g, int x, int y, size_t z);
-		void draw(Graphics& g, int x, int y, int length, size_t z);
-		void setLeft(short left);
-		void setTop(short top);
-		~Label();
+		bool MouseHover(int x, int y, Graphics &g){ return false;}
+
+    private:
+        string text_;
 
 };
 

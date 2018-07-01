@@ -4,6 +4,8 @@
 
 using namespace std;
 
+Control* Control::focused_control = nullptr;
+
 Control::Control()
 {
     left_ = 0;
@@ -14,14 +16,14 @@ Control::Control()
 }
 
 
-
 Control::Control(int left, int top, IBorder* border):
-        left_(left), top_(top), border_(border){}
+        left_(left), top_(top),
+        border_(border){}
 
 
 Control::~Control() {}
 
-void Control::fillBackground(short x, short y, int height, Graphics & g) {
+void Control::FillBackground(short x, short y, int height, Graphics & g) {
     string Line(height,  ' ');
     string Fill(height , ' ');
     int col = x;

@@ -16,30 +16,26 @@ private:
 	Graphics* graphic_;
 
 public:
-	//C'tors
+	// C'tors & D'tors
 	TextBox(Graphics &);
 	TextBox(short left, short top, int length, Graphics &);
 	TextBox(short left, short top, int length, string value, Graphics &);
+	~TextBox() {};
+
+	// Setters & Getters
+	void set_left(short left);
+	void set_top(short top);
+	void set_frame_size(int length);
 
 	// methods
-	void setLeft(short left);
-	void setTop(short top);
-	void setFrameSize(int Length);
 	void addChar(int x, char ch);
 	void deleteChar();
 	void deleteAllText();
-
+	void draw(Graphics& g, int x, int y, size_t z);
 
 	//Handler
-	void draw(Graphics& g, int x, int y, size_t z);
 	void action(IObservable* iObservable);
-	void keyDown(int keyCode, char character);
-	//void keyPressed(CHAR AsciiChar, Graphics& g);
-	//void mousePressed(int x, int y, bool isLeft);
-	//bool mouseHover(int x, int y, Graphics &g);
-
-	//D'tors
-	~TextBox() {};
+	void KeyDown(int keyCode, char character);
 
 
 

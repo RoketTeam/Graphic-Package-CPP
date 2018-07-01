@@ -13,72 +13,64 @@
 using namespace std;
 
 
-TextBox::TextBox(Graphics &g) : Control(), IListener(),
-length_(10),
-graphic_(&g),
-value_("") {};
+TextBox::TextBox(Graphics &g) : 
+	Control(), IListener(), length_(10), graphic_(&g), value_("")
+{};
 
-TextBox::TextBox(short left, short top, int length, Graphics &g) : Control(), //IListener(),
-length_(length),
-graphic_(&g),
-value_("")
+TextBox::TextBox(short left, short top, int length, Graphics &g) : 
+	Control(), IListener(), length_(length), graphic_(&g), value_("")
 {
-	setLeft(left);
-	setTop(top);
+	set_left(left);
+	set_top(top);
 };
 
 
-TextBox::TextBox(short left, short top, int length, string value, Graphics &g) : Control(), // IListener(), 
-length_(length),
-graphic_(&g),
-value_(value)
+TextBox::TextBox(short left, short top, int length, string value, Graphics &g) : 
+	Control(),  IListener(),  length_(length), graphic_(&g), value_(value)
 {
-	setLeft(left);
-	setTop(top);
+	set_left(left);
+	set_top(top);
 };
 
 
-void TextBox::setLeft(short left) {
+void TextBox::set_left(short left) {
 	if (left < 0) { left = 0; }
 	left_ = left;
 }
 
-void TextBox::setTop(short top) {
+void TextBox::set_top(short top) {
 	if (top < 0) { top = 0; }
 	top_ = top;
 }
 
-void TextBox::setFrameSize(int length) {
-	this->length_ = length;
+void TextBox::set_frame_size(int length) {
+	if (length < 0) { length = 0; }
+	length_ = length;
 }
 
 void TextBox::addChar(int x, char ch) {
-	if (length_ > value_.getText().length()) {
-		value_.setText(value_.getText() += ch);
-		graphic_->write(this->left_ + 1, this->top_ + 1, value_.getText());
+	if (length_ > value_.get_text().length()) {
+		value_.set_text(value_.get_text() += ch);
+		graphic_->write(this->left_ + 1, this->top_ + 1, value_.get_text());
 	}
 }
 
 void TextBox::deleteChar() {
-	if (value_.getText().length() > 0) {
-		value_ = value_.getText().substr(0, value_.getText().size() - 1);
+	if (value_.get_text().length() > 0) {
+		value_ = value_.get_text().substr(0, value_.get_text().size() - 1);
 		cout << '\b' << " " << '\b';
 	}
 }
 
 void TextBox::deleteAllText() {
-	if (value_.getText().length() > 0) {
-		for (int i = 0; i < value_.getText().length(); i++)
+	if (value_.get_text().length() > 0) {
+		for (int i = 0; i < value_.get_text().length(); i++)
 		{
 			cout << '\b' << " " << '\b';
 		}
-		value_.setText("");
+		value_.set_text("");
 	}
 }
-
-//
-//void notify();
-//void add(IListener* listener);
 
 void TextBox::draw(Graphics& g, int x = -1, int y = -1, size_t z = 0) {
 	if (!z)
@@ -94,7 +86,7 @@ void TextBox::draw(Graphics& g, int x = -1, int y = -1, size_t z = 0) {
 			this->top_ = y;
 		}
 
-		value_.setBorder(this->border_);
+		value_.set_border(this->border_);
 		value_.draw(g, this->left_, this->top_, length_, 0);
 	}
 }
@@ -104,7 +96,7 @@ void TextBox::action(IObservable * iObservable)
 	//need to complete
 }
 
-void TextBox::keyDown(int keyCode, char character)
+void TextBox::KeyDown(int keyCode, char character)
 {
 	if (keyCode >= 32 && keyCode <= 127) {
 		addChar(0, character);
