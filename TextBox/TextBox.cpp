@@ -13,12 +13,14 @@
 using namespace std;
 
 
-TextBox::TextBox() : Control(), IListener(),
+TextBox::TextBox(Graphics &g) : Control(), IListener(),
 length_(10),
+graphic_(&g),
 value_("") {};
 
-TextBox::TextBox(short left, short top, int length) : Control(), //IListener(),
+TextBox::TextBox(short left, short top, int length, Graphics &g) : Control(), //IListener(),
 length_(length),
+graphic_(&g),
 value_("")
 {
 	setLeft(left);
@@ -26,8 +28,10 @@ value_("")
 };
 
 
-TextBox::TextBox(short left, short top, int length, string value) : Control(), // IListener(), 
-length_(length), value_(value)
+TextBox::TextBox(short left, short top, int length, string value, Graphics &g) : Control(), // IListener(), 
+length_(length),
+graphic_(&g),
+value_(value)
 {
 	setLeft(left);
 	setTop(top);
@@ -48,10 +52,10 @@ void TextBox::setFrameSize(int length) {
 	this->length_ = length;
 }
 
-void TextBox::addChar(int x, Graphics &g, char ch) {
+void TextBox::addChar(int x, char ch) {
 	if (length_ > value_.getText().length()) {
 		value_.setText(value_.getText() += ch);
-		g.write(this->left_ + 1, this->top_ + 1, value_.getText());
+		graphic_->write(this->left_ + 1, this->top_ + 1, value_.getText());
 	}
 }
 
@@ -76,25 +80,40 @@ void TextBox::deleteAllText() {
 //void notify();
 //void add(IListener* listener);
 
-void TextBox::draw(Graphics& g) {
-	value_.setBorder(this->border_);
-	value_.draw(g, this->left_, this->top_, length_, 0);
+void TextBox::draw(Graphics& g, int x = -1, int y = -1, size_t z = 0) {
+	if (!z)
+	{
+		if (graphic_ != &g) {
+			delete(graphic_);
+			graphic_ = &g;
+		}
+		if (x != -1) {
+			this->left_ = x;
+		}
+		if (y != -1) {
+			this->top_ = y;
+		}
+
+		value_.setBorder(this->border_);
+		value_.draw(g, this->left_, this->top_, length_, 0);
+	}
 }
 
 void TextBox::action(IObservable * iObservable)
 {
+	//need to complete
 }
 
-void TextBox::keyPressed(CHAR AsciiChar, Graphics& g)
+void TextBox::keyDown(int keyCode, char character)
 {
-	if (AsciiChar >= 32 && AsciiChar <= 127) {
-		addChar(0, g, AsciiChar);
+	if (keyCode >= 32 && keyCode <= 127) {
+		addChar(0, character);
 	}
-	else if (AsciiChar == 128) { //ir.Event.KeyEvent.uChar.AsciiChar == 0 
-		deleteAllText();
-	}
-	else if (AsciiChar == 8) {
+	else if (keyCode == 8) {
 		deleteChar();
+	}
+	else if (keyCode == 128 || keyCode == 0) {
+		deleteAllText();
 	}
 }
 
