@@ -41,6 +41,6 @@ bool Button::mouseHover(int x, int y, Graphics &g){
 
 
 Button::~Button() {
-    //delete this->border_;
+    delete this->border_;
 }
 
