@@ -9,6 +9,7 @@
 #include "../Panel/Panel.h"
 #include "../ListItem/ListItem.h"
 #include "../RadioBox/RadioBox.h"
+#include "../GenericList/GenericList.h"
 
 int main(int argc, char** argv)
 {
@@ -29,7 +30,7 @@ int main(int argc, char** argv)
 //    p.Add(l);
 //    p.Add(new MyMessageBox("I hope dsfsfsdfdsf"));
 //	MyMessageBox m("lalala");
-    RadioBox radioBox;
+    GenericList radioBox;
     radioBox.Add(new ListItem("Ligal"));
     radioBox.Add(new ListItem("Chen"));
     radioBox.Add(new ListItem("Lahmi"));
