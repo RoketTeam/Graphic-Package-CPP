@@ -2,13 +2,12 @@
 
 #include <string>
 #include "../Control/Control.h"
-#include "../IListener/IListener.h"
 #include "../Label/Label.h"
 #include "../IObserver/IObservable.h"
 
 using namespace std;
 
-class TextBox : public Control, public IListener
+class TextBox : public Control
 {
 private:
 	int length_;
@@ -34,8 +33,9 @@ public:
 	void draw(Graphics& g, int x, int y, size_t z);
 
 	//Handler
-	void action(IObservable* iObservable);
 	void KeyDown(int keyCode, char character);
+	void MousePressed(int x, int y, bool isLeft);
+	bool MouseHover(int x, int y, Graphics &g);
 
 
 

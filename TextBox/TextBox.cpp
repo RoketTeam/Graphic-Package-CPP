@@ -14,11 +14,11 @@ using namespace std;
 
 
 TextBox::TextBox(Graphics &g) : 
-	Control(), IListener(), length_(10), graphic_(&g), value_("")
+	Control(), length_(10), graphic_(&g), value_("")
 {};
 
 TextBox::TextBox(short left, short top, int length, Graphics &g) : 
-	Control(), IListener(), length_(length), graphic_(&g), value_("")
+	Control(), length_(length), graphic_(&g), value_("")
 {
 	set_left(left);
 	set_top(top);
@@ -26,7 +26,7 @@ TextBox::TextBox(short left, short top, int length, Graphics &g) :
 
 
 TextBox::TextBox(short left, short top, int length, string value, Graphics &g) : 
-	Control(),  IListener(),  length_(length), graphic_(&g), value_(value)
+	Control(), length_(length), graphic_(&g), value_(value)
 {
 	set_left(left);
 	set_top(top);
@@ -72,27 +72,23 @@ void TextBox::deleteAllText() {
 	}
 }
 
-void TextBox::draw(Graphics& g, int x = -1, int y = -1, size_t z = 0) {
+void TextBox::draw(Graphics& g, int x, int y , size_t z = 0) {
 	if (!z)
 	{
 		if (graphic_ != &g) {
 			delete(graphic_);
 			graphic_ = &g;
 		}
-		if (x != -1) {
+		if (x > 0) {
 			this->left_ = x;
 		}
-		if (y != -1) {
+		if (y > 0) {
 			this->top_ = y;
 		}
 
 		value_.set_border(this->border_);
 		value_.draw(g, this->left_, this->top_, length_, 0);
 	}
-}
-
-void TextBox::action(IObservable *observable) {
-	//need to complete
 }
 
 void TextBox::KeyDown(int keyCode, char character) {
@@ -105,6 +101,16 @@ void TextBox::KeyDown(int keyCode, char character) {
 	else if (keyCode == 128 || keyCode == 0) {
 		deleteAllText();
 	}
+}
+
+void TextBox::MousePressed(int x, int y, bool isLeft) {
+	if (isInside(x, y, value_.get_left(), value_.get_top(), value_.get_width(), value_.get_height()))
+		value_.MousePressed(x, y, isLeft);
+};
+
+
+bool TextBox::MouseHover(int x, int y, Graphics &g) {
+	return value_.MouseHover(x, y, g);
 }
 
 
