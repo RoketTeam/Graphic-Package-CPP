@@ -124,11 +124,12 @@ void TextBox::KeyDown(int keyCode, char character) {
 }
 
 void TextBox::MousePressed(int x, int y, bool isLeft) {
-	if (isInside(x, y, value_.get_left(), value_.get_top(), value_.get_width(), value_.get_height()))
-	{
-		//this->set_focus(*this);
+	x--;
+	y--;
+	if (isLeft) {
+		set_highlight(x);
 	}
-	//value_.MousePressed(x, y, isLeft);
+	//if (isInside(x, y, value_.get_left(), value_.get_top(), value_.get_width(), value_.get_height())){}
 };
 
 
