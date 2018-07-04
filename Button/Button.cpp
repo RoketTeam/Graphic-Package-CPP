@@ -22,7 +22,7 @@ void Button::MousePressed(int x, int y, bool isLeft) {
 }
 
 string Button::get_text() {
-    Label::get_text();
+   return Label::get_text();
 }
 
 void Button::draw(Graphics &g, int x, int y, size_t z) {
