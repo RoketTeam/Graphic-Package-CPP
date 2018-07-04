@@ -30,6 +30,7 @@ TextBox::TextBox(short left, short top, int length, string value) :
 {
 	set_left(left);
 	set_top(top);
+	highlight_index_ = value.length();
 };
 
 
@@ -48,21 +49,34 @@ void TextBox::set_frame_size(int length) {
 	length_ = length;
 }
 
+void TextBox::set_highlight(int index) {
+	Graphics _graphics(STD_OUTPUT_HANDLE);
+	if (index >= value_.get_text().length()) {
+		index = value_.get_text().length();
+	}
+	if (index <= 0) {
+		index = 0;
+	}
+	highlight_index_ = index;
+}
+
 void TextBox::add_char(int x, char ch) {
 	if (length_ > value_.get_text().length()) {
-		value_.set_text(value_.get_text() += ch);
-		//graphic_->write(this->left_ + 1, this->top_ + 1, value_.get_text());
+		value_.set_text(value_.get_text().insert(highlight_index_, 1, ch));
+		set_highlight(highlight_index_ + 1);
 	}
 }
 
 void TextBox::delete_char() {
 	if (value_.get_text().length() > 0) {
-		value_ = value_.get_text().substr(0, value_.get_text().size() - 1);
+		value_.set_text(value_.get_text().erase(highlight_index_, 1));
+		set_highlight(highlight_index_ - 1);
 	}
 }
 
 void TextBox::delete_all_text() {
 	value_.set_text("");
+	set_highlight(0);
 }
 
 void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
@@ -70,6 +84,9 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
 	{
 		value_.set_border(this->border_);
 		value_.draw(g, this->left_, this->top_, 0, length_);
+
+		g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
+		g.setCursorVisibility(true);
 	}
 }
 
@@ -93,6 +110,16 @@ void TextBox::KeyDown(int keyCode, char character) {
 	}
 	else if (keyCode == VK_DELETE) {
 		delete_all_text();
+	}
+	else if (keyCode == VK_LEFT || keyCode == VK_NUMPAD4) {
+		if (highlight_index_ > 0) {
+			set_highlight(highlight_index_ - 1);
+		}
+	}
+	else if (keyCode == VK_RIGHT || keyCode == VK_NUMPAD6) {
+		if (this->highlight_index_ <= (value_.get_text().length() - 1)) {
+			set_highlight(highlight_index_ + 1);
+		}
 	}
 }
 
