@@ -13,11 +13,11 @@
 using namespace std;
 
 
-TextBox::TextBox() : 
+TextBox::TextBox() :
 	Control(), length_(10), value_("")
 {};
 
-TextBox::TextBox(short left, short top, int length) : 
+TextBox::TextBox(short left, short top, int length) :
 	Control(), length_(length), value_("")
 {
 	set_left(left);
@@ -58,21 +58,14 @@ void TextBox::add_char(int x, char ch) {
 void TextBox::delete_char() {
 	if (value_.get_text().length() > 0) {
 		value_ = value_.get_text().substr(0, value_.get_text().size() - 1);
-		cout << '\b' << " " << '\b';
 	}
 }
 
 void TextBox::delete_all_text() {
-	if (value_.get_text().length() > 0) {
-		for (int i = 0; i < value_.get_text().length(); i++)
-		{
-			cout << '\b' << " " << '\b';
-		}
-		value_.set_text("");
-	}
+	value_.set_text("");
 }
 
-void TextBox::draw(Graphics& g, int x, int y , size_t z = 0) {
+void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
 	if (!z)
 	{
 		value_.set_border(this->border_);
@@ -88,11 +81,11 @@ void TextBox::get_all_controls(vector<Control*>* controls)
 void TextBox::set_focus(Control & control)
 {
 	//focused_control = &control;
-	highlight_index_ = this->value_.get_text().length;
+	//	highlight_index_ = this->value_.get_text().length;
 }
 
 void TextBox::KeyDown(int keyCode, char character) {
-	if ( (keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A) ) {
+	if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
 		add_char(0, character);
 	}
 	else if (keyCode == VK_BACK) {
@@ -106,9 +99,9 @@ void TextBox::KeyDown(int keyCode, char character) {
 void TextBox::MousePressed(int x, int y, bool isLeft) {
 	if (isInside(x, y, value_.get_left(), value_.get_top(), value_.get_width(), value_.get_height()))
 	{
-		this->set_focus();
+		//this->set_focus(*this);
 	}
-		//value_.MousePressed(x, y, isLeft);
+	//value_.MousePressed(x, y, isLeft);
 };
 
 
