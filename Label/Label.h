@@ -23,7 +23,6 @@ class Label : public Control
 
 		// Methods
 		void draw(Graphics& g, int x, int y, size_t z);
-		void draw(Graphics& g, int x, int y, size_t z, int length);
 		bool MouseHover(int x, int y, Graphics &g){ return false;}
 
     private:

@@ -13,11 +13,11 @@
 using namespace std;
 
 
-TextBox::TextBox() :
+TextBox::TextBox() : 
 	Control(), length_(10), value_("")
 {};
 
-TextBox::TextBox(short left, short top, int length) :
+TextBox::TextBox(short left, short top, int length) : 
 	Control(), length_(length), value_("")
 {
 	set_left(left);
@@ -58,19 +58,19 @@ void TextBox::set_highlight(int index) {
 		index = 0;
 	}
 	highlight_index_ = index;
-}
+	}
 
 void TextBox::add_char(int x, char ch) {
 	if (length_ > value_.get_text().length()) {
-		value_.set_text(value_.get_text().insert(highlight_index_, 1, ch));
-		set_highlight(highlight_index_ + 1);
+		value_.set_text (value_.get_text().insert(highlight_index_, 1,  ch));
+		set_highlight(highlight_index_+1);
 	}
 }
 
 void TextBox::delete_char() {
 	if (value_.get_text().length() > 0) {
 		value_.set_text(value_.get_text().erase(highlight_index_, 1));
-		set_highlight(highlight_index_ - 1);
+		set_highlight(highlight_index_ -1);
 	}
 }
 
@@ -79,11 +79,23 @@ void TextBox::delete_all_text() {
 	set_highlight(0);
 }
 
-void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
+void TextBox::draw(Graphics& g, int x, int y , size_t z = 0) {
 	if (!z)
 	{
-		value_.set_border(this->border_);
-		value_.draw(g, this->left_, this->top_, 0, length_);
+		left_ = x;
+		top_ = y;
+
+		Color background = g.getBackground();
+		Color foreground = g.getForeground();
+		if (background_ != Color::Transparent)
+			g.setBackground(background_);
+		if (foreground_ != Color::Transparent)
+			g.setForeground(foreground_);
+		border_->drawBorder(x, y, length_ , g);
+		value_.draw(g, x, y, 0);
+
+		//value_.set_border(this->border_);
+		//value_.draw(g, this->left_, this->top_, 0, length_);
 
 		g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
 		g.setCursorVisibility(true);
@@ -98,11 +110,11 @@ void TextBox::get_all_controls(vector<Control*>* controls)
 void TextBox::set_focus(Control & control)
 {
 	//focused_control = &control;
-	//	highlight_index_ = this->value_.get_text().length;
+//	highlight_index_ = this->value_.get_text().length;
 }
 
 void TextBox::KeyDown(int keyCode, char character) {
-	if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
+	if ( (keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A) ) {
 		add_char(0, character);
 	}
 	else if (keyCode == VK_BACK) {
@@ -117,7 +129,7 @@ void TextBox::KeyDown(int keyCode, char character) {
 		}
 	}
 	else if (keyCode == VK_RIGHT || keyCode == VK_NUMPAD6) {
-		if (this->highlight_index_ <= (value_.get_text().length() - 1)) {
+		if (this->highlight_index_ <= (value_.get_text().length()-1)) {
 			set_highlight(highlight_index_ + 1);
 		}
 	}

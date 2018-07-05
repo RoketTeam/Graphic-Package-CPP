@@ -14,7 +14,6 @@ private:
 	int highlight_index_;
 	Label value_;
 
-	// methods
 	void set_highlight(int index);
 
 public:
@@ -42,6 +41,9 @@ public:
 	void KeyDown(int keyCode, char character);
 	void MousePressed(int x, int y, bool isLeft);
 	bool MouseHover(int x, int y, Graphics &g);
+
+
+
 
 };
 
