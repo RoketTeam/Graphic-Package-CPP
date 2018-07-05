@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include "IComposite.h"
-#include "ListItem.h"
+#include "../IComposite/IComposite.h"
+#include "../ListItem/ListItem.h"
 #include <vector>
 
 class CheckList : public IComposite {

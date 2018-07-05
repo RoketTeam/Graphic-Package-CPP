@@ -4,7 +4,8 @@
 #include <windows.h>
 #include <iostream>
 #include <string>
-#include "IControl.h"
+#include "../Control/Control.h"
+#include "../Label/Label.h"
 
 using namespace std;
 
@@ -26,12 +27,17 @@ class ListItem : public Control {
 
 	public:
 		// C'tors
+		ListItem(string description);
 		ListItem(short positionX, short positionY, string description);
+
+		// Setters & Getters
+		void set_left(short left);
+		void set_top(short top);
 
 		// methods
 		bool focus();
 		bool unfocus();
-		bool is_focus() { return _isFocused; }
+		bool is_focus() { return is_focused_; }
 		bool is_hover(); // need redesign
 	    void draw(Graphics& g, int x, int y, size_t z);
 

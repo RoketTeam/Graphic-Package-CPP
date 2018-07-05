@@ -33,16 +33,19 @@ void EventEngine::run(Control &c)
 			case KEY_EVENT:
 			{
 				auto f = Control::get_focus();
-				if (f != nullptr && record.Event.KeyEvent.bKeyDown)
+				auto code = record.Event.KeyEvent.wVirtualKeyCode;
+				auto chr = record.Event.KeyEvent.uChar.AsciiChar;
+
+				if (record.Event.KeyEvent.wVirtualKeyCode == VK_TAB) {
+					if (f != nullptr) {moveFocus(c, f);}
+					else { moveFocus(c, &c); }
+				}
+				else if (f != nullptr)
 				{
-					auto code = record.Event.KeyEvent.wVirtualKeyCode;
-					auto chr = record.Event.KeyEvent.uChar.AsciiChar;
-					if (code == VK_TAB)
-						moveFocus(c, f);
-					else
-						f->KeyDown(code, chr);
+					f->KeyDown(code, chr);
 					redraw = true;
 				}
+
 				break;
 			}
 			case MOUSE_EVENT:
