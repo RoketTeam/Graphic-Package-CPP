@@ -1,8 +1,13 @@
 #include "../IComposite/IComposite.h"
 
 
-void IComposite::Add(Control *item) {
-    items_.push_back(item);
+bool IComposite::Add(Control *item) {
+    try{
+        items_.push_back(item);
+    } catch (...){
+        return false;
+    }
+    return true;
 }
 
 Control* IComposite::GetItem(int index) {
@@ -12,5 +17,6 @@ Control* IComposite::GetItem(int index) {
 
     return items_[index];
 }
+
 
 IComposite::~IComposite() {}

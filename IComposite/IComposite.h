@@ -21,7 +21,7 @@ class IComposite : public Control, IListener  {
 
 		// methods
 		virtual Control* GetItem(int index);
-		virtual void Add(Control* item);
+		virtual bool Add(Control* item);
 
 		//D'tors
 		virtual ~IComposite() = 0;
