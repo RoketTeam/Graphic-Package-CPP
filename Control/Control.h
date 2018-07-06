@@ -13,6 +13,8 @@ class Control
         // Static methods
         static Control* get_focus() { return focused_control_; }
         static void set_focus(Control& control);
+        static void lock_events(){lock_events_ = true;}
+        static void enable_events(){lock_events_ = false;}
 
         // C'tors & D'tors
         Control();
@@ -24,10 +26,14 @@ class Control
         void set_foreground(Color color){ foreground_ = color; }
         void set_border(IBorder* border);
         Control* set_margin(int margin);
+        Control* set_margin_left(int margin);
         virtual void set_left(short left){left_ = left;}
         virtual void set_top(short top){top_ = top;}
 
+        Color get_background(){ return background_; }
+        Color get_foreground(){ return foreground_; }
         int get_margin(){return margin_;}
+        int get_margin_left(){ return margin_left_;}
         virtual int get_left() { return left_; }
         virtual short get_top() { return top_; }
         virtual int get_width(){ return width_;}
@@ -57,5 +63,7 @@ class Control
         Color background_;
         Color foreground_;
         int margin_;
+        int margin_left_;
+        static bool lock_events_;
 };
 

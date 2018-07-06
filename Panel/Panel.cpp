@@ -26,8 +26,14 @@ void Panel::draw(Graphics &g, int x, int y, size_t z) {
     }
     int spacing = 0;
     for(int i = 0; i < items_.size(); i ++){
-        items_[i]->draw(g, x + 1, y+spacing, z);
-        spacing += items_[i]->get_height() + items_[i]->get_margin();
+        auto current_item = items_[i];
+        if(current_item->get_background() == Color::Transparent)
+            current_item->set_background(get_background());
+        if(current_item->get_foreground() == Color::Transparent)
+            current_item->set_foreground(get_foreground());
+        current_item->draw(g, x + 1 + current_item->get_margin_left(), y+spacing, z);
+        spacing += current_item->get_height() + current_item->get_margin();
+
     }
     if(z == 0) {
         g.setBackground(background);
@@ -44,7 +50,9 @@ bool Panel::Add(Control *item) {
 void Panel::CalculateHeight() {
     height_ = 0;
     for(int i = 0; i < items_.size(); i ++){
-        height_ += items_[i]->get_height() + items_[i]->get_margin();
+        auto item = items_[i];
+        if(!dynamic_cast<MyMessageBox*>(item))
+            height_ += items_[i]->get_height() + items_[i]->get_margin();
     }
 }
 
@@ -82,3 +90,7 @@ void Panel::get_all_controls(vector<Control*>* controls){
     }
 }
 
+void Panel::action(IObservable* observable){
+    MyMessageBox* m = new MyMessageBox("Are you sure?");
+    Add(m);
+}

@@ -11,7 +11,7 @@
 using namespace std;
 
 
-class IComposite : public Control, IListener  {
+class IComposite : public Control, public IListener  {
 
 	protected:
 		// Atrributes

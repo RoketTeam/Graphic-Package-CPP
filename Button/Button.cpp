@@ -12,6 +12,7 @@ Button::Button(string text):
     set_border(new OneLine());
     is_hover_ = false;
     set_clickable(true);
+    set_margin(0);
 }
 
 void Button::MousePressed(int x, int y, bool isLeft) {

@@ -5,13 +5,16 @@ GenericList::GenericList() {
 }
 
 bool GenericList::MouseHover(int x, int y, Graphics &g) {
-    bool redraw = false;
-    for (auto list_item: items_){
-        if(list_item->MouseHover(x, y, g)){
-            redraw = true;
+    if(!Control::lock_events_) {
+        bool redraw = false;
+        for (auto list_item: items_) {
+            if (list_item->MouseHover(x, y, g)) {
+                redraw = true;
+            }
         }
+        return redraw;
     }
-    return redraw;
+    return false;
 }
 
 

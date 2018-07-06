@@ -5,11 +5,14 @@
 using namespace std;
 
 Control* Control::focused_control_ = nullptr;
+bool Control::lock_events_ = false;
 
 Control::Control()
 {
     left_ = 0;
     top_ = 0;
+    set_margin_left(0);
+    set_margin(0);
     border_ = new NoneBorder();
     background_ = Color::Transparent;
     foreground_ = Color::Transparent;
@@ -24,7 +27,7 @@ void Control::set_border(IBorder* border){
 
 Control::Control(int left, int top, IBorder* border):
         left_(left), top_(top),
-        border_(border){}
+        border_(border), margin_left_(0), margin_(0){}
 
 
 Control::~Control() {
@@ -37,6 +40,12 @@ Control* Control::set_margin(int margin){
     margin_ = margin;
     return this;
 }
+
+Control* Control::set_margin_left(int margin_left){
+    margin_left_ = margin_left;
+    return this;
+}
+
 
 void Control::FillBackground(short x, short y, int height, Graphics & g) {
     string Line(height,  ' ');

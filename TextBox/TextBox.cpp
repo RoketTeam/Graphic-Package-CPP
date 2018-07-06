@@ -94,7 +94,7 @@ void TextBox::delete_all_text() {
 }
 
 void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
-    if (!z)
+    if (z == 1)
     {
         left_ = x;
         top_ = y;
@@ -104,49 +104,58 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
             g.setBackground(background_);
         if (foreground_ != Color::Transparent)
             g.setForeground(foreground_);
-        border_->drawBorder(x, y, length_ + 1, g);
-        value_.draw(g, x, y, 0);
+        border_->drawBorder(left_, top_, length_ + 1, g);
+        value_.draw(g, left_, top_, 0);
 
         g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
         g.setCursorVisibility(is_focus_);
+        g.setBackground(background);
+        g.setForeground(foreground);
     }
 }
 
 
 
 void TextBox::KeyDown(int keyCode, char character) {
-    if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
-        add_char(0, character);
-    }
-    else if (keyCode == VK_BACK) {
-        delete_char();
-    }
-    else if (keyCode == VK_DELETE) {
-        delete_all_text();
-    }
-    else if (keyCode == VK_LEFT || keyCode == VK_NUMPAD4) {
-        if (highlight_index_ > 0) {
-            set_highlight(highlight_index_ - 1);
+    if(!Control::lock_events_) {
+        if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
+            add_char(0, character);
         }
-    }
-    else if (keyCode == VK_RIGHT || keyCode == VK_NUMPAD6) {
-        if (this->highlight_index_ <= (value_.get_text().length() - 1)) {
-            set_highlight(highlight_index_ + 1);
+        else if (keyCode == VK_BACK) {
+            delete_char();
+        }
+        else if (keyCode == VK_DELETE) {
+            delete_all_text();
+        }
+        else if (keyCode == VK_LEFT || keyCode == VK_NUMPAD4) {
+            if (highlight_index_ > 0) {
+                set_highlight(highlight_index_ - 1);
+            }
+        }
+        else if (keyCode == VK_RIGHT || keyCode == VK_NUMPAD6) {
+            if (this->highlight_index_ <= (value_.get_text().length() - 1)) {
+                set_highlight(highlight_index_ + 1);
+            }
         }
     }
 }
 
 void TextBox::MousePressed(int x, int y, bool isLeft) {
-    x--;
-    y--;
-    if (isLeft) {
-        set_highlight(x);
+    if(!Control::lock_events_){
+        x--;
+        y--;
+        if (isLeft) {
+            set_highlight(x);
+        }
+        set_focus(*this);
     }
-    set_focus(*this);
 };
 
 
 bool TextBox::MouseHover(int x, int y, Graphics &g) {
-    return value_.MouseHover(x, y, g);
+    if(!Control::lock_events_){
+        return value_.MouseHover(x, y, g);
+    }
+    return false;
 }
 

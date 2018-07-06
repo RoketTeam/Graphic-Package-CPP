@@ -87,14 +87,18 @@ void NumericBox::action(IObservable* iObservable) {
 }
 
 void NumericBox::MousePressed(int x, int y, bool isLeft) {
-    if(isInside(x, y, inc_.get_left(), inc_.get_top(), inc_.get_width(), inc_.get_height()))
-        inc();
+    if(!Control::lock_events_){
+        if(isInside(x, y, inc_.get_left(), inc_.get_top(), inc_.get_width(), inc_.get_height()))
+            inc();
 
-    if(isInside(x, y, dec_.get_left(), dec_.get_top(), dec_.get_width(), dec_.get_height()))
-        dec();
+        if(isInside(x, y, dec_.get_left(), dec_.get_top(), dec_.get_width(), dec_.get_height()))
+            dec();
+    }
 };
 
 
 bool NumericBox::MouseHover(int x, int y, Graphics &g) {
-    return dec_.MouseHover(x, y, g) || inc_.MouseHover(x, y, g);
+    if(!Control::lock_events_)
+        return dec_.MouseHover(x, y, g) || inc_.MouseHover(x, y, g);
+    return false;
 }

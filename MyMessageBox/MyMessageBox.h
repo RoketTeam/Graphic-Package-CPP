@@ -18,6 +18,10 @@ class MyMessageBox : public Control, public IListener
 		// Setters & Getters
 		void set_message(string message){message_.set_text(message);}
 		string get_message(){ return message_.get_text();}
+		void set_visibility(bool visibility){is_visible_ = visibility;}
+		bool is_visible(){ return is_visible_;}
+		void set_ok_text(string ok){ok_ = ok;}
+		void set_cancel_text(string ok){cancel_ = ok;}
 
 		// Methods
 		void draw(Graphics& g, int x, int y, size_t z);
@@ -25,7 +29,7 @@ class MyMessageBox : public Control, public IListener
 		// Event handler
 		void MousePressed(int x, int y, bool isLeft);
         bool MouseHover(int x, int y, Graphics &g);
-        virtual void action(IObservable* observable);
+        void action(IObservable* observable);
 
 
 	private:
