@@ -20,6 +20,7 @@ class ListItem : public Control {
         ~ListItem(){};
 
         // Setters & Getters
+		string get_text(){return description_label_.get_text();}
         short get_line_length() { return line_length_; }
 
 		// Methods
