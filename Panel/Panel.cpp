@@ -18,11 +18,10 @@ void Panel::draw(Graphics &g, int x, int y, size_t z) {
             g.setBackground(background_);
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
-        if(border_){
-            CalculateHeight();
-            CalculateWidth();
-            border_->drawBorder(x, y, width_ + 4, g, height_ + 4);
-        }
+
+        CalculateHeight();
+        CalculateWidth();
+        border_->drawBorder(x, y, width_ + 4, g, height_ + 4);
     }
     int spacing = 0;
     for(int i = 0; i < items_.size(); i ++){
@@ -56,6 +55,7 @@ void Panel::MousePressed(int x, int y, bool isLeft){
         items_[i]->MousePressed(x, y, isLeft);
     }
 }
+
 bool Panel::MouseHover(int x, int y, Graphics &g){
     bool redraw = false;
     for(int i = 0; i < items_.size(); i ++){

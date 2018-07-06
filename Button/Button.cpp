@@ -11,7 +11,6 @@ Button::Button(string text):
 {
     set_border(new OneLine());
     is_hover_ = false;
-    set_background(Color::Transparent);
     set_clickable(true);
 }
 
@@ -49,6 +48,7 @@ bool Button::MouseHover(int x, int y, Graphics &g){
 
 
 Button::~Button() {
-    delete border_;
+    if(border_)
+        delete border_;
 }
 

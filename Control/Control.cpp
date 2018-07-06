@@ -15,13 +15,22 @@ Control::Control()
     foreground_ = Color::Transparent;
 }
 
+void Control::set_border(IBorder* border){
+    if(border_)
+        delete border_;
+    border_ = border;
+}
+
 
 Control::Control(int left, int top, IBorder* border):
         left_(left), top_(top),
         border_(border){}
 
 
-Control::~Control() {}
+Control::~Control() {
+    if(border_)
+        delete border_;
+}
 
 
 Control* Control::set_margin(int margin){

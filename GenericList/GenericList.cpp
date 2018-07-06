@@ -1,6 +1,6 @@
 #include "../GenericList/GenericList.h"
 
-
+GenericList::GenericList() {set_focus(*this);}
 
 bool GenericList::MouseHover(int x, int y, Graphics &g) {
     bool redraw = false;
@@ -34,9 +34,15 @@ int GenericList::select() {
 
 void GenericList::draw(Graphics& g, int x, int y, size_t z){
     if(z == 0){
+        auto background = g.getBackground();
+        auto foreground = g.getForeground();
+        g.setBackground(background_);
+        g.setForeground(foreground_);
         for (int i=0; i < items_.size(); ++i){
             items_[i]->draw(g, x, y + i, z);
         }
+        g.setBackground(background);
+        g.setForeground(foreground);
     }
 }
 

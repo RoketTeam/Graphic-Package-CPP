@@ -55,8 +55,8 @@ void ListItem::draw(Graphics &g, int x, int y, size_t z) {
         left_ = x;
         width_ = description_label_.get_text().length() + 6;
         height_ = 1;
-        Color background = g.getBackground();
-        Color foreground = g.getForeground();
+        auto background = g.getBackground();
+        auto foreground = g.getForeground();
         if(background_ != Color::Transparent)
             g.setBackground(background_);
         if(foreground_ != Color::Transparent)

@@ -22,16 +22,14 @@ MyMessageBox::MyMessageBox(string message) :
 
 void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
     if(is_visible_ && z == 3){
-        Color background = g.getBackground();
-        Color foreground = g.getForeground();
+        auto background = g.getBackground();
+        auto foreground = g.getForeground();
         if(background_ != Color::Transparent)
             g.setBackground(background_);
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
-
         width_ = ok_.get_width() + cancel_.get_width() + message_.get_text().length();
-        if(border_)
-            border_->drawBorder(x, y, width_, g, get_height());
+        border_->drawBorder(x, y, width_, g, get_height());
         int center = width_ / 4 - 1;
         message_.draw(g, center, y, 0);
         ok_.draw(g, center + 1, y+3, 0);

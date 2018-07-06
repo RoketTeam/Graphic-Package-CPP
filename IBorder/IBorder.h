@@ -16,7 +16,7 @@ class IBorder {
 
 		// methods
 		IBorder(){};
-		virtual void drawBorder(int, int, int, Graphics&, int amount = 3){};
+		virtual void drawBorder(int top, int left, int length, Graphics& g, int amount = 3){};
 
 		//D'tors
 		virtual ~IBorder() = 0;

@@ -10,6 +10,7 @@
 #include "../ListItem/ListItem.h"
 #include "../RadioBox/RadioBox.h"
 #include "../GenericList/GenericList.h"
+#include "../CheckList/CheckList.h"
 
 int main(int argc, char** argv)
 {
@@ -30,7 +31,7 @@ int main(int argc, char** argv)
 //    p.Add(l);
 //    p.Add(new MyMessageBox("I hope dsfsfsdfdsf"));
 //	MyMessageBox m("lalala");
-    GenericList radioBox;
+    CheckList radioBox;
     radioBox.Add(new ListItem("Ligal"));
     radioBox.Add(new ListItem("Chen"));
     radioBox.Add(new ListItem("Lahmi"));

@@ -8,7 +8,6 @@ Label::Label(string text) :
 {
     width_ = text_.length() + 2;
     height_ = 3;
-    background_ = Color ::Transparent;
 };
 
 

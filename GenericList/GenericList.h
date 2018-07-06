@@ -10,8 +10,8 @@ class GenericList : public IComposite {
 
 public:
 
-    GenericList(){set_focus(*this);}
-    ~GenericList() {};
+    GenericList();
+    ~GenericList(){}
 
     // Event handlers
     void MousePressed(int x, int y, bool isLeft);
