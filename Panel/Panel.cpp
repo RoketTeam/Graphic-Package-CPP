@@ -65,6 +65,8 @@ bool Panel::MouseHover(int x, int y, Graphics &g){
     }
     return redraw;
 }
-void Panel::KeyDown(int keyCode, char character){}
+void Panel::KeyDown(int keyCode, char character){
+    get_focus()->KeyDown(keyCode, character);
+}
 void Panel::get_all_controls(vector<Control*>* controls){}
 
