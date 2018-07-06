@@ -1,6 +1,9 @@
 #include "../GenericList/GenericList.h"
 
-GenericList::GenericList() {set_focus(*this);}
+GenericList::GenericList() {
+    set_focus(*this);
+    height_ = 0;
+}
 
 bool GenericList::MouseHover(int x, int y, Graphics &g) {
     bool redraw = false;
@@ -21,6 +24,7 @@ void GenericList::MousePressed(int x, int y, bool isLeft){
 bool GenericList::AddSelectedItem(ListItem *item) {
     try{
         items_.push_back(item);
+        height_ += item->get_height();
         return true;
     } catch (...) {
         return false;
@@ -33,6 +37,7 @@ bool GenericList::RemoveSelectedItem(ListItem *item) {
         {
             try{
                 items_.erase(items_.begin()+i);
+                height_ -= item->get_height();
                 return true;
             } catch (...){
                 return false;
@@ -62,8 +67,10 @@ void GenericList::draw(Graphics& g, int x, int y, size_t z){
         auto foreground = g.getForeground();
         g.setBackground(background_);
         g.setForeground(foreground_);
+        height_ = 0;
         for (int i=0; i < items_.size(); ++i){
             items_[i]->draw(g, x, y + i, z);
+            height_ += items_[i]->get_height();
         }
         g.setBackground(background);
         g.setForeground(foreground);

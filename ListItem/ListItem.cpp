@@ -9,6 +9,7 @@ ListItem::ListItem(string description):
         is_checked_(false)
 {
     line_length_ = description.length();
+    height_ = 1;
     set_background(Color::Transparent);
     set_foreground(Color::Green);
 }
