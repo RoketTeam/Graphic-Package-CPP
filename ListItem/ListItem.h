@@ -1,43 +1,48 @@
 
-# pragma once
+#pragma once
 
 #include <windows.h>
 #include <iostream>
 #include <string>
-#include "IControl.h"
+#include "../Label/Label.h"
+#include "../IBorder/IBorderStyle.h"
+#include "../IBorder/NoneBorder.h"
 
 using namespace std;
 
 
 class ListItem : public Control {
 
-	private:
-		// Atrributes
-		Label description_label_;
-		short line_lengh_;
-		bool is_checked_;
-		bool is_focused_;
-
-
-	// Methods
-		void MarkAsChoose();
-		void MarkAsUnchoose();
-		bool SetColor(DWORD color);
 
 	public:
-		// C'tors
-		ListItem(short positionX, short positionY, string description);
+		// C'tors & D'tors
+		ListItem(string description);
+        ~ListItem(){};
 
-		// methods
-		bool focus();
-		bool unfocus();
-		bool is_focus() { return _isFocused; }
-		bool is_hover(); // need redesign
+        // Setters & Getters
+        short get_line_length() { return line_length_; }
+
+		// Methods
+		void focus();
+		void unfocus();
+		bool is_focus() { return is_focused_; }
 	    void draw(Graphics& g, int x, int y, size_t z);
 
-	    short get_line_lengh() { return line_lengh_; }
+        // Event handlers
+        void MousePressed(int x, int y, bool isLeft);
+        bool MouseHover(int x, int y, Graphics &g);
+        void KeyDown(int keyCode, char character){};
 
-		//D'tors
-		~ListItem();
 
+    private:
+        // Atrributes
+        Label description_label_;
+        short line_length_;
+        bool is_checked_;
+        bool is_focused_;
+
+
+        // Methods
+        void MarkAsChoose(){};
+        void MarkAsUnchoose(){};
 };
