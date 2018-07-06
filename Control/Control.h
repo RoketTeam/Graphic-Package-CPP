@@ -23,7 +23,7 @@ class Control
         void set_background(Color color){background_ = color; }
         void set_foreground(Color color){ foreground_ = color; }
         void set_border(IBorder* border){border_ = border;}
-        Control* set_margin(int margin){margin_ = margin;}
+        Control* set_margin(int margin);
         virtual void set_left(short left){left_ = left;}
         virtual void set_top(short top){top_ = top;}
 

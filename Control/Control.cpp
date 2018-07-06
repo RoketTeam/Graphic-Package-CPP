@@ -23,6 +23,12 @@ Control::Control(int left, int top, IBorder* border):
 
 Control::~Control() {}
 
+
+Control* Control::set_margin(int margin){
+    margin_ = margin;
+    return this;
+}
+
 void Control::FillBackground(short x, short y, int height, Graphics & g) {
     string Line(height,  ' ');
     string Fill(height , ' ');
