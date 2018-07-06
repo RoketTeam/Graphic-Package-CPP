@@ -1,16 +1,7 @@
 #include "../Graphics/Graphics.h"
-#include "../Label/Label.h"
-#include "../Button/Button.h"
-#include "../NumericBox/NumericBox.h"
-#include "../IBorder/OneLine.h"
-#include "../IBorder/DoubleLine.h"
 #include "../EventEngine/EventEngine.h"
-#include "../MyMessageBox/MyMessageBox.h"
 #include "../Panel/Panel.h"
-#include "../ListItem/ListItem.h"
-#include "../RadioBox/RadioBox.h"
-#include "../GenericList/GenericList.h"
-#include "../CheckList/CheckList.h"
+
 
 int main(int argc, char** argv)
 {
@@ -35,6 +26,8 @@ int main(int argc, char** argv)
     checkList.AddSelectedItem(new ListItem("Lahmi"));
     checkList.AddSelectedItem(new ListItem("Shaked"));
     p.Add(&checkList);
+
+    p.Add(new TextBox());
     EventEngine e;
 	e.run(p);
 }

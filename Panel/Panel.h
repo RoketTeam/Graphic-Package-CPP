@@ -1,6 +1,17 @@
-#include "../IComposite/IComposite.h"
-
 #pragma once
+
+#include "../Label/Label.h"
+#include "../Button/Button.h"
+#include "../NumericBox/NumericBox.h"
+#include "../IBorder/OneLine.h"
+#include "../IBorder/DoubleLine.h"
+#include "../MyMessageBox/MyMessageBox.h"
+#include "../IComposite/IComposite.h"
+#include "../ListItem/ListItem.h"
+#include "../RadioBox/RadioBox.h"
+#include "../GenericList/GenericList.h"
+#include "../CheckList/CheckList.h"
+#include "../TextBox/TextBox.h"
 
 using namespace std;
 
