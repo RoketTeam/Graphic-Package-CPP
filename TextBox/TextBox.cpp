@@ -15,7 +15,10 @@ using namespace std;
 
 TextBox::TextBox() :
         Control(), length_(10), value_("")
-{};
+{
+    is_focus_ = false;
+    height_ = 3;
+};
 
 TextBox::TextBox(short left, short top, int length) :
         Control(), length_(length), value_("")
@@ -25,6 +28,7 @@ TextBox::TextBox(short left, short top, int length) :
     }
     set_left(left);
     set_top(top);
+    is_focus_ = false;
 };
 
 
@@ -38,6 +42,7 @@ TextBox::TextBox(short left, short top, int length, string value) :
     set_left(left);
     set_top(top);
     highlight_index_ = value.length();
+    is_focus_ = false;
 };
 
 
@@ -93,34 +98,21 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
     {
         left_ = x;
         top_ = y;
-
         Color background = g.getBackground();
         Color foreground = g.getForeground();
         if (background_ != Color::Transparent)
             g.setBackground(background_);
         if (foreground_ != Color::Transparent)
             g.setForeground(foreground_);
-        border_->drawBorder(x, y, length_, g);
+        border_->drawBorder(x, y, length_ + 1, g);
         value_.draw(g, x, y, 0);
 
-        //value_.set_border(this->border_);
-        //value_.draw(g, this->left_, this->top_, 0, length_);
-
         g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
-        g.setCursorVisibility(true);
+        g.setCursorVisibility(is_focus_);
     }
 }
 
-void TextBox::get_all_controls(vector<Control*>* controls)
-{
-    controls->push_back(this);
-}
 
-void TextBox::set_focus(Control & control)
-{
-    //focused_control = &control;
-    //	highlight_index_ = this->value_.get_text().length;
-}
 
 void TextBox::KeyDown(int keyCode, char character) {
     if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
@@ -150,6 +142,7 @@ void TextBox::MousePressed(int x, int y, bool isLeft) {
     if (isLeft) {
         set_highlight(x);
     }
+    set_focus(*this);
 };
 
 
