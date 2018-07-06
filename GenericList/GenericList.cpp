@@ -29,6 +29,7 @@ void GenericList::get_all_controls(vector<Control*>* controls){
 
 bool GenericList::AddSelectedItem(ListItem *item) {
     try{
+        item->set_parent(this);
         items_.push_back(item);
         height_ += item->get_height();
         return true;
@@ -104,11 +105,11 @@ void GenericList::MoveDown(int index, ListItem* current_item){
         current_item->unfocus();
     if(index == list_size - 1) {
         temp = static_cast<ListItem*> (items_[0]);
-        temp->focus();
+        set_focus(*temp);
     }
     else {
         temp = static_cast<ListItem*> (items_[index+1]);
-        temp->focus();
+        set_focus(*temp);
     }
     return;
 }
@@ -121,11 +122,11 @@ void GenericList::MoveUp(int index, ListItem* current_item) {
 
     if(index == 0 || index == -1) {
         temp = static_cast<ListItem*> (items_[list_size - 1]);
-        temp->focus();
+        set_focus(*temp);
     }
     else {
         temp = static_cast<ListItem*> (items_[index - 1]);
-        temp->focus();
+        set_focus(*temp);
     }
     return;
 }

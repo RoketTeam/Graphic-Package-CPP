@@ -12,6 +12,7 @@ ListItem::ListItem(string description):
     height_ = 1;
     border_ = new NoneBorder();
     foreground_ = Color::White;
+    parent_ = nullptr;
 }
 
 void ListItem::focus() {
@@ -20,16 +21,16 @@ void ListItem::focus() {
         Color temp = background_;
         background_ = foreground_;
         foreground_ = temp;
-        set_focus(*this);
     }
 }
 
 void ListItem::unfocus() {
     if(is_focused_){
-        is_focused_ = false;
         Color temp = background_;
         background_ = foreground_;
         foreground_ = temp;
+        is_focused_ = false;
+        set_focus(*parent_);
     }
 }
 
@@ -99,7 +100,8 @@ void ListItem::KeyDown(int keyCode, char character){
             MarkAsUnchecked();
         else
             MarkAsChecked();
-        set_focus(*this);
     }
+    else
+        parent_->KeyDown(keyCode, character);
 }
 
