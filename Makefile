@@ -20,7 +20,7 @@ OBJS += ListItem/ListItem.o
 OBJS += NumericBox/NumericBox.o
 OBJS += Panel/Panel.o
 OBJS += RadioBox/RadioBox.o
-# OBJS += TextBox/TextBox.o
+OBJS += TextBox/TextBox.o
 OBJS += MyMessageBox/MyMessageBox.o
 OBJS += GenericList/GenericList.o
 
