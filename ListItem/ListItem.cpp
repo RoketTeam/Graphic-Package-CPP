@@ -10,8 +10,8 @@ ListItem::ListItem(string description):
 {
     line_length_ = description.length();
     height_ = 1;
-    set_background(Color::Transparent);
-    set_foreground(Color::Green);
+    border_ = new NoneBorder();
+    foreground_ = Color::White;
 }
 
 void ListItem::focus() {
@@ -60,8 +60,12 @@ void ListItem::draw(Graphics &g, int x, int y, size_t z) {
         auto foreground = g.getForeground();
         if(background_ != Color::Transparent)
             g.setBackground(background_);
+        else
+            background_ = background;
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
+        else
+            foreground_ = foreground;
         border_->drawBorder(x, y, width_ - 2, g);
         string line;
         if (is_checked_)

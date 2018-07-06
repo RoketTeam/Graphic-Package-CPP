@@ -65,8 +65,10 @@ void GenericList::draw(Graphics& g, int x, int y, size_t z){
     if(z == 0){
         auto background = g.getBackground();
         auto foreground = g.getForeground();
-        g.setBackground(background_);
-        g.setForeground(foreground_);
+        if(background_ != Color::Transparent)
+            g.setBackground(background_);
+        if(foreground_ != Color::Transparent)
+            g.setForeground(foreground_);
         height_ = 0;
         for (int i=0; i < items_.size(); ++i){
             items_[i]->draw(g, x, y + i, z);
