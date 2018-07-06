@@ -29,13 +29,18 @@ int main(int argc, char** argv)
 //    l = new Label("MessageBox: ");
 //    l -> set_margin(0);
 //    p.Add(l);
-//    p.Add(new MyMessageBox("I hope dsfsfsdfdsf"));
-//	MyMessageBox m("lalala");
-    CheckList radioBox;
-    radioBox.Add(new ListItem("Ligal"));
-    radioBox.Add(new ListItem("Chen"));
-    radioBox.Add(new ListItem("Lahmi"));
-    radioBox.Add(new ListItem("Shaked"));
+//    CheckList radioBox;
+//    radioBox.Add(new ListItem("Ligal"));
+//    radioBox.Add(new ListItem("Chen"));
+//    radioBox.Add(new ListItem("Lahmi"));
+//    radioBox.Add(new ListItem("Shaked"));
+//    p.Add(&radioBox);
+    CheckList check_list;
+    check_list.AddSelectedItem(new ListItem("shaked"));
+    check_list.AddSelectedItem(new ListItem("Ligal"));
+    check_list.AddSelectedItem(new ListItem("Chen"));
+    check_list.AddSelectedItem(new ListItem("Avi"));
+    check_list.RemoveSelectedItem(new ListItem("Avi"));
 	EventEngine e;
-	e.run(radioBox);
+	e.run(check_list);
 }
