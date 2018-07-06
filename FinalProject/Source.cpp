@@ -27,7 +27,11 @@ int main(int argc, char** argv)
     checkList.AddSelectedItem(new ListItem("Shaked"));
     p.Add(&checkList);
 
-    p.Add(new TextBox());
+    p.Add(new Label("this is a TextBos:"));
+    TextBox textBox;
+    textBox.set_margin(-1);
+    textBox.set_border(new OneLine);
+    p.Add(&textBox);
     EventEngine e;
 	e.run(p);
 }
