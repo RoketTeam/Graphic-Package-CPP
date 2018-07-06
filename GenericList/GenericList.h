@@ -1,4 +1,4 @@
-#include "../IComposite/IComposite.h"
+#include <vector>
 #include "../ListItem/ListItem.h"
 
 #pragma once
@@ -6,7 +6,7 @@
 using namespace std;
 
 
-class GenericList : public IComposite {
+class GenericList: public Control{
 
 public:
 
@@ -19,11 +19,13 @@ public:
     void KeyDown(int keyCode, char character);
     void MoveDown(int index, ListItem* current_item);
     void MoveUp(int index, ListItem* current_item);
+    // Methods
     void draw(Graphics& g, int x, int y, size_t z);
-    void action(IObservable* observable){}
     virtual int select();
+    bool RemoveSelectedItem(ListItem* item);
+    bool AddSelectedItem(ListItem* item);
 
 
-private:
-    int selected_index_;
+protected:
+    vector<ListItem*> items_;
 };

@@ -18,6 +18,30 @@ void GenericList::MousePressed(int x, int y, bool isLeft){
     }
 }
 
+bool GenericList::AddSelectedItem(ListItem *item) {
+    try{
+        items_.push_back(item);
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
+bool GenericList::RemoveSelectedItem(ListItem *item) {
+    for(int i = 0; i < items_.size(); i++){
+        if(items_[i]->get_text() == item->get_text())
+        {
+            try{
+                items_.erase(items_.begin()+i);
+                return true;
+            } catch (...){
+                return false;
+            }
+        }
+    }
+    return false;
+}
+
 int GenericList::select() {
     for (int i=0; i < items_.size(); ++i){
         ListItem* current_item = static_cast<ListItem*> (items_[i]);
