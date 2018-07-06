@@ -1,19 +1,24 @@
-#include "IComposite.h"
+#include "../GenericList/GenericList.h"
 
 #pragma once
 
 using namespace std;
 
 
-class RadioBox : public IComposite {
+class RadioBox : public GenericList {
 
-private:
-	// Atrributes
-public:
+	public:
 
-	// methods
+		RadioBox(){set_focus(*this);}
+		~RadioBox() {};
 
-	//D'tors
-	 ~RadioBox() {};
+		int select();
 
+
+        void SwitchCheckedItem();
+
+
+	private:
+		int selected_index_;
+		void DisselectOthers(int selected);
 };
