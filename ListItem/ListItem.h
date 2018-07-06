@@ -29,13 +29,14 @@ class ListItem : public Control {
 		bool is_focus() { return is_focused_; }
 		bool is_checked() { return is_checked_; }
 	    void draw(Graphics& g, int x, int y, size_t z);
-        void MarkAsUnchecked(){is_checked_ = false;};
-        void MarkAsChecked(){is_checked_ = true;}
+        void MarkAsUnchecked();
+        void MarkAsChecked();
+		bool CanGetFocus() { return true; };
 
         // Event handlers
         void MousePressed(int x, int y, bool isLeft);
         bool MouseHover(int x, int y, Graphics &g);
-        void KeyDown(int keyCode, char character){}
+        void KeyDown(int keyCode, char character);
 
 
 

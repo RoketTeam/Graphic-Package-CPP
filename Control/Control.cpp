@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Control* Control::focused_control = nullptr;
+Control* Control::focused_control_ = nullptr;
 
 Control::Control()
 {
@@ -53,4 +53,11 @@ void Control::FillBackground(short x, short y, int height, Graphics & g) {
         cout << Fill;
         cout << ' ';
     }
+}
+
+void Control::set_focus(Control& control) {
+    if(focused_control_)
+        focused_control_->unfocus();
+    focused_control_ = &control;
+    focused_control_->focus();
 }

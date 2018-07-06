@@ -7,8 +7,9 @@ GenericList::GenericList() {
 bool GenericList::MouseHover(int x, int y, Graphics &g) {
     bool redraw = false;
     for (auto list_item: items_){
-        if(list_item->MouseHover(x, y, g))
+        if(list_item->MouseHover(x, y, g)){
             redraw = true;
+        }
     }
     return redraw;
 }
@@ -19,6 +20,12 @@ void GenericList::MousePressed(int x, int y, bool isLeft){
         select();
     }
 }
+
+void GenericList::get_all_controls(vector<Control*>* controls){
+    for(auto list_item: items_)
+        controls->push_back(list_item);
+}
+
 
 bool GenericList::AddSelectedItem(ListItem *item) {
     try{
@@ -52,8 +59,9 @@ int GenericList::select() {
         if(current_item->is_focus()){
             if(current_item->is_checked())
                 current_item->MarkAsUnchecked();
-            else
+            else{
                 current_item->MarkAsChecked();
+            }
             return i;
         }
     }
@@ -121,6 +129,14 @@ void GenericList::MoveUp(int index, ListItem* current_item) {
     }
     return;
 }
+
+
+void GenericList::unfocus(){
+    for (auto list_item: items_){
+        list_item->unfocus();
+    }
+}
+
 
 void GenericList::KeyDown(int keyCode, char character) {
 

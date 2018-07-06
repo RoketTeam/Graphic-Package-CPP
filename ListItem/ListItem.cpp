@@ -15,17 +15,22 @@ ListItem::ListItem(string description):
 }
 
 void ListItem::focus() {
-    is_focused_ = true;
-    Color temp = background_;
-    background_ = foreground_;
-    foreground_ = temp;
+    if(!is_focused_){
+        is_focused_ = true;
+        Color temp = background_;
+        background_ = foreground_;
+        foreground_ = temp;
+        set_focus(*this);
+    }
 }
 
 void ListItem::unfocus() {
-    is_focused_ = false;
-    Color temp = background_;
-    background_ = foreground_;
-    foreground_ = temp;
+    if(is_focused_){
+        is_focused_ = false;
+        Color temp = background_;
+        background_ = foreground_;
+        foreground_ = temp;
+    }
 }
 
 bool ListItem::MouseHover(int x, int y, Graphics &g){
@@ -78,4 +83,23 @@ void ListItem::draw(Graphics &g, int x, int y, size_t z) {
     }
 }
 
+void ListItem::MarkAsUnchecked(){
+    is_checked_ = false;
+    set_focus(*this);
+}
+
+void ListItem::MarkAsChecked(){
+    is_checked_ = true;
+    set_focus(*this);
+}
+
+void ListItem::KeyDown(int keyCode, char character){
+    if (keyCode == VK_SPACE || keyCode == VK_RETURN) {
+        if(is_checked())
+            MarkAsUnchecked();
+        else
+            MarkAsChecked();
+        set_focus(*this);
+    }
+}
 

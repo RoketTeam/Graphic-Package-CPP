@@ -5,6 +5,4 @@
 #include <vector>
 
 class CheckList : public GenericList {
-
-
 };

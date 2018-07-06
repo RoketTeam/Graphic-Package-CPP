@@ -11,8 +11,8 @@ class Control
 	public:
 
         // Static methods
-        static Control* get_focus() { return focused_control; }
-        static void set_focus(Control& control) {focused_control = &control;}
+        static Control* get_focus() { return focused_control_; }
+        static void set_focus(Control& control);
 
         // C'tors & D'tors
         Control();
@@ -38,6 +38,8 @@ class Control
         virtual void draw(Graphics& g, int x, int y, size_t z){}
         virtual bool CanGetFocus() { return false; };
         void FillBackground(short x, short y, int height, Graphics & g);
+        virtual void focus(){}
+        virtual void unfocus(){}
 
         // Event handlers
         virtual void MousePressed(int x, int y, bool isLeft) {}
@@ -45,7 +47,7 @@ class Control
 		virtual void KeyDown(int keyCode, char character) {}
 
     protected:
-        static Control* focused_control;
+        static Control* focused_control_;
 
         short left_;	 	// top x
         short top_; 		// top y

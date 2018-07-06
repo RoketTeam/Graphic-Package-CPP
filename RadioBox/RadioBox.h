@@ -9,7 +9,7 @@ class RadioBox : public GenericList {
 
 	public:
 
-		RadioBox(){set_focus(*this);}
+		RadioBox(){}
 		~RadioBox() {};
 
 		int select();

@@ -26,14 +26,16 @@ class Panel : public IComposite {
         ~Panel() {};
 
         // Setters & Getters
-        static void set_focus(Control& control);
-        static Control* get_focus();
+        void set_focus(Control& control){Control::set_focus(control);}
+        Control* get_focus(){ return items_[focus_control_index_];}
         void get_all_controls(vector<Control*>* controls);
 
         // Methods
         void draw(Graphics& g, int x, int y, size_t z);
+        bool Add(Control* item);
 
-        // Event handler
+
+    // Event handler
         void MousePressed(int x, int y, bool isLeft);
         bool MouseHover(int x, int y, Graphics &g);
         void KeyDown(int keyCode, char character);
