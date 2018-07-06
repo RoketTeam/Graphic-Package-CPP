@@ -1,7 +1,6 @@
 #include "../GenericList/GenericList.h"
 
 GenericList::GenericList() {
-    set_focus(*this);
     height_ = 0;
 }
 

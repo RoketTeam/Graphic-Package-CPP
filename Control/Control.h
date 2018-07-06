@@ -36,7 +36,7 @@ class Control
 
         // Methods
         virtual void draw(Graphics& g, int x, int y, size_t z){}
-        virtual bool CanGetFocus() { return FALSE; };
+        virtual bool CanGetFocus() { return false; };
         void FillBackground(short x, short y, int height, Graphics & g);
 
         // Event handlers
