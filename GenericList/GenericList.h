@@ -24,6 +24,7 @@ public:
     virtual int select();
     bool RemoveSelectedItem(ListItem* item);
     bool AddSelectedItem(ListItem* item);
+    vector<string> get_value();
 
 
 protected:

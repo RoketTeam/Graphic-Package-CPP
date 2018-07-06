@@ -19,6 +19,7 @@ class Button : public IObservable, public Label
 		void set_clickable(bool clickable){clickable_ = clickable;}
 		string get_text();
 
+
 		// Methods
 		void draw(Graphics &g, int x, int y, size_t z);
 

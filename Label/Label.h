@@ -18,6 +18,7 @@ class Label : public Control
         void set_text(string text);
         void set_left(short left);
         void set_top(short top);
+        string get_value(){ return get_text();}
 
         string get_text();
 

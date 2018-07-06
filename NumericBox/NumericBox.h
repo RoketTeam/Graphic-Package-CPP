@@ -21,6 +21,7 @@ class NumericBox : public Control, public IListener
 		void set_value(int value);
 		int get_value();
 
+
 		// Methods
 		void inc();
 		void dec();

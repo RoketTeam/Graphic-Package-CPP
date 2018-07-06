@@ -60,6 +60,16 @@ int GenericList::select() {
     }
 }
 
+vector<string> GenericList::get_value(){
+    vector<string> value;
+    for (int i=0; i < items_.size(); ++i){
+        ListItem* current_item = items_[i];
+        if(current_item->is_checked())
+            value.push_back(current_item->get_text());
+    }
+    return value;
+}
+
 
 void GenericList::draw(Graphics& g, int x, int y, size_t z){
     if(z == 0){
