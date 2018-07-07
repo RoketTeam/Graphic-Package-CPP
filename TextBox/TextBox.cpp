@@ -18,23 +18,18 @@ TextBox::TextBox() :
 {};
 
 TextBox::TextBox(short left, short top, int length) :
-	Control(), length_(length), value_("")
+	Control(), value_("")
 {
-	if (length < 0) {
-		length_ = 0;
-	}
+	set_frame_size(length);
 	set_left(left);
 	set_top(top);
 };
 
 
 TextBox::TextBox(short left, short top, int length, string value) :
-	Control(), length_(length), value_(value)
+	Control(), value_(value)
 {
-	if (length < 0 || length < value.length()) {
-		length_ = value.length();
-	}
-
+	set_frame_size(length);
 	set_left(left);
 	set_top(top);
 	highlight_index_ = value.length();
@@ -150,6 +145,7 @@ void TextBox::MousePressed(int x, int y, bool isLeft) {
 	if (isLeft) {
 		set_highlight(x);
 	}
+	//if (isInside(x, y, value_.get_left(), value_.get_top(), value_.get_width(), value_.get_height())){}
 };
 
 
