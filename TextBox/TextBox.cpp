@@ -28,6 +28,7 @@ TextBox::TextBox(short left, short top, int length) :
     }
     set_left(left);
     set_top(top);
+    height_ = 3;
     is_focus_ = false;
 };
 
@@ -43,6 +44,7 @@ TextBox::TextBox(short left, short top, int length, string value) :
     set_top(top);
     highlight_index_ = value.length();
     is_focus_ = false;
+    height_ = 3;
 };
 
 
@@ -106,9 +108,10 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
             g.setForeground(foreground_);
         border_->drawBorder(left_, top_, length_ + 1, g);
         value_.draw(g, left_, top_, 0);
-
-        g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
-        g.setCursorVisibility(is_focus_);
+        if(is_focus_){
+            g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
+            g.setCursorVisibility(true);
+        }
         g.setBackground(background);
         g.setForeground(foreground);
     }
@@ -142,12 +145,14 @@ void TextBox::KeyDown(int keyCode, char character) {
 
 void TextBox::MousePressed(int x, int y, bool isLeft) {
     if(!Control::lock_events_){
-        x--;
-        y--;
-        if (isLeft) {
-            set_highlight(x);
+        if(isInside(x, y, left_, top_, width_, height_)){
+            x--;
+            y--;
+            if (isLeft) {
+                set_highlight(x);
+            }
+            set_focus(*this);
         }
-        set_focus(*this);
     }
 };
 

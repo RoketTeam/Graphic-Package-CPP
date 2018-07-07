@@ -23,7 +23,8 @@ class Button : public IObservable, public Label
 		// Methods
 		void draw(Graphics &g, int x, int y, size_t z);
 
-		// Event handlers
+
+	// Event handlers
 		void MousePressed(int x, int y, bool isLeft);
 		bool MouseHover(int x, int y, Graphics &g);
 
@@ -32,6 +33,7 @@ class Button : public IObservable, public Label
 
 		void hover(){is_hover_ = true;}
 		void unhover(){is_hover_ = false;}
+
 
 
 	protected:

@@ -13,7 +13,6 @@ using namespace std;
 
 class ListItem : public Control {
 
-
 	public:
 		// C'tors & D'tors
 		ListItem(string description);
@@ -41,7 +40,6 @@ class ListItem : public Control {
         void KeyDown(int keyCode, char character);
 
 
-
     private:
         // Atrributes
         Label description_label_;
@@ -49,7 +47,5 @@ class ListItem : public Control {
         bool is_checked_;
         bool is_focused_;
         Control* parent_;
-
-
 
 };

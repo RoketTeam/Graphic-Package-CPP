@@ -11,7 +11,7 @@ MyMessageBox::MyMessageBox(string message) :
     set_border(new OneLine());
     ok_.set_background(Color::Green);
     cancel_.set_background(Color::Red);
-    background_ = Color::Transparent;
+    background_ = Color::Blue;
     foreground_ = Color::Transparent;
     height_ = message_.get_height() + 4;
     width_ = ok_.get_width() + cancel_.get_width() + message_.get_text().length();
@@ -45,6 +45,8 @@ void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
         g.setBackground(background);
         g.setForeground(foreground);
         g.setCursorVisibility(false);
+    } else if(!is_visible_){
+        enable_events();
     }
 }
 
@@ -68,5 +70,6 @@ void MyMessageBox::action(IObservable *observable) {
     }
     else {
         is_visible_ = true;
+        lock_events();
     }
 }

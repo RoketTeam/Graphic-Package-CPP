@@ -48,6 +48,7 @@ void NumericBox::inc() {
         value_ += 1;
         text_value_.set_text(to_string(value_));
     }
+    set_focus(*this);
 }
 
 void NumericBox::dec() {
@@ -55,6 +56,7 @@ void NumericBox::dec() {
         value_ -= 1;
         text_value_.set_text(to_string(value_));
     }
+    set_focus(*this);
 }
 
 

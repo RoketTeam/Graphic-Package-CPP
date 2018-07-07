@@ -6,12 +6,7 @@
 int main(int argc, char** argv)
 {
 	Panel p;
-	Label* l = new Label("Im a Panel and I have: ");
-	l -> set_margin(0);
-	l ->set_margin_left(0);
-	p.Add(l);
-
-    l = new Label("NumericBox:");
+	Label* l = new Label("NumericBox:");
     l -> set_margin(0);
     p.Add(l);
     NumericBox* n = new NumericBox(0, 10);
