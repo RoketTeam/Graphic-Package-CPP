@@ -18,6 +18,7 @@ TextBox::TextBox() :
 {
     is_focus_ = false;
     height_ = 3;
+    width_ = length_ + 1;
 };
 
 TextBox::TextBox(short left, short top, int length) :
@@ -30,6 +31,7 @@ TextBox::TextBox(short left, short top, int length) :
     set_top(top);
     height_ = 3;
     is_focus_ = false;
+    width_ = length_ + 1;
 };
 
 
@@ -45,6 +47,7 @@ TextBox::TextBox(short left, short top, int length, string value) :
     highlight_index_ = value.length();
     is_focus_ = false;
     height_ = 3;
+    width_ = length_ + 1;
 };
 
 
@@ -61,8 +64,13 @@ void TextBox::set_top(short top) {
 void TextBox::set_frame_size(int length) {
     if (length < 0 || length < value_.get_text().length()) {
         length_ = value_.get_text().length();
+        width_ = length_ + 1;
     }
-    else length_ = length;
+    else
+    {
+        length_ = length;
+        width_ = length_ + 1;
+    }
 }
 
 void TextBox::set_highlight(int index) {
@@ -106,7 +114,8 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
             g.setBackground(background_);
         if (foreground_ != Color::Transparent)
             g.setForeground(foreground_);
-        border_->drawBorder(left_, top_, length_ + 1, g);
+        width_ = length_ + 1;
+        border_->drawBorder(left_, top_, width_, g);
         value_.draw(g, left_, top_, 0);
         if(is_focus_){
             g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
