@@ -32,6 +32,7 @@ void Label::draw(Graphics& g, int x, int y, size_t z) {
         top_ = y;
         left_ = x;
         width_ = text_.length() + 2;
+        height_ = 3;
         Color background = g.getBackground();
         Color foreground = g.getForeground();
         if(background_ != Color::Transparent)

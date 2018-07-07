@@ -23,8 +23,12 @@ class ListItem : public Control {
         short get_line_length() { return line_length_; }
         void set_parent(Control* parent){parent_ = parent;}
         Control* get_parent(){ return parent_;}
+        void set_checked_bullet_symbol(string bullet){checked_bullet_symbol_ = bullet;}
+        void set_unchecked_bullet_symbol(string bullet){unchecked_bullet_symbol_ = bullet;}
+        void set_clickable(bool clickable){is_clickable_ = clickable;}
 
-		// Methods
+
+    // Methods
 		void focus();
 		void unfocus();
 		bool is_focus() { return is_focused_; }
@@ -43,9 +47,12 @@ class ListItem : public Control {
     private:
         // Atrributes
         Label description_label_;
+        string checked_bullet_symbol_;
+        string unchecked_bullet_symbol_;
         short line_length_;
         bool is_checked_;
         bool is_focused_;
         Control* parent_;
+        bool is_clickable_;
 
 };

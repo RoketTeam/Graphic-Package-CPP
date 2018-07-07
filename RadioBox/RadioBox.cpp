@@ -2,13 +2,13 @@
 
 
 
-void RadioBox::SwitchCheckedItem() {
+int RadioBox::SwitchCheckedItem() {
     for (int i=0; i < items_.size(); ++i){
         ListItem* current_item = static_cast<ListItem*> (items_[i]);
         if(current_item->is_focus()){
             current_item->MarkAsChecked();
             DisselectOthers(i);
-            return;
+            return i;
         }
     }
 }

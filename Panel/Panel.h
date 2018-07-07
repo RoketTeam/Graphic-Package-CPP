@@ -12,6 +12,7 @@
 #include "../GenericList/GenericList.h"
 #include "../CheckList/CheckList.h"
 #include "../TextBox/TextBox.h"
+#include "../ComboBox/ComboBox.h"
 
 using namespace std;
 

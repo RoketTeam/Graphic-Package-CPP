@@ -15,10 +15,10 @@ class RadioBox : public GenericList {
 		int select();
 
 
-        void SwitchCheckedItem();
+        int SwitchCheckedItem();
 
 
-	private:
+	protected:
 		int selected_index_;
 		void DisselectOthers(int selected);
 };

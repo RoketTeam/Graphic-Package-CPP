@@ -12,11 +12,14 @@ ListItem::ListItem(string description):
     height_ = 1;
     border_ = new NoneBorder();
     foreground_ = Color::White;
+    checked_bullet_symbol_ = "[X] ";
+    unchecked_bullet_symbol_ = "[ ] ";
     parent_ = nullptr;
+    is_clickable_ = true;
 }
 
 void ListItem::focus() {
-    if(!is_focused_){
+    if(!is_focused_ && is_clickable_){
         is_focused_ = true;
         Color temp = background_;
         background_ = foreground_;
@@ -25,7 +28,7 @@ void ListItem::focus() {
 }
 
 void ListItem::unfocus() {
-    if(is_focused_){
+    if(is_focused_ && is_clickable_){
         Color temp = background_;
         background_ = foreground_;
         foreground_ = temp;
@@ -37,9 +40,11 @@ void ListItem::unfocus() {
 bool ListItem::MouseHover(int x, int y, Graphics &g){
     bool redraw = false;
     if (isInside(x-1, y - 1, left_, top_, width_, height_)){
-        if(!is_focused_){
+        if(!is_focused_ && is_clickable_){
             focus();
             redraw = true;
+        } else {
+            redraw = false;
         }
     }
     else if (is_focused_) {
@@ -50,7 +55,7 @@ bool ListItem::MouseHover(int x, int y, Graphics &g){
 }
 
 void ListItem::MousePressed(int x, int y, bool isLeft) {
-    if (is_checked_)
+    if (is_checked_ && is_clickable_)
         MarkAsUnchecked();
     else
         MarkAsChecked();
@@ -75,9 +80,9 @@ void ListItem::draw(Graphics &g, int x, int y, size_t z) {
         border_->drawBorder(x, y, width_ - 2, g);
         string line;
         if (is_checked_)
-            line = "[X] " + description_label_.get_text();
+            line = checked_bullet_symbol_ + description_label_.get_text();
         else
-            line = "[ ] " + description_label_.get_text();
+            line = unchecked_bullet_symbol_ + description_label_.get_text();
         g.write(x+ 1, y + 1, line);
         g.setBackground(background);
         g.setForeground(foreground);
