@@ -92,16 +92,14 @@ void ListItem::draw(Graphics &g, int x, int y, size_t z) {
 
 void ListItem::MarkAsUnchecked(){
     is_checked_ = false;
-    set_focus(*this);
 }
 
 void ListItem::MarkAsChecked(){
     is_checked_ = true;
-    set_focus(*this);
 }
 
 void ListItem::KeyDown(int keyCode, char character){
-    if (keyCode == VK_SPACE || keyCode == VK_RETURN) {
+    if (!parent_ && (keyCode == VK_SPACE || keyCode == VK_RETURN)) {
         if(is_checked())
             MarkAsUnchecked();
         else
