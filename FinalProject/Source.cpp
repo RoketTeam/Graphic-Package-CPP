@@ -3,57 +3,84 @@
 #include "../Panel/Panel.h"
 
 
+class Form: public Panel {
+    private:
+        Label* label;
+        NumericBox numericBox;
+        ComboBox comboBox;
+        CheckList checkList;
+        RadioBox radioBox;
+        TextBox textBox;
+        Button submit;
+
+    public:
+        Form(){
+            label = new Label("~~~~~~ THIS IS AN AWESOME FORM! ~~~~~~");
+            label->set_margin(0);
+            Add(label);
+
+            label = new Label("How many cofee cups are you drinking in a day?");
+            label->set_margin(0);
+            Add(label);
+            numericBox.set_margin(3);
+            Add(&numericBox);
+
+            label = new Label("Choose your favorite cofee company: ");
+            label->set_margin(0);
+            Add(label);
+
+            comboBox.AddSelectedItem(new ListItem("Elite"));
+            comboBox.AddSelectedItem(new ListItem("Jacobs"));
+            comboBox.AddSelectedItem(new ListItem("TesterChoice"));
+            comboBox.set_margin(3);
+            Add(&comboBox);
+
+            label = new Label("Choose your cofee Type: ");
+            label->set_margin(0);
+            Add(label);
+
+            checkList.AddSelectedItem(new ListItem("Black"));
+            checkList.AddSelectedItem(new ListItem("Espresso"));
+            checkList.AddSelectedItem(new ListItem("Espresso with milk"));
+            checkList.AddSelectedItem(new ListItem("Americano"));
+            checkList.set_margin(3);
+            Add(&checkList);
+
+            label = new Label("When do you like to drink your cofee? ");
+            label->set_margin(0);
+            Add(label);
+
+            radioBox.AddSelectedItem(new ListItem("8AM"));
+            radioBox.AddSelectedItem(new ListItem("10AM"));
+            radioBox.AddSelectedItem(new ListItem("4PM"));
+            radioBox.AddSelectedItem(new ListItem("All answers is right"));
+            radioBox.set_margin(3);
+            Add(&radioBox);
+
+            label = new Label("Anything else? ");
+            label->set_margin(0);
+            Add(label);
+            textBox.set_border(new OneLine);
+            textBox.set_margin(2);
+            Add(&textBox);
+
+            submit.set_text("Submit");
+            submit.set_margin_left(6);
+            submit.add(this);
+            Add(&submit);
+        }
+
+        void action(IObservable* observable){
+            MyMessageBox* m = new MyMessageBox("Are you sure?");
+            Add(m);
+        }
+
+};
+
+
 int main(int argc, char** argv)
 {
-	Panel p;
-	Label* l = new Label("NumericBox:");
-    l -> set_margin(0);
-    p.Add(l);
-    NumericBox* n = new NumericBox(0, 10);
-    n->set_margin(4);
-	p.Add(n);
-
-    l = new Label("ComboBox: ");
-    l -> set_margin(0);
-    p.Add(l);
-    ComboBox* comboBox = new ComboBox;
-    comboBox->AddSelectedItem(new ListItem("avi"));
-    comboBox->AddSelectedItem(new ListItem("shaked"));
-    p.Add(comboBox);
-
-    l = new Label("CheckList: ");
-    l -> set_margin(0);
-    p.Add(l);
-    CheckList checkList;
-    checkList.AddSelectedItem(new ListItem("Ligal"));
-    checkList.AddSelectedItem(new ListItem("Chen"));
-    checkList.AddSelectedItem(new ListItem("Lahmi"));
-    checkList.AddSelectedItem(new ListItem("Shaked"));
-    checkList.set_margin(1);
-    p.Add(&checkList);
-
-    l = new Label("RadioBox: ");
-    l -> set_margin(0);
-    p.Add(l);
-    RadioBox radioBox;
-    radioBox.AddSelectedItem(new ListItem("Dubi"));
-    radioBox.AddSelectedItem(new ListItem("Estie"));
-    radioBox.AddSelectedItem(new ListItem("Shimi"));
-    radioBox.AddSelectedItem(new ListItem("Sansa"));
-    radioBox.set_margin(1);
-    p.Add(&radioBox);
-
-    p.Add(new Label("this is a TextBox:"));
-    TextBox textBox;
-    textBox.set_margin(0);
-    textBox.set_margin_left(0);
-    textBox.set_border(new OneLine);
-    p.Add(&textBox);
-    Button b("Submit");
-    b.set_margin(-1);
-    b.set_margin_left(8);
-    b.add(&p);
-    p.Add(&b);
+	Form cofee_form;
     EventEngine e;
-	e.run(p);
+	e.run(cofee_form);
 }
