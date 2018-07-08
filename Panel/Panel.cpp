@@ -5,7 +5,7 @@ using namespace std;
 
 
 Panel::Panel() {
-    background_ = Color::Cyan;
+    background_ = Color::Black;
     foreground_ = Color::White;
     set_border(new DoubleLine());
 }
