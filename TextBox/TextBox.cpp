@@ -93,7 +93,7 @@ void TextBox::add_char(int x, char ch) {
 
 void TextBox::delete_char() {
     if (value_.get_text().length() > 0) {
-        value_.set_text(value_.get_text().erase(highlight_index_, 1));
+        value_.set_text(value_.get_text().erase(highlight_index_ - 1, 2));
         set_highlight(highlight_index_ - 1);
     }
 }
