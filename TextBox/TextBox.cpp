@@ -117,19 +117,19 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
         width_ = length_ + 1;
         border_->drawBorder(left_, top_, width_, g);
         value_.draw(g, left_, top_, 0);
-        if(is_focus_){
-            g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
-            g.setCursorVisibility(true);
-        }
         g.setBackground(background);
         g.setForeground(foreground);
+    }
+    if(z == 4 & is_focus_){
+        g.moveTo(left_ + highlight_index_ + 1, top_ + 1);
+        g.setCursorVisibility(true);
     }
 }
 
 
 
 void TextBox::KeyDown(int keyCode, char character) {
-    if(!Control::lock_events_) {
+    if(!Control::lock_events_ && is_focus_) {
         if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
             add_char(0, character);
         }
@@ -161,7 +161,8 @@ void TextBox::MousePressed(int x, int y, bool isLeft) {
                 set_highlight(x);
             }
             set_focus(*this);
-        }
+        } else
+            is_focus_ = false;
     }
 };
 
