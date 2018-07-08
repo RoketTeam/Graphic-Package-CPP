@@ -23,6 +23,7 @@ class ListItem : public Control {
         short get_line_length() { return line_length_; }
         void set_parent(Control* parent){parent_ = parent;}
         Control* get_parent(){ return parent_;}
+        void set_width(int width){width_ = width;}
         void set_checked_bullet_symbol(string bullet){checked_bullet_symbol_ = bullet;}
         void set_unchecked_bullet_symbol(string bullet){unchecked_bullet_symbol_ = bullet;}
         void set_clickable(bool clickable){is_clickable_ = clickable;}
