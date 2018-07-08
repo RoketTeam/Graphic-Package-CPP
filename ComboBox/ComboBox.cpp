@@ -18,10 +18,13 @@ ComboBox::ComboBox():toggle_list_("V"){
 
 void ComboBox::CalculateHeight() {
     height_ = 3;
-    for(int i = 0; i < items_.size(); i ++){
-        auto item = items_[i];
-        height_ += (2 + items_[i]->get_margin());
+    if(is_open()){
+        for(int i = 0; i < items_.size(); i ++){
+            auto item = items_[i];
+            height_ += (3 + items_[i]->get_margin());
+        }
     }
+
 }
 
 void ComboBox::CalculateWidth() {
@@ -34,7 +37,7 @@ void ComboBox::CalculateWidth() {
 }
 
 void ComboBox::draw(Graphics& g, int x, int y, size_t z){
-    if(z == 0){
+    if(z == 2){
         top_ = y;
         left_ = x;
         auto background = g.getBackground();
@@ -46,16 +49,19 @@ void ComboBox::draw(Graphics& g, int x, int y, size_t z){
         set_border(new OneLine);
         border_->drawBorder(x, y, width_, g, 3);
         if(is_open()){
-            CalculateHeight();
             toggle_list_.set_text("^");
             toggle_list_.draw(g, x, y, 0);
-            items_[0]->draw(g, x + toggle_list_.get_width(), y, 0);
+            items_[0]->draw(g, x + toggle_list_.get_width(), y, z);
             for (int i=1; i < items_.size(); ++i){
-                items_[i]->set_unchecked_bullet_symbol("");
-                items_[i]->set_checked_bullet_symbol("");
-                items_[i]->set_clickable(true);
-                items_[i]->draw(g, x + toggle_list_.get_width() + 1, y + i + 1, 0);
+                auto item = items_[i];
+                item->set_unchecked_bullet_symbol("");
+                item->set_checked_bullet_symbol("");
+                item->set_clickable(true);
+                item->set_width(items_[0]->get_width());
+                item->set_border(new OneLine);
+                item->draw(g, x + toggle_list_.get_width() - 1, y + i*3, 0);
             }
+
         } else{
             toggle_list_.set_text("v");
             toggle_list_.draw(g, x, y, 0);
@@ -81,19 +87,19 @@ void ComboBox::action(IObservable* observable){
 
 
 void ComboBox::MousePressed(int x, int y, bool isLeft) {
-    if(!Control::lock_events_){
-        if(isInside(x, y, left_, top_, width_, height_)){
-            if(is_open()){
-                for(int i=0; i< items_.size(); ++i){
-                    if(items_[i]->is_focus()){
-                        selected_index_ = i;
-                    }
-                }
-                close();
-            } else {
-                open();
-            }
+    CalculateHeight();
+    if(isInside(x, y, left_, top_, width_, height_)){
+        if(is_open()){
+            for(int i=0; i< items_.size(); ++i)
+                if(items_[i]->is_focus())
+                    selected_index_ = i;
+            close();
+            CalculateHeight();
         }
+        else
+            open();
+
     }
 };
+
 
