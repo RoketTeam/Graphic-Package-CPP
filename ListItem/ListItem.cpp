@@ -62,31 +62,32 @@ void ListItem::MousePressed(int x, int y, bool isLeft) {
 }
 
 void ListItem::draw(Graphics &g, int x, int y, size_t z) {
-    if (z == 0) {
-        top_ = y;
-        left_ = x;
-        width_ = description_label_.get_text().length() + 6;
-        height_ = 1;
-        auto background = g.getBackground();
-        auto foreground = g.getForeground();
-        if(background_ != Color::Transparent)
-            g.setBackground(background_);
-        else
-            background_ = background;
-        if(foreground_ != Color::Transparent)
-            g.setForeground(foreground_);
-        else
-            foreground_ = foreground;
-        border_->drawBorder(x, y, width_ - 2, g);
-        string line;
-        if (is_checked_)
-            line = checked_bullet_symbol_ + description_label_.get_text();
-        else
-            line = unchecked_bullet_symbol_ + description_label_.get_text();
-        g.write(x+ 1, y + 1, line);
-        g.setBackground(background);
-        g.setForeground(foreground);
-    }
+    top_ = y;
+    left_ = x;
+    auto temp_width = description_label_.get_text().length() + 6;
+    if(width_ < temp_width)
+        width_ = temp_width;
+    height_ = 1;
+    auto background = g.getBackground();
+    auto foreground = g.getForeground();
+    if(background_ != Color::Transparent)
+        g.setBackground(background_);
+    else
+        background_ = background;
+    if(foreground_ != Color::Transparent)
+        g.setForeground(foreground_);
+    else
+        foreground_ = foreground;
+    border_->drawBorder(x, y, width_ - 2, g);
+    string line;
+    if (is_checked_)
+        line = checked_bullet_symbol_ + description_label_.get_text();
+    else
+        line = unchecked_bullet_symbol_ + description_label_.get_text();
+    g.write(x+ 1, y + 1, line);
+    g.setBackground(background);
+    g.setForeground(foreground);
+
 }
 
 void ListItem::MarkAsUnchecked(){
