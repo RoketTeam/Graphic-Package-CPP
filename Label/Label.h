@@ -12,6 +12,7 @@ class Label : public Control
 
 		//  C'tors & D'tors
         Label(string text);
+		Label();
         ~Label();
 
         // Setters & Getters

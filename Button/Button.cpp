@@ -15,6 +15,16 @@ Button::Button(string text):
     set_margin(0);
 }
 
+Button::Button():
+        Label()
+{
+    set_border(new OneLine());
+    is_hover_ = false;
+    set_clickable(true);
+    set_margin(0);
+}
+
+
 void Button::MousePressed(int x, int y, bool isLeft) {
     if(is_clickable())
         if(isLeft && isInside(x, y, get_left(), get_top(), get_width(), get_height()))

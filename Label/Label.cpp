@@ -11,6 +11,15 @@ Label::Label(string text) :
 };
 
 
+Label::Label() :
+        Control(), text_("")
+{
+    width_ = text_.length() + 2;
+    height_ = 3;
+};
+
+
+
 void Label::set_left(short left) {
     left_ = left;
 }

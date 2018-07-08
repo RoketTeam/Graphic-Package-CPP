@@ -13,6 +13,7 @@ class Button : public IObservable, public Label
 	public:
 		// C'tors & D'tors
 		Button(string text);
+		Button();
 		~Button();
 
 		// Setters & Getters

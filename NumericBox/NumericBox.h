@@ -12,6 +12,7 @@ class NumericBox : public Control, public IListener
 	public:
 		// C'tors & D'tors
 		NumericBox(int min_value, int max_value);
+		NumericBox();
 		~NumericBox() {};
 
 

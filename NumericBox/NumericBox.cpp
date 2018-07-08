@@ -17,6 +17,18 @@ NumericBox::NumericBox(int min_value, int max_value):
     dec_.add(this);
 }
 
+NumericBox::NumericBox():
+        min_value_(0),
+        max_value_(10),
+        inc_("+"),
+        dec_("-"),
+        value_(0),
+        text_value_(to_string(0))
+{
+    inc_.add(this);
+    dec_.add(this);
+}
+
 
 void NumericBox::set_min_value(int value) {
     min_value_ = value;
