@@ -91,6 +91,5 @@ void Panel::get_all_controls(vector<Control*>* controls){
 }
 
 void Panel::action(IObservable* observable){
-    MyMessageBox* m = new MyMessageBox("Are you sure?");
-    Add(m);
+
 }

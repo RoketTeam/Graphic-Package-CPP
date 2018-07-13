@@ -21,6 +21,7 @@ public:
 	void MousePressed(int x, int y, bool isLeft);
 	void CalculateWidth();
 	void CalculateHeight();
+	string get_value();
 	//D'tors
 	ComboBox();
 	~ComboBox() {};

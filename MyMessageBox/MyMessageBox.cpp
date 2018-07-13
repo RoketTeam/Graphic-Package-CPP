@@ -6,6 +6,7 @@
 MyMessageBox::MyMessageBox(string message) :
         ok_("OK"),
         cancel_("CANCEL"),
+        value_(""),
         message_(message)
 {
     set_border(new OneLine());
@@ -26,7 +27,7 @@ MyMessageBox::MyMessageBox(string message) :
 
 void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
     if(is_visible_ && z == 3){
-        lock_events();
+        Control::lock_events();
         x = 1;
         y = 4;
         auto background = g.getBackground();
@@ -46,7 +47,7 @@ void MyMessageBox::draw(Graphics& g, int x, int y, size_t z){
         g.setForeground(foreground);
         g.setCursorVisibility(false);
     } else if(!is_visible_){
-        enable_events();
+        Control::enable_events();
     }
 }
 
@@ -60,16 +61,32 @@ void MyMessageBox::MousePressed(int x, int y, bool isLeft) {
     cancel_.MousePressed(x, y, isLeft);
 };
 
+void MyMessageBox::ok_pressed(){
+    value_ = "OK";
+}
+
+void MyMessageBox::cancel_pressed(){
+    value_ = "CANCEL";
+}
+
 void MyMessageBox::action(IObservable *observable) {
-    // TODO: Check who is pressed and handle it
     if(is_visible_){
         is_visible_ = false;
         ok_.set_clickable(false);
         cancel_.set_clickable(false);
+        Button* pressed_button = static_cast<Button*> (observable);
+        if(pressed_button && !ok_.get_text().compare(pressed_button->get_text())){
+            ok_pressed();
+        } else if (pressed_button && !cancel_.get_text().compare(pressed_button->get_text())) {
+            cancel_pressed();
+        }
         enable_events();
+        notify();
     }
     else {
         is_visible_ = true;
         lock_events();
     }
+
+
 }

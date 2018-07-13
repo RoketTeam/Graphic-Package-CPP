@@ -76,6 +76,10 @@ void ComboBox::draw(Graphics& g, int x, int y, size_t z){
     }
 }
 
+string ComboBox::get_value(){
+    return items_[selected_index_]->get_text();
+}
+
 
 void ComboBox::action(IObservable* observable){
     if(is_open()){

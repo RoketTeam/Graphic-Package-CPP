@@ -17,6 +17,7 @@ class Form: public Panel {
         Form(){
             label = new Label("~~~~~~ THIS IS AN AWESOME FORM! ~~~~~~");
             label->set_margin(0);
+            label->set_margin_left(4);
             Add(label);
 
             label = new Label("How many cofee cups are you drinking in a day?");
@@ -65,14 +66,60 @@ class Form: public Panel {
             Add(&textBox);
 
             submit.set_text("Submit");
-            submit.set_margin_left(6);
+            submit.set_margin_left(9);
             submit.add(this);
             Add(&submit);
         }
 
+        void Submit(){
+            Label* numericBox_value = new Label(to_string(numericBox.get_value()));
+            Label* comboBox_value = new Label(comboBox.get_value());
+            vector<string> checkList_value = checkList.get_value();
+            vector<string> radioBox_value = radioBox.get_value();
+            Label* textBox_value = new Label(textBox.get_value());
+            items_.clear();
+            label = new Label("You Choose cofee cups:");
+            label->set_margin(0);
+            Add(label);
+            Add(numericBox_value);
+
+            label = new Label("Your favorite cofee company: ");
+            label->set_margin(0);
+            Add(label);
+            Add(comboBox_value);
+
+            label = new Label("Your cofee Type: ");
+            label->set_margin(0);
+            Add(label);
+
+            for (auto select : checkList_value)
+                Add(new Label(select));
+
+            label = new Label("You like to drink your cofee at: ");
+            label->set_margin(0);
+            Add(label);
+
+            for (auto select : radioBox_value)
+                Add(new Label(select));
+
+            label = new Label("Your free text: ");
+            label->set_margin(0);
+            Add(label);
+            Add(textBox_value);
+        }
+
         void action(IObservable* observable){
-            MyMessageBox* m = new MyMessageBox("Are you sure?");
-            Add(m);
+            Button* submit = dynamic_cast<Button*> (observable);
+            MyMessageBox* messagebox = dynamic_cast<MyMessageBox*> (observable);
+            if(submit && !submit->get_text().compare("Submit")){
+                MyMessageBox* m = new MyMessageBox("Are you sure?");
+                m->add(this);
+                Add(m);
+                return;
+            }
+            if(messagebox && !messagebox->get_value().compare("OK")){
+                Submit();
+            }
         }
 
 };

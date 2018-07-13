@@ -28,6 +28,7 @@ public:
 	void set_left(short left);
 	void set_top(short top);
 	void set_frame_size(int length);
+	string get_value(){ return value_.get_value();}
 
 	// methods
 	void add_char(int x, char ch);
