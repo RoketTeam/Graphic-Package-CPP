@@ -40,8 +40,7 @@ void EventEngine::run(Control &c)
 					if (code == VK_TAB)
 						moveFocus(c, f);
 					else
-						f->KeyDown(code, chr);
-					redraw = true;
+						redraw = f->KeyDown(code, chr);
 				}
 				break;
 			}
@@ -54,8 +53,7 @@ void EventEngine::run(Control &c)
 				auto y = coord.Y - c.get_top();
 				if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
 				{
-					c.MousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
-					redraw = true;
+					redraw = c.MousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
 				} else if(event == MOUSE_MOVED) {
                     redraw = c.MouseHover(x, y, _graphics);
                 }

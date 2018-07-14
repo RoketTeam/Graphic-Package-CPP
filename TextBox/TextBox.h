@@ -40,8 +40,8 @@ public:
 	void unfocus(){is_focus_ = false;}
 
 	//Handler
-	void KeyDown(int keyCode, char character);
-	void MousePressed(int x, int y, bool isLeft);
+	bool KeyDown(int keyCode, char character);
+	bool MousePressed(int x, int y, bool isLeft);
 	bool MouseHover(int x, int y, Graphics &g);
 
 

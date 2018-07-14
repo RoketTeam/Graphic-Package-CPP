@@ -128,8 +128,10 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
 
 
 
-void TextBox::KeyDown(int keyCode, char character) {
+bool TextBox::KeyDown(int keyCode, char character) {
+	bool result = false;
     if(!Control::lock_events_ && is_focus_) {
+		result = true;
         if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
             add_char(0, character);
         }
@@ -149,10 +151,12 @@ void TextBox::KeyDown(int keyCode, char character) {
                 set_highlight(highlight_index_ + 1);
             }
         }
+		else { result = false; }
     }
+	return result;
 }
 
-void TextBox::MousePressed(int x, int y, bool isLeft) {
+bool TextBox::MousePressed(int x, int y, bool isLeft) {
     if(!Control::lock_events_){
         if(isInside(x, y, left_, top_, width_, height_)){
             x--;
@@ -164,6 +168,7 @@ void TextBox::MousePressed(int x, int y, bool isLeft) {
         } else
             is_focus_ = false;
     }
+	return is_focus_;
 };
 
 

@@ -45,6 +45,7 @@ bool Panel::Add(Control *item) {
     IComposite::Add(item);
     if ((!Control::get_focus()) && item->CanGetFocus())
         Control::set_focus(*item);
+	return true;
 }
 
 void Panel::CalculateHeight() {
@@ -65,10 +66,14 @@ void Panel::CalculateWidth() {
     }
 }
 
-void Panel::MousePressed(int x, int y, bool isLeft){
+bool Panel::MousePressed(int x, int y, bool isLeft){
+	bool result = false;
     for(int i = 0; i < items_.size(); i ++){
-        items_[i]->MousePressed(x, y, isLeft);
+		if (items_[i]->MousePressed(x, y, isLeft)) {
+			result = true;
+		}
     }
+	return result;
 }
 
 bool Panel::MouseHover(int x, int y, Graphics &g){
@@ -77,10 +82,10 @@ bool Panel::MouseHover(int x, int y, Graphics &g){
         if(items_[i]->MouseHover(x, y, g))
             redraw = true;
     }
-    return redraw;
+	return redraw;
 }
-void Panel::KeyDown(int keyCode, char character){
-    get_focus()->KeyDown(keyCode, character);
+bool Panel::KeyDown(int keyCode, char character){
+   return get_focus()->KeyDown(keyCode, character);
 }
 void Panel::get_all_controls(vector<Control*>* controls){
     for(auto control: items_){

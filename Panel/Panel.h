@@ -37,9 +37,9 @@ class Panel : public IComposite {
 
 
     // Event handler
-        void MousePressed(int x, int y, bool isLeft);
+		bool MousePressed(int x, int y, bool isLeft);
         bool MouseHover(int x, int y, Graphics &g);
-        void KeyDown(int keyCode, char character);
+		bool KeyDown(int keyCode, char character);
         void action(IObservable* observable);
         void CalculateHeight();
         void CalculateWidth();

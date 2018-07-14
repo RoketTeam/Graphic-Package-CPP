@@ -54,11 +54,12 @@ bool ListItem::MouseHover(int x, int y, Graphics &g){
     return redraw;
 }
 
-void ListItem::MousePressed(int x, int y, bool isLeft) {
+bool ListItem::MousePressed(int x, int y, bool isLeft) {
     if (is_checked_ && is_clickable_)
         MarkAsUnchecked();
     else
         MarkAsChecked();
+	return true;
 }
 
 void ListItem::draw(Graphics &g, int x, int y, size_t z) {
@@ -98,14 +99,15 @@ void ListItem::MarkAsChecked(){
     is_checked_ = true;
 }
 
-void ListItem::KeyDown(int keyCode, char character){
+bool ListItem::KeyDown(int keyCode, char character){
     if (!parent_ && (keyCode == VK_SPACE || keyCode == VK_RETURN)) {
         if(is_checked())
             MarkAsUnchecked();
         else
             MarkAsChecked();
+		return true;
     }
     else
-        parent_->KeyDown(keyCode, character);
+        return parent_->KeyDown(keyCode, character);
 }
 

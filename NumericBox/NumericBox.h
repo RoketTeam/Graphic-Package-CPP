@@ -30,7 +30,7 @@ class NumericBox : public Control, public IListener
 
 		// Event handlers
 		void action(IObservable* iObservable);
-		void MousePressed(int x, int y, bool isLeft);
+		bool MousePressed(int x, int y, bool isLeft);
 		bool MouseHover(int x, int y, Graphics &g);
 
 

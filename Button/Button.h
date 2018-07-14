@@ -26,7 +26,7 @@ class Button : public IObservable, public Label
 
 
 	// Event handlers
-		void MousePressed(int x, int y, bool isLeft);
+		bool MousePressed(int x, int y, bool isLeft);
 		bool MouseHover(int x, int y, Graphics &g);
 
 		bool is_hover(){ return is_hover_;}

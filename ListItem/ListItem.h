@@ -40,9 +40,9 @@ class ListItem : public Control {
 		bool CanGetFocus() { return true; };
 
         // Event handlers
-        void MousePressed(int x, int y, bool isLeft);
+		bool MousePressed(int x, int y, bool isLeft);
         bool MouseHover(int x, int y, Graphics &g);
-        void KeyDown(int keyCode, char character);
+		bool KeyDown(int keyCode, char character);
 
 
     private:

@@ -14,9 +14,9 @@ public:
     ~GenericList(){}
 
     // Event handlers
-    virtual void MousePressed(int x, int y, bool isLeft);
+    virtual bool MousePressed(int x, int y, bool isLeft);
     virtual bool MouseHover(int x, int y, Graphics &g);
-    virtual void KeyDown(int keyCode, char character);
+    virtual bool KeyDown(int keyCode, char character);
     virtual void MoveDown(int index, ListItem* current_item);
     virtual void MoveUp(int index, ListItem* current_item);
 

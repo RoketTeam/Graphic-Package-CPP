@@ -90,7 +90,7 @@ void ComboBox::action(IObservable* observable){
 }
 
 
-void ComboBox::MousePressed(int x, int y, bool isLeft) {
+bool ComboBox::MousePressed(int x, int y, bool isLeft) {
     CalculateHeight();
     if(isInside(x, y, left_, top_, width_, height_)){
         if(is_open()){
@@ -102,8 +102,29 @@ void ComboBox::MousePressed(int x, int y, bool isLeft) {
         }
         else
             open();
-
+		return true;
     }
+	return false;
+}
+
+
+bool ComboBox::KeyDown(int keyCode, char character) {
+	bool result = false;
+	if (!Control::lock_events_ ) { 
+
+		result = GenericList::KeyDown(keyCode, character);
+	    if (keyCode == VK_RETURN) {
+			if (is_open()) {
+				for (int i = 0; i< items_.size(); ++i)
+					if (items_[i]->is_focus())
+						selected_index_ = i;
+				close();
+				CalculateHeight();
+			}
+			else
+				open();
+		}
+		
+	}
+	return result;
 };
-
-
