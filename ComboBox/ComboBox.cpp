@@ -102,10 +102,12 @@ bool ComboBox::MousePressed(int x, int y, bool isLeft) {
         }
         else
             open();
+        return true;
 
     } else if (is_open()){
         close();
         CalculateHeight();
+        return true;
     }
 	return false;
 }
