@@ -28,7 +28,7 @@ class MyMessageBox : public Control, public IListener, public IObservable
 		void draw(Graphics& g, int x, int y, size_t z);
 
 		// Event handler
-		void MousePressed(int x, int y, bool isLeft);
+		bool MousePressed(int x, int y, bool isLeft);
         bool MouseHover(int x, int y, Graphics &g);
         void action(IObservable* observable);
 		virtual void ok_pressed();

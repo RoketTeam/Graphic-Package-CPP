@@ -14,9 +14,9 @@ public:
     ~GenericList(){}
 
     // Event handlers
-    virtual void MousePressed(int x, int y, bool isLeft);
+    virtual bool MousePressed(int x, int y, bool isLeft);
     virtual bool MouseHover(int x, int y, Graphics &g);
-    virtual void KeyDown(int keyCode, char character);
+    virtual bool KeyDown(int keyCode, char character);
     virtual void MoveDown(int index, ListItem* current_item);
     virtual void MoveUp(int index, ListItem* current_item);
 
@@ -29,7 +29,7 @@ public:
     bool RemoveSelectedItem(ListItem* item);
     bool AddSelectedItem(ListItem* item);
     vector<string> get_value();
-    bool CanGetFocus() { return true; };
+    bool CanGetFocus() { return false; };
 
 protected:
     vector<ListItem*> items_;

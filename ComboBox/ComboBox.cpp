@@ -2,6 +2,7 @@
 
 ComboBox::ComboBox():toggle_list_("V"){
     ListItem* default_item = new ListItem("Choose an item from the list");
+    default_item->CanGetFocus(false);
     default_item->set_clickable(false);
     default_item->set_checked_bullet_symbol("");
     default_item->set_unchecked_bullet_symbol("");
@@ -13,6 +14,11 @@ ComboBox::ComboBox():toggle_list_("V"){
     is_open_  = false;
     set_margin(0);
     set_margin_left(0);
+}
+
+bool ComboBox::AddSelectedItem(ListItem* item){
+    item->CanGetFocus(false);
+    return RadioBox::AddSelectedItem(item);
 }
 
 
@@ -90,7 +96,7 @@ void ComboBox::action(IObservable* observable){
 }
 
 
-void ComboBox::MousePressed(int x, int y, bool isLeft) {
+bool ComboBox::MousePressed(int x, int y, bool isLeft) {
     CalculateHeight();
     if(isInside(x, y, left_, top_, width_, height_)){
         if(is_open()){
@@ -99,11 +105,36 @@ void ComboBox::MousePressed(int x, int y, bool isLeft) {
                     selected_index_ = i;
             close();
             CalculateHeight();
+            return true;
         }
-        else
+        else {
             open();
+            set_focus(*this);
+            return true;
+        }
 
+    } else if (is_open()){
+        close();
+        CalculateHeight();
+        return true;
     }
+    return false;
+
 };
 
-
+bool ComboBox::KeyDown(int keyCode, char character) {
+    if (is_open()){
+        //Space or Return key pressed
+        if (keyCode == VK_SPACE || keyCode == VK_RETURN) {
+            for(int i=0; i< items_.size(); ++i)
+                if(items_[i]->is_focus())
+                    selected_index_ = i;
+            close();
+            CalculateHeight();
+            return true;
+        }
+        else
+            return GenericList::KeyDown(keyCode, character);
+    } else
+        return false;
+}

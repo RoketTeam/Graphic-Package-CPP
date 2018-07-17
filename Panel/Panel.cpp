@@ -65,10 +65,13 @@ void Panel::CalculateWidth() {
     }
 }
 
-void Panel::MousePressed(int x, int y, bool isLeft){
+bool Panel::MousePressed(int x, int y, bool isLeft){
+    bool redraw = false;
     for(int i = 0; i < items_.size(); i ++){
-        items_[i]->MousePressed(x, y, isLeft);
+        if(items_[i]->MousePressed(x, y, isLeft))
+            redraw = true;
     }
+    return redraw;
 }
 
 bool Panel::MouseHover(int x, int y, Graphics &g){
@@ -79,14 +82,15 @@ bool Panel::MouseHover(int x, int y, Graphics &g){
     }
     return redraw;
 }
-void Panel::KeyDown(int keyCode, char character){
-    get_focus()->KeyDown(keyCode, character);
+
+bool Panel::KeyDown(int keyCode, char character){
+    return get_focus()->KeyDown(keyCode, character);
 }
+
 void Panel::get_all_controls(vector<Control*>* controls){
     for(auto control: items_){
         controls->push_back(control);
-        if(control->CanGetFocus())
-            control->get_all_controls(controls);
+        control->get_all_controls(controls);
     }
 }
 

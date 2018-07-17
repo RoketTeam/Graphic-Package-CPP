@@ -25,10 +25,13 @@ Button::Button():
 }
 
 
-void Button::MousePressed(int x, int y, bool isLeft) {
+bool Button::MousePressed(int x, int y, bool isLeft) {
     if(is_clickable())
-        if(isLeft && isInside(x, y, get_left(), get_top(), get_width(), get_height()))
+        if(isLeft && isInside(x, y, get_left(), get_top(), get_width(), get_height())){
             notify();
+            return true;
+        }
+    return false;
 }
 
 string Button::get_text() {

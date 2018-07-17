@@ -128,31 +128,39 @@ void TextBox::draw(Graphics& g, int x, int y, size_t z = 0) {
 
 
 
-void TextBox::KeyDown(int keyCode, char character) {
+bool TextBox::KeyDown(int keyCode, char character) {
+    bool redraw = false;
     if(!Control::lock_events_ && is_focus_) {
         if ((keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A)) {
             add_char(0, character);
+            redraw = true;
         }
         else if (keyCode == VK_BACK) {
             delete_char();
+            redraw = true;
         }
         else if (keyCode == VK_DELETE) {
             delete_all_text();
+            redraw = true;
         }
         else if (keyCode == VK_LEFT || keyCode == VK_NUMPAD4) {
             if (highlight_index_ > 0) {
                 set_highlight(highlight_index_ - 1);
+                redraw = true;
             }
         }
         else if (keyCode == VK_RIGHT || keyCode == VK_NUMPAD6) {
             if (this->highlight_index_ <= (value_.get_text().length() - 1)) {
                 set_highlight(highlight_index_ + 1);
+                redraw = true;
             }
         }
     }
+    return redraw;
 }
 
-void TextBox::MousePressed(int x, int y, bool isLeft) {
+bool TextBox::MousePressed(int x, int y, bool isLeft) {
+    bool redraw = false;
     if(!Control::lock_events_){
         if(isInside(x, y, left_, top_, width_, height_)){
             x--;
@@ -161,9 +169,11 @@ void TextBox::MousePressed(int x, int y, bool isLeft) {
                 set_highlight(x);
             }
             set_focus(*this);
+            redraw = true;
         } else
             is_focus_ = false;
     }
+    return redraw;
 };
 
 

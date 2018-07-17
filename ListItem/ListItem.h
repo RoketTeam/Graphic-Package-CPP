@@ -37,15 +37,16 @@ class ListItem : public Control {
 	    void draw(Graphics& g, int x, int y, size_t z);
         void MarkAsUnchecked();
         void MarkAsChecked();
-		bool CanGetFocus() { return true; };
+		bool CanGetFocus() { return can_get_focus_; };
+		void CanGetFocus(bool can_get_focus) { can_get_focus_ = can_get_focus; };
 
         // Event handlers
-        void MousePressed(int x, int y, bool isLeft);
+        bool MousePressed(int x, int y, bool isLeft);
         bool MouseHover(int x, int y, Graphics &g);
-        void KeyDown(int keyCode, char character);
+        bool KeyDown(int keyCode, char character);
 
 
-    private:
+	protected:
         // Atrributes
         Label description_label_;
         string checked_bullet_symbol_;
@@ -55,5 +56,6 @@ class ListItem : public Control {
         bool is_focused_;
         Control* parent_;
         bool is_clickable_;
+        bool can_get_focus_;
 
 };

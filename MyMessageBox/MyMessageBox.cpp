@@ -56,9 +56,8 @@ bool MyMessageBox::MouseHover(int x, int y, Graphics &g) {
     return ok_.MouseHover(x, y, g) || cancel_.MouseHover(x, y, g);
 }
 
-void MyMessageBox::MousePressed(int x, int y, bool isLeft) {
-    ok_.MousePressed(x, y, isLeft);
-    cancel_.MousePressed(x, y, isLeft);
+bool MyMessageBox::MousePressed(int x, int y, bool isLeft) {
+    return ok_.MousePressed(x, y, isLeft) || cancel_.MousePressed(x, y, isLeft);
 };
 
 void MyMessageBox::ok_pressed(){
