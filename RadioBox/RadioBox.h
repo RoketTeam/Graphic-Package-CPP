@@ -11,9 +11,8 @@ class RadioBox : public GenericList {
 		RadioBox(){}
 		
 		int select();
-        int switch_checked_item();
+        int SwitchCheckedItem();
 
-		~RadioBox() {};
 
 	protected:
 		int selected_index_;

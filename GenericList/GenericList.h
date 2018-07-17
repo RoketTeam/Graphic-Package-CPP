@@ -29,7 +29,7 @@ public:
     bool RemoveSelectedItem(ListItem* item);
     bool AddSelectedItem(ListItem* item);
     vector<string> get_value();
-    bool CanGetFocus() { return true; };
+    bool CanGetFocus() { return false; };
 
 protected:
     vector<ListItem*> items_;

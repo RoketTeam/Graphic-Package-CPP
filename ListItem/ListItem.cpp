@@ -6,7 +6,8 @@
 ListItem::ListItem(string description):
         description_label_(description),
         is_focused_(false),
-        is_checked_(false)
+        is_checked_(false),
+        can_get_focus_(true)
 {
     line_length_ = description.length();
     height_ = 1;
@@ -55,11 +56,13 @@ bool ListItem::MouseHover(int x, int y, Graphics &g){
 }
 
 bool ListItem::MousePressed(int x, int y, bool isLeft) {
-    if (is_checked_ && is_clickable_)
+    if (is_checked_ && is_clickable_){
         MarkAsUnchecked();
-    else
+    }
+    else {
         MarkAsChecked();
-	return true;
+    }
+    return true;
 }
 
 void ListItem::draw(Graphics &g, int x, int y, size_t z) {
@@ -101,11 +104,14 @@ void ListItem::MarkAsChecked(){
 
 bool ListItem::KeyDown(int keyCode, char character){
     if (!parent_ && (keyCode == VK_SPACE || keyCode == VK_RETURN)) {
-        if(is_checked())
+        if(is_checked()) {
             MarkAsUnchecked();
-        else
+            return true;
+        }
+        else {
             MarkAsChecked();
-		return true;
+            return true;
+        }
     }
     else
         return parent_->KeyDown(keyCode, character);

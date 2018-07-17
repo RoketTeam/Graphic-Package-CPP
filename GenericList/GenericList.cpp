@@ -20,10 +20,12 @@ bool GenericList::MouseHover(int x, int y, Graphics &g) {
 
 bool GenericList::MousePressed(int x, int y, bool isLeft){
     if(isLeft){
-        if(select() != -1)
-			return true;
+        if(select() == -1){
+            return false;
+        }
+        return true;
     }
-	return false;
+    return false;
 }
 
 void GenericList::get_all_controls(vector<Control*>* controls){
@@ -71,7 +73,7 @@ int GenericList::select() {
             return i;
         }
     }
-	return -1;
+    return -1;
 }
 
 vector<string> GenericList::get_value(){
@@ -146,7 +148,7 @@ void GenericList::unfocus(){
 
 
 bool GenericList::KeyDown(int keyCode, char character) {
-	bool result = false;
+
     ListItem* temp;
     ListItem* current_item = nullptr;
     int index = -1;
@@ -164,17 +166,19 @@ bool GenericList::KeyDown(int keyCode, char character) {
     //Down key pressed
     if(keyCode == VK_DOWN) {
         MoveDown(index, current_item);
-		result = true;
+        return true;
     }
     //Space key pressed
 	else if (keyCode == VK_SPACE || keyCode == VK_RETURN) {
         select();
-		result = true;
+        return true;
     }
     //Up key pressed
     else if (keyCode == VK_UP) {
         MoveUp(index, current_item);
-		result = true;
+        return true;
     }
-	return result;
+
+    return false;
+
 }

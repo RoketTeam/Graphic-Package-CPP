@@ -37,8 +37,10 @@ void EventEngine::run(Control &c)
 				{
 					auto code = record.Event.KeyEvent.wVirtualKeyCode;
 					auto chr = record.Event.KeyEvent.uChar.AsciiChar;
-					if (code == VK_TAB)
-						moveFocus(c, f);
+					if (code == VK_TAB){
+                        moveFocus(c, f);
+                        redraw = true;
+					}
 					else
 						redraw = f->KeyDown(code, chr);
 				}
@@ -53,7 +55,7 @@ void EventEngine::run(Control &c)
 				auto y = coord.Y - c.get_top();
 				if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
 				{
-					redraw = c.MousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
+					redraw =  c.MousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
 				} else if(event == MOUSE_MOVED) {
                     redraw = c.MouseHover(x, y, _graphics);
                 }

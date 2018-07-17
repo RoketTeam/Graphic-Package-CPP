@@ -21,8 +21,12 @@ public:
 	void close(){is_open_ = false;}
 	void draw(Graphics& g, int x, int y, size_t z);
 	void action(IObservable* observable);
+	bool MousePressed(int x, int y, bool isLeft);
+	bool KeyDown(int keyCode, char character);
 	void CalculateWidth();
 	void CalculateHeight();
+	bool AddSelectedItem(ListItem* item);
+	bool CanGetFocus() { return false; };
 	string get_value();
 
 	//Handlers

@@ -48,9 +48,9 @@ class Control
         virtual void unfocus(){}
 
         // Event handlers
-        virtual bool MousePressed(int x, int y, bool isLeft) { return false; }
-		virtual bool MouseHover(int x, int y, Graphics &g){ return false; }
-		virtual bool KeyDown(int keyCode, char character) { return false; }
+        virtual bool MousePressed(int x, int y, bool isLeft) { return false;}
+		virtual bool MouseHover(int x, int y, Graphics &g){ return false;}
+		virtual bool KeyDown(int keyCode, char character) {return false;}
 
     protected:
         static Control* focused_control_;
