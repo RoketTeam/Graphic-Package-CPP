@@ -27,9 +27,9 @@ public:
     void unfocus();
     void get_all_controls(vector<Control*>* controls);
     bool RemoveSelectedItem(ListItem* item);
-    bool AddSelectedItem(ListItem* item);
+    bool add_selected_item(ListItem* item);
     vector<string> get_value();
-    bool CanGetFocus() { return false; };
+    bool can_get_focus() { return false; };
 
 protected:
     vector<ListItem*> items_;

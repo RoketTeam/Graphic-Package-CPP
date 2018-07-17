@@ -20,8 +20,8 @@ void Panel::draw(Graphics &g, int x, int y, size_t z) {
         if(foreground_ != Color::Transparent)
             g.setForeground(foreground_);
 
-        CalculateHeight();
-        CalculateWidth();
+        calculate_height();
+        calculate_width();
         border_->drawBorder(x, y, width_ + 4, g, height_ + 4);
     }
     int spacing = 0;
@@ -43,12 +43,12 @@ void Panel::draw(Graphics &g, int x, int y, size_t z) {
 
 bool Panel::Add(Control *item) {
     IComposite::Add(item);
-    if ((!Control::get_focus()) && item->CanGetFocus())
+    if ((!Control::get_focus()) && item->can_get_focus())
         Control::set_focus(*item);
 	return true;
 }
 
-void Panel::CalculateHeight() {
+void Panel::calculate_height() {
     height_ = 0;
     for(int i = 0; i < items_.size(); i ++){
         auto item = items_[i];
@@ -57,7 +57,7 @@ void Panel::CalculateHeight() {
     }
 }
 
-void Panel::CalculateWidth() {
+void Panel::calculate_width() {
     width_ = 0;
     for(int i = 0; i < items_.size(); i ++){
         int item_width = items_[i]->get_width();

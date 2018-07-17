@@ -37,8 +37,8 @@ class ListItem : public Control {
 	    void draw(Graphics& g, int x, int y, size_t z);
         void MarkAsUnchecked();
         void MarkAsChecked();
-		bool CanGetFocus() { return can_get_focus_; };
-		void CanGetFocus(bool can_get_focus) { can_get_focus_ = can_get_focus; };
+		bool can_get_focus() { return can_get_focus_; };
+		void can_get_focus(bool can_get_focus) { can_get_focus_ = can_get_focus; };
 
         // Event handlers
         bool MousePressed(int x, int y, bool isLeft);

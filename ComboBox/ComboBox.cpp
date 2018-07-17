@@ -2,11 +2,11 @@
 
 ComboBox::ComboBox():toggle_list_("V"){
     ListItem* default_item = new ListItem("Choose an item from the list");
-    default_item->CanGetFocus(false);
+    default_item->can_get_focus(false);
     default_item->set_clickable(false);
     default_item->set_checked_bullet_symbol("");
     default_item->set_unchecked_bullet_symbol("");
-    AddSelectedItem(default_item);
+	add_selected_item(default_item);
     toggle_list_.add(this);
     height_ = 3;
     width_ = default_item->get_text().length() + 6;
@@ -16,13 +16,13 @@ ComboBox::ComboBox():toggle_list_("V"){
     set_margin_left(0);
 }
 
-bool ComboBox::AddSelectedItem(ListItem* item){
-    item->CanGetFocus(false);
-    return RadioBox::AddSelectedItem(item);
+bool ComboBox::add_selected_item(ListItem* item){
+    item->can_get_focus(false);
+    return RadioBox::add_selected_item(item);
 }
 
 
-void ComboBox::CalculateHeight() {
+void ComboBox::calculate_height() {
     height_ = 3;
     if(is_open()){
         for(int i = 0; i < items_.size(); i ++){
@@ -33,7 +33,7 @@ void ComboBox::CalculateHeight() {
 
 }
 
-void ComboBox::CalculateWidth() {
+void ComboBox::calculate_width() {
     width_ = 0;
     for(int i = 0; i < items_.size(); i ++){
         int item_width = items_[i]->get_width();
@@ -97,14 +97,14 @@ void ComboBox::action(IObservable* observable){
 
 
 bool ComboBox::MousePressed(int x, int y, bool isLeft) {
-    CalculateHeight();
+    calculate_height();
     if(isInside(x, y, left_, top_, width_, height_)){
         if(is_open()){
             for(int i=0; i< items_.size(); ++i)
                 if(items_[i]->is_focus())
                     selected_index_ = i;
             close();
-            CalculateHeight();
+            calculate_height();
             return true;
         }
         else {
@@ -115,7 +115,7 @@ bool ComboBox::MousePressed(int x, int y, bool isLeft) {
 
     } else if (is_open()){
         close();
-        CalculateHeight();
+        calculate_height();
         return true;
     }
     return false;
@@ -130,7 +130,7 @@ bool ComboBox::KeyDown(int keyCode, char character) {
                 if(items_[i]->is_focus())
                     selected_index_ = i;
             close();
-            CalculateHeight();
+            calculate_height();
             return true;
         }
         else

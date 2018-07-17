@@ -34,7 +34,7 @@ void GenericList::get_all_controls(vector<Control*>* controls){
 }
 
 
-bool GenericList::AddSelectedItem(ListItem *item) {
+bool GenericList::add_selected_item(ListItem *item) {
     try{
         item->set_parent(this);
         items_.push_back(item);
