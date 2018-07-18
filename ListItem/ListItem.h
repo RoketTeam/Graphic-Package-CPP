@@ -34,11 +34,12 @@ class ListItem : public Control {
 		void unfocus();
 		bool is_focus() { return is_focused_; }
 		bool is_checked() { return is_checked_; }
+		bool is_enabled() { return is_clickable_; }
 	    void draw(Graphics& g, int x, int y, size_t z);
         void MarkAsUnchecked();
         void MarkAsChecked();
-		bool CanGetFocus() { return can_get_focus_; };
-		void CanGetFocus(bool can_get_focus) { can_get_focus_ = can_get_focus; };
+		bool can_get_focus() { return can_get_focus_; };
+		void can_get_focus(bool can_get_focus) { can_get_focus_ = can_get_focus; };
 
         // Event handlers
         bool MousePressed(int x, int y, bool isLeft);

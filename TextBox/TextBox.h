@@ -35,7 +35,7 @@ public:
 	void delete_char();
 	void delete_all_text();
 	void draw(Graphics& g, int x, int y, size_t z);
-	bool CanGetFocus() { return true; };
+	bool can_get_focus() { return true; };
 	void focus(){is_focus_ = true;}
 	void unfocus(){is_focus_ = false;}
 

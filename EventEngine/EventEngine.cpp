@@ -14,32 +14,32 @@ void EventEngine::run(Control &c)
 {
 	for (bool redraw = true;;)
 	{
-		if (redraw)
-		{
-			_graphics.clearScreen();
-			_graphics.setCursorVisibility(false);
-			for (size_t z = 0; z < 5; ++z)
+			if (redraw)
 			{
-				c.draw(_graphics, 0, 0, z);
-			}	
-			redraw = false;
-		}
+				_graphics.clearScreen();
+				_graphics.setCursorVisibility(false);
+				for (size_t z = 0; z < 5; ++z)
+				{
+					c.draw(_graphics, 0, 0, z);
+				}
+				redraw = false;
+			}
 
-		INPUT_RECORD record;
-		DWORD count;
-		ReadConsoleInput(_console, &record, 1, &count);
-		switch (record.EventType)
-		{
+			INPUT_RECORD record;
+			DWORD count;
+			ReadConsoleInput(_console, &record, 1, &count);
+			switch (record.EventType)
+			{
 			case KEY_EVENT:
 			{
 				auto f = Control::get_focus();
-				if (f != nullptr && record.Event.KeyEvent.bKeyDown)
+				if (f != nullptr && record.Event.KeyEvent.bKeyDown && record.Event.KeyEvent.wVirtualKeyCode != VK_FINAL)
 				{
 					auto code = record.Event.KeyEvent.wVirtualKeyCode;
 					auto chr = record.Event.KeyEvent.uChar.AsciiChar;
-					if (code == VK_TAB){
-                        moveFocus(c, f);
-                        redraw = true;
+					if (code == VK_TAB) {
+						moveFocus(c, f);
+						redraw = true;
 					}
 					else
 						redraw = f->KeyDown(code, chr);
@@ -57,14 +57,14 @@ void EventEngine::run(Control &c)
 				{
 					redraw =  c.MousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);
 				} else if(event == MOUSE_MOVED) {
-                    redraw = c.MouseHover(x, y, _graphics);
-                }
+					redraw = c.MouseHover(x, y, _graphics);
+				}
 				break;
 			}
 			default:
 				break;
 			}
-	}
+		}
 }
 
 EventEngine::~EventEngine()
@@ -80,6 +80,6 @@ void EventEngine::moveFocus(Control &main, Control *focused)
 	do
 		if (++it == controls.end())
 			it = controls.begin();
-	while (!(*it)->CanGetFocus());
+	while (!(*it)->can_get_focus());
 	Control::set_focus(**it);
 }

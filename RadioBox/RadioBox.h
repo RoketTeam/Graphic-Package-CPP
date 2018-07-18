@@ -8,15 +8,13 @@ using namespace std;
 class RadioBox : public GenericList {
 
 	public:
-
 		RadioBox(){}
-		~RadioBox() {};
-
+		
 		int select();
-        int SwitchCheckedItem();
+        int switch_checked_item();
 
 
 	protected:
 		int selected_index_;
-		void DisselectOthers(int selected);
+		void unselec_others(int selected);
 };
