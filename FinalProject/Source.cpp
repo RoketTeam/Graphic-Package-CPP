@@ -30,9 +30,9 @@ class Form: public Panel {
             label->set_margin(0);
             Add(label);
 
-            comboBox.AddSelectedItem(new ListItem("Elite"));
-            comboBox.AddSelectedItem(new ListItem("Jacobs"));
-            comboBox.AddSelectedItem(new ListItem("TesterChoice"));
+            comboBox.add_selected_item(new ListItem("Elite"));
+            comboBox.add_selected_item(new ListItem("Jacobs"));
+            comboBox.add_selected_item(new ListItem("TesterChoice"));
             comboBox.set_margin(3);
             Add(&comboBox);
 
@@ -40,10 +40,10 @@ class Form: public Panel {
             label->set_margin(0);
             Add(label);
 
-            checkList.AddSelectedItem(new ListItem("Black"));
-            checkList.AddSelectedItem(new ListItem("Espresso"));
-            checkList.AddSelectedItem(new ListItem("Espresso with milk"));
-            checkList.AddSelectedItem(new ListItem("Americano"));
+            checkList.add_selected_item(new ListItem("Black"));
+            checkList.add_selected_item(new ListItem("Espresso"));
+            checkList.add_selected_item(new ListItem("Espresso with milk"));
+            checkList.add_selected_item(new ListItem("Americano"));
             checkList.set_margin(3);
             Add(&checkList);
 
@@ -51,10 +51,10 @@ class Form: public Panel {
             label->set_margin(0);
             Add(label);
 
-            radioBox.AddSelectedItem(new ListItem("8AM"));
-            radioBox.AddSelectedItem(new ListItem("10AM"));
-            radioBox.AddSelectedItem(new ListItem("4PM"));
-            radioBox.AddSelectedItem(new ListItem("All answers is right"));
+            radioBox.add_selected_item(new ListItem("8AM"));
+            radioBox.add_selected_item(new ListItem("10AM"));
+            radioBox.add_selected_item(new ListItem("4PM"));
+            radioBox.add_selected_item(new ListItem("All answers is right"));
             radioBox.set_margin(3);
             Add(&radioBox);
 

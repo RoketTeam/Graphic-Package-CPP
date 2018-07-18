@@ -41,8 +41,8 @@ class Panel : public IComposite {
         bool MouseHover(int x, int y, Graphics &g);
         bool KeyDown(int keyCode, char character);
         void action(IObservable* observable);
-        void CalculateHeight();
-        void CalculateWidth();
+        void calculate_height();
+        void calculate_width();
 
 
 
