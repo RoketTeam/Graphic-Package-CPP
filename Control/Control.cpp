@@ -65,8 +65,15 @@ void Control::FillBackground(short x, short y, int height, Graphics & g) {
 }
 
 void Control::set_focus(Control& control) {
-    if(focused_control_)
-        focused_control_->unfocus();
-    focused_control_ = &control;
-    focused_control_->focus();
+	Control* tempPtr = focused_control_;
+	if (focused_control_ != &control) {
+		if (focused_control_)
+			focused_control_->unfocus();
+		while (focused_control_ && tempPtr != focused_control_) {
+			focused_control_->unfocus();
+			tempPtr = focused_control_;
+		}
+		focused_control_ = &control;
+		focused_control_->focus();
+	}
 }

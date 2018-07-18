@@ -105,40 +105,71 @@ void GenericList::draw(Graphics& g, int x, int y, size_t z){
     }
 }
 
-void GenericList::MoveDown(int index, ListItem* current_item){
-    ListItem* temp;
+bool GenericList::MoveDown(int index, ListItem* current_item) {
+	bool result = false;
+    ListItem* temp = nullptr;
     int list_size = items_.size();
 
-    if(current_item)
-        current_item->unfocus();
     if(index == list_size - 1) {
         temp = static_cast<ListItem*> (items_[0]);
-        set_focus(*temp);
     }
     else {
-        temp = static_cast<ListItem*> (items_[index+1]);
-        set_focus(*temp);
+		index++;
+        temp = static_cast<ListItem*> (items_[index]);
     }
-    return;
+	while (temp != nullptr && index < list_size) {
+		if (temp->is_enabled()) {
+			if (current_item)
+				current_item->unfocus();
+			set_focus(*temp);
+			result = true;
+			break;
+		}
+		else if(index < list_size-1) {
+			index++;
+			temp = static_cast<ListItem*> (items_[index]);
+		}
+		else {
+			temp = nullptr;
+		}
+
+	}
+    return result;
 }
 
-void GenericList::MoveUp(int index, ListItem* current_item) {
-    ListItem* temp;
+bool GenericList::MoveUp(int index, ListItem* current_item) {
+	bool result = false;
+    ListItem* temp = nullptr;
     int list_size = items_.size();
-    if(current_item)
-        current_item->unfocus();
-
+    
     if(index == 0 || index == -1) {
         temp = static_cast<ListItem*> (items_[list_size - 1]);
-        set_focus(*temp);
     }
     else {
         temp = static_cast<ListItem*> (items_[index - 1]);
-        set_focus(*temp);
+
     }
-    return;
+
+	if (temp != nullptr && temp->is_enabled()) {
+		if (current_item)
+			current_item->unfocus();
+		set_focus(*temp);
+		result = true;
+	}
+		
+    return result;
 }
 
+
+//void GenericList::focus() {
+//	for (auto list_item : items_) {
+//		if (list_item->can_get_focus()) {
+//			list_item->focus();
+//			return;
+//		}
+//		
+//	}
+//}
 
 void GenericList::unfocus(){
     for (auto list_item: items_){
@@ -165,8 +196,7 @@ bool GenericList::KeyDown(int keyCode, char character) {
     }
     //Down key pressed
     if(keyCode == VK_DOWN) {
-        MoveDown(index, current_item);
-        return true;
+		return MoveDown(index, current_item);
     }
     //Space key pressed
 	else if (keyCode == VK_SPACE || keyCode == VK_RETURN) {
@@ -175,8 +205,7 @@ bool GenericList::KeyDown(int keyCode, char character) {
     }
     //Up key pressed
     else if (keyCode == VK_UP) {
-        MoveUp(index, current_item);
-        return true;
+		return  MoveUp(index, current_item);
     }
 
     return false;

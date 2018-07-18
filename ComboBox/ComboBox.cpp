@@ -88,11 +88,18 @@ string ComboBox::get_value(){
 
 
 void ComboBox::action(IObservable* observable){
-    if(is_open()){
-        close();
-    } else {
-        open();
-    }
+	if (is_open()) {
+		close();
+	}
+	else {
+		open();
+	}
+}
+
+void ComboBox::unfocus() {
+	if (is_open()) {
+		close();
+	}	
 }
 
 
@@ -109,7 +116,7 @@ bool ComboBox::MousePressed(int x, int y, bool isLeft) {
         }
         else {
             open();
-            set_focus(*this);
+            //set_focus(*this);
             return true;
         }
 
@@ -123,18 +130,27 @@ bool ComboBox::MousePressed(int x, int y, bool isLeft) {
 };
 
 bool ComboBox::KeyDown(int keyCode, char character) {
-    if (is_open()){
-        //Space or Return key pressed
-        if (keyCode == VK_SPACE || keyCode == VK_RETURN) {
-            for(int i=0; i< items_.size(); ++i)
-                if(items_[i]->is_focus())
-                    selected_index_ = i;
-            close();
-            calculate_height();
-            return true;
-        }
-        else
-            return GenericList::KeyDown(keyCode, character);
-    } else
-        return false;
+
+	//Space or Return key pressed
+	if (keyCode == VK_SPACE || keyCode == VK_RETURN) {
+		if (is_open()) {
+			for (int i = 0; i < items_.size(); ++i)
+				if (items_[i]->is_focus())
+					selected_index_ = i;
+			close();
+			calculate_height();
+		}
+		else {
+			open();
+		}
+		return true;
+	}
+	else if (is_open()) {
+		bool result = GenericList::KeyDown(keyCode, character);
+		if (result) { open(); }
+		return result;
+	}
+	else {
+		return false;
+	}
 }

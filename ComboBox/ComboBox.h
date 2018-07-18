@@ -24,8 +24,9 @@ public:
 	void calculate_width();
 	void calculate_height();
 	bool add_selected_item(ListItem* item);
-	bool can_get_focus() { return false; };
+	bool can_get_focus() { return true; };
 	string get_value();
+	void unfocus();
 
 	//Handlers
 	bool KeyDown(int keyCode, char character);
