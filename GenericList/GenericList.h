@@ -30,7 +30,7 @@ public:
     bool RemoveSelectedItem(ListItem* item);
     bool add_selected_item(ListItem* item);
     vector<string> get_value();
-    bool can_get_focus() { return true; };
+    bool can_get_focus() { return false; };
 
 protected:
     vector<ListItem*> items_;
