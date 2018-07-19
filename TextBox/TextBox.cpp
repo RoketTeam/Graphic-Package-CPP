@@ -132,8 +132,7 @@ bool TextBox::KeyDown(int keyCode, char character) {
     bool redraw = false;
     if(!Control::lock_events_ && is_focus_) {
 		redraw = true;
-         if (keyCode == VK_BACK || (keyCode >= 0x30 && keyCode <= 0x39) || 
-	     		(keyCode >= 0x41 && keyCode <= 0x5A) || (keyCode >= 0x60 && keyCode <= 0x69)) {
+         if (keyCode == VK_SPACE || (keyCode >= 0x30 && keyCode <= 0x39) || (keyCode >= 0x41 && keyCode <= 0x5A) ) {
             add_char(0, character);
         }
         else if (keyCode == VK_BACK) {
