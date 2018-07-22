@@ -29,4 +29,4 @@ We used Google C++ Style Guide.
 
 #### Panel
 
-<img width="368" alt="panel" src="https://user-images.githubusercontent.com/34625584/43034244-b77963ae-8ce1-11e8-9588-12056ea16e36.png">
+<img width="368" alt="panel" src="https://trello-attachments.s3.amazonaws.com/5aec85de7ae4cd018396e831/5b0c31a824407fcd406a38ac/e6ab102ad9fc343904f4a7b1b1e2b38d/Screen_Shot_2018-07-13_at_20.49.22.png">
