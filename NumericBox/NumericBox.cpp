@@ -54,6 +54,18 @@ int NumericBox::get_value() {
 }
 
 
+int NumericBox::get_max_value() {
+    return max_value_;
+}
+
+int NumericBox::get_min_value() {
+    return min_value_;
+}
+
+string NumericBox::get_text_value() {
+    return text_value_.get_text();
+}
+
 void NumericBox::inc() {
 
     if (max_value_ >= value_+1){
