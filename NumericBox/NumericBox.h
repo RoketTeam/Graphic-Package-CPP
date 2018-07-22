@@ -20,6 +20,9 @@ class NumericBox : public Control, public IListener
 		void set_min_value(int value);
 		void set_max_value(int value);
 		void set_value(int value);
+		int get_min_value();
+		string get_text_value();
+		int get_max_value();
 		int get_value();
 
 
