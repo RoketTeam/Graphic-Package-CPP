@@ -16,13 +16,18 @@ We used Google C++ Style Guide.
 
 ##### How to use - Code example
 
-CheckList checkList;                                                // Create en empty Checklist (Constructor gets nothing)
-checkList.add_selected_item(new ListItem("Black"));                 // Add some list items
+###### Create en empty Checklist (Constructor gets nothing)
+CheckList checkList;                       
+
+###### Add some list items
+checkList.add_selected_item(new ListItem("Black"));                 
 checkList.add_selected_item(new ListItem("Espresso"));
 checkList.add_selected_item(new ListItem("Espresso with milk"));
 checkList.add_selected_item(new ListItem("Americano"));
-checkList.set_margin(3);                                            // Set margin (margin from bottom)
-checkList.set_margin_left(5);                                       // Set margin left (margin from left)
+
+###### Set margin (margin from bottom or margin from left)
+checkList.set_margin(3);                                            
+checkList.set_margin_left(5);                                       
 
 #### ComboBox
 
@@ -46,8 +51,8 @@ comboBox.set_margin(3);
 ##### How to use - Code example 
 
 MyMessageBox messageBox(string: message);  
-messageBox.set_ok_text("Submit");           // "OK" by default
-messageBox.set_cancel_text("cancel");       // "CANCEL" by default
+messageBox.set_ok_text("Submit");           
+messageBox.set_cancel_text("cancel");       
 
 #### NumericBox
 <img width="73" alt="numericbox" src="https://user-images.githubusercontent.com/34625584/43034238-9da36d9e-8ce1-11e8-8ce6-7bda201f94fb.png">
@@ -55,9 +60,9 @@ messageBox.set_cancel_text("cancel");       // "CANCEL" by default
 ##### How to use - Code example 
 
 NumericBox numericBox(int: min_value, int: max_value);
-NumericBox numericBox();                                // Set min:0 and max:10 by default
-numericBox.inc()                                        // Increment by 1
-numericBox.dec()                                        // Dec by 1
+NumericBox numericBox();                                
+numericBox.inc()                                        
+numericBox.dec()                                        
 
 
 #### Panel - Form example
