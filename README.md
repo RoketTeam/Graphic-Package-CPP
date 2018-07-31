@@ -14,8 +14,15 @@ We used Google C++ Style Guide.
 #### CheckList
 <img width="203" alt="checklist" src="https://user-images.githubusercontent.com/34625584/43034212-248262d0-8ce1-11e8-8050-0dc9c0eca881.png">
 
-##### How to use
-<img width="350" alt="checklist-howto" src="https://trello-attachments.s3.amazonaws.com/5aec85de7ae4cd018396e831/5b0c314f35ab7a05ab88218d/cc05e985d03bd9a3a5ee7adb6bdf3850/Screen_Shot_2018-07-31_at_19.55.10.png">
+##### How to use - Code example
+
+CheckList checkList;                                                // Create en empty Checklist (Constructor gets nothing)
+checkList.add_selected_item(new ListItem("Black"));                 // Add some list items
+checkList.add_selected_item(new ListItem("Espresso"));
+checkList.add_selected_item(new ListItem("Espresso with milk"));
+checkList.add_selected_item(new ListItem("Americano"));
+checkList.set_margin(3);                                            // Set margin (margin from bottom)
+checkList.set_margin_left(5);                                       // Set margin left (margin from left)
 
 #### ComboBox
 
@@ -23,12 +30,35 @@ We used Google C++ Style Guide.
 
 <img width="287" alt="combobox" src="https://user-images.githubusercontent.com/34625584/43034221-42429ae2-8ce1-11e8-9d88-5b4c07b3c05a.png">
 
+##### How to use - Code example (similar to Checklist)
+
+ComboBox comboBox;                                      
+comboBox.add_selected_item(new ListItem("Elite"));
+comboBox.add_selected_item(new ListItem("Jacobs"));
+comboBox.add_selected_item(new ListItem("TesterChoice"));
+comboBox.set_margin(3);
+
+
 #### MessageBox
 
 <img width="216" alt="messagebox" src="https://user-images.githubusercontent.com/34625584/43034226-6ce58ae8-8ce1-11e8-839a-0a82bcda8180.png">
 
+##### How to use - Code example 
+
+MyMessageBox messageBox(string: message);  
+messageBox.set_ok_text("Submit");           // "OK" by default
+messageBox.set_cancel_text("cancel");       // "CANCEL" by default
+
 #### NumericBox
 <img width="73" alt="numericbox" src="https://user-images.githubusercontent.com/34625584/43034238-9da36d9e-8ce1-11e8-8ce6-7bda201f94fb.png">
+
+##### How to use - Code example 
+
+NumericBox numericBox(int: min_value, int: max_value);
+NumericBox numericBox();                                // Set min:0 and max:10 by default
+numericBox.inc()                                        // Increment by 1
+numericBox.dec()                                        // Dec by 1
+
 
 #### Panel - Form example
 
