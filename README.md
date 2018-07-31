@@ -15,7 +15,7 @@ We used Google C++ Style Guide.
 <img width="203" alt="checklist" src="https://user-images.githubusercontent.com/34625584/43034212-248262d0-8ce1-11e8-8050-0dc9c0eca881.png">
 
 ##### How to use
-<img width="203" alt="checklist-howto" src="https://trello-attachments.s3.amazonaws.com/5aec85de7ae4cd018396e831/5b0c314f35ab7a05ab88218d/cc05e985d03bd9a3a5ee7adb6bdf3850/Screen_Shot_2018-07-31_at_19.55.10.png">
+<img width="350" alt="checklist-howto" src="https://trello-attachments.s3.amazonaws.com/5aec85de7ae4cd018396e831/5b0c314f35ab7a05ab88218d/cc05e985d03bd9a3a5ee7adb6bdf3850/Screen_Shot_2018-07-31_at_19.55.10.png">
 
 #### ComboBox
 
